@@ -1,6 +1,7 @@
 import regrest from "regrest";
 
 class PokeService {
+  
   public static getPokemonByNameOrId(id: string): any {
     return (
       regrest
@@ -13,7 +14,12 @@ class PokeService {
   }
 
   public static getAllPokemon(): any {
-    return regrest.get("https://pokeapi.co/api/v2/pokemon");
+    return (
+      regrest
+        .get("https://pokeapi.co/api/v2/pokemon")
+        // tslint:disable-next-line:no-console
+        .catch((e: string) => console.log(e))
+    );
   }
 }
 
