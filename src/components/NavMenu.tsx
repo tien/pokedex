@@ -4,6 +4,7 @@ import ToggleNavButton from "./ToggleNavButton";
 
 interface INavMenuProps {
   links: string[];
+  active: boolean;
 }
 
 interface INavMenuState {
@@ -14,7 +15,7 @@ class NavMenu extends React.Component<INavMenuProps, INavMenuState> {
   public constructor(props: INavMenuProps) {
     super(props);
     this.state = {
-      active: false
+      active: this.props.active
     };
     this.toggleNav = this.toggleNav.bind(this);
   }
@@ -31,6 +32,7 @@ class NavMenu extends React.Component<INavMenuProps, INavMenuState> {
         <nav id="main-nav" className={this.state.active ? "active" : ""}>
           {this.props.links.map((link: string, index: number) => (
             <NavLink
+              onClick={this.toggleNav}
               className="nav-item"
               key={index}
               to={`/${link.trim().replace(/\s+/g, "-")}`}>

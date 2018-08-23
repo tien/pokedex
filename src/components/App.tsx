@@ -9,7 +9,7 @@ class App extends React.Component {
   public render() {
     return (
       <BrowserRouter>
-        <NavMenu links={menuCategory} />
+        <NavMenu links={menuCategory} active={false} />
       </BrowserRouter>
     );
   }
