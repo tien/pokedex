@@ -1,5 +1,6 @@
 import * as React from "react";
 import { GlobalContextConsumer } from "../contexts/GlobalContext";
+import PokeDetails from "./PokeDetails";
 
 interface IPokeCardProps {
   idNum: number;
@@ -11,7 +12,7 @@ const PokeCard = (props: IPokeCardProps) => (
   <GlobalContextConsumer>
     {value => {
       const openModalWithPokemonInfo = () =>
-        value.openModalWithReactNode(<div />);
+        value.openModalWithReactNode(<PokeDetails id={props.idNum} />);
       return (
         <div
           className="card-section profile"
