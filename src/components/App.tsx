@@ -35,7 +35,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public closeModal() {
-    this.setState({ modalIsOpen: false });
+    this.setState({ modalIsOpen: false, modalContent: null });
   }
 
   public toggleNavMenuActiveState() {

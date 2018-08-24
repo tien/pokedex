@@ -42,35 +42,29 @@ class PokeDetails extends React.Component<
 
   public componentDidMount() {
     PokeService.getPokemonByNameOrId(this.props.id).then(
-      ({
-        abilities,
-        evolutionChain,
-        height,
-        loading = false,
-        moves,
-        name,
-        sprites,
-        stats,
-        types,
-        weight
-      }: IPokeDetailsState) =>
+      (pokemonDetails: any) =>
         this.setState({
-          abilities,
-          evolutionChain,
-          height,
-          loading,
-          moves,
-          name,
-          sprites,
-          stats,
-          types,
-          weight
+          ...pokemonDetails,
+          loading: false
         })
     );
   }
 
   public render() {
-    return <div>{this.state.name}</div>;
+    return (
+      <div>
+        <div>{this.state.name}</div>
+        <div>{this.state.id}</div>
+        {/* <div>{this.state.abilities}</div> */}
+        <div>{this.state.height}</div>
+        <div>{this.state.weight}</div>
+        <div>{this.state.name}</div>
+        {/* <div>{this.state.evolutionChain}</div> */}
+        {/* <div>{this.state.moves}</div> */}
+        {/* <div>{this.state.stats}</div> */}
+        {/* <div>{this.state.types}</div> */}
+      </div>
+    );
   }
 }
 
