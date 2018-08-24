@@ -53,7 +53,9 @@ class PokeDetails extends React.Component<
   public render() {
     return (
       <div>
-        <div>{this.state.name}</div>
+        <div className="details-modal-header">
+          <h1>{this.state.name}</h1>
+        </div>
         <div>{this.state.id}</div>
         {/* <div>{this.state.abilities}</div> */}
         <div>{this.state.height}</div>

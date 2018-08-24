@@ -2,8 +2,8 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import "../styles/App.css";
+import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
-import NavMenu from "./NavMenu";
 import PokeListPage from "./PokeListPage";
 
 const menuCategory = ["Pokemon List", "delays & cancellations"];
