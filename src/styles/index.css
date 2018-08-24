@@ -453,10 +453,7 @@ th {
   .nav-item {
     font-size: 3.5rem;
   }
-  #page-container.courses-page,
-  #page-container.news-page,
-  #page-container.notices-page,
-  #page-container.people-page {
+  #page-container.grid-on-lg {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 15px;

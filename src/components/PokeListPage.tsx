@@ -19,21 +19,20 @@ class PokeListPage extends React.Component<{}, IPokeListPageState> {
   }
 
   public componentDidMount() {
-    PokeService.getAllPokemon().then((data: any) =>
+    PokeService.getAllPokemonWithLimitAndOffset(40, 0).then((data: any) =>
       this.setState({ pokemons: data })
     );
   }
 
   public render() {
     return (
-      <div id="page-container">
+      <div id="page-container" className="grid-on-lg">
         {this.state.pokemons.map((pokemon: any) => (
           <PokeCard
             key={pokemon.name}
             idNum={pokemon.id}
             name={pokemon.name}
-            types={pokemon.types}
-            imageUrl={pokemon.sprites.front_default}
+            imageUrl={pokemon.imageUrl}
           />
         ))}
       </div>
