@@ -9,6 +9,7 @@ import PokeListPage from "./pokemonListPage/PokeListPage";
 const menuCategory = ["Pokemon List", "delays & cancellations"];
 
 interface IAppState {
+  modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
   navMenuIsOpen: boolean;
@@ -27,8 +28,9 @@ class App extends React.Component<{}, IAppState> {
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
   }
 
-  public openModalWithReactNode(ReactNode: React.ReactNode) {
+  public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
     this.setState({
+      modalColor: color,
       modalContent: ReactNode,
       modalIsOpen: true
     });
@@ -63,7 +65,14 @@ class App extends React.Component<{}, IAppState> {
           }}>
           <Route path="/Pokemon-List" component={PokeListPage} />
         </div>
-        <Modal active={this.state.modalIsOpen} closeModal={this.closeModal}>
+        <Modal
+          style={{
+            backgroundColor: this.state.modalColor
+              ? this.state.modalColor
+              : "white"
+          }}
+          active={this.state.modalIsOpen}
+          closeModal={this.closeModal}>
           {this.state.modalContent}
         </Modal>
       </GlobalContextProvider>

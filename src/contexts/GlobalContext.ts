@@ -2,13 +2,16 @@ import * as React from "react";
 
 interface IGlobalContext {
   closeModal: () => void;
-  openModalWithReactNode: (ReactNode: React.ReactNode) => void;
+  openModalWithReactNode: (ReactNode: React.ReactNode, color: string) => void;
 }
 
 // tslint:disable-next-line:no-empty
 const closeModal: () => void = () => {};
-// tslint:disable-next-line:no-empty
-const openModalWithReactNode: (ReactNode: React.ReactNode) => void = () => {};
+const openModalWithReactNode: (
+  ReactNode: React.ReactNode,
+  color: string
+) => // tslint:disable-next-line:no-empty
+void = () => {};
 
 const globalContext = {
   closeModal,
