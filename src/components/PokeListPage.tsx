@@ -26,7 +26,7 @@ class PokeListPage extends React.Component<{}, IPokeListPageState> {
 
   public render() {
     return (
-      <div id=" page-container poke-list-page">
+      <div id="page-container">
         {this.state.pokemons.map((pokemon: any) => (
           <PokeCard
             key={pokemon.name}
