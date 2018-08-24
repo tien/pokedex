@@ -1,16 +1,18 @@
 import * as React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "../styles/App.css";
 import NavMenu from "./NavMenu";
+import PokeListPage from "./PokeListPage";
 
-const menuCategory = ["monitor stops", "delays & cancellations"];
+const menuCategory = ["Pokemon List", "delays & cancellations"];
 
 class App extends React.Component {
   public render() {
     return (
-      <BrowserRouter>
+      <div>
         <NavMenu links={menuCategory} active={false} />
-      </BrowserRouter>
+        <Route path="/Pokemon-List" component={PokeListPage} />
+      </div>
     );
   }
 }
