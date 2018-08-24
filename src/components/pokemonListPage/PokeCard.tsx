@@ -1,6 +1,7 @@
 import * as React from "react";
-import { GlobalContextConsumer } from "../contexts/GlobalContext";
-import PokeDetails from "./PokeDetails";
+import { GlobalContextConsumer } from "../../contexts/GlobalContext";
+import PokeService from "../../services/pokeService";
+import PokeDetails from "../pokemonDetailsView/PokeDetails";
 
 interface IPokeCardProps {
   idNum: number;
@@ -12,7 +13,13 @@ const PokeCard = (props: IPokeCardProps) => (
   <GlobalContextConsumer>
     {value => {
       const openModalWithPokemonInfo = () =>
-        value.openModalWithReactNode(<PokeDetails id={props.idNum} />);
+        PokeService.getPokemonByNameOrId(props.idNum).then((details: any) =>
+          {
+            // tslint:disable-next-line:no-console
+            console.log(details)
+            value.openModalWithReactNode(<PokeDetails {...details} />)}
+        );
+
       return (
         <div
           className="card-section profile"
@@ -22,7 +29,7 @@ const PokeCard = (props: IPokeCardProps) => (
             <h3>{props.name}</h3>
             <h6>{props.idNum}</h6>
           </div>
-          <div className="profile-content">temp</div>
+          <div className="profile-content" />
         </div>
       );
     }}

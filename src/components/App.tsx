@@ -4,7 +4,7 @@ import { GlobalContextProvider } from "../contexts/GlobalContext";
 import "../styles/App.css";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
-import PokeListPage from "./PokeListPage";
+import PokeListPage from "./pokemonListPage/PokeListPage";
 
 const menuCategory = ["Pokemon List", "delays & cancellations"];
 
@@ -56,10 +56,16 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
+        <div
+          style={{
+            height: "100vh",
+            overflowY: this.state.modalIsOpen ? "hidden" : "auto"
+          }}>
+          <Route path="/Pokemon-List" component={PokeListPage} />
+        </div>
         <Modal active={this.state.modalIsOpen} closeModal={this.closeModal}>
           {this.state.modalContent}
         </Modal>
-        <Route path="/Pokemon-List" component={PokeListPage} />
       </GlobalContextProvider>
     );
   }

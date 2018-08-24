@@ -14,7 +14,19 @@ class PokeService {
     return regrest
       .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((res: any) => res.json)
-      .then((data: any) => data);
+      .then((data: any) => data)
+      .then((details: any) => ({
+        abilities: details.abilities,
+        evolutionChain: details.evolutionChain,
+        height: details.height,
+        id: details.id,
+        moves: details.moves,
+        name: details.name,
+        sprites: details.sprites,
+        stats: details.stats,
+        types: details.types,
+        weight: details.weight
+      }));
   }
 
   public static getAllPokemonWithLimitAndOffset(

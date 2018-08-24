@@ -1,5 +1,5 @@
 import * as React from "react";
-import PokeService from "../services/pokeService";
+import PokeService from "../../services/pokeService";
 import PokeCard from "./PokeCard";
 
 interface IPokeListPageState {

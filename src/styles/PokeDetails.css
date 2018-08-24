@@ -1,0 +1,17 @@
+.poke-details-container {
+  max-width: 600px;
+  margin: 0 auto 10px;
+}
+
+.details-modal-header {
+  color: white;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+.details-modal-content {
+  padding: 15px;
+}
