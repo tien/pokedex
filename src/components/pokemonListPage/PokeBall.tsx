@@ -3,7 +3,7 @@ import * as React from "react";
 import { GlobalContextConsumer } from "../../contexts/GlobalContext";
 import PokemonTypeColor from "../../enums/PokemonTypeColors";
 import PokeService from "../../services/pokeService";
-import "../../styles/PokeBall.css"
+import "../../styles/PokeBall.css";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 
 interface IPokeCardProps {
@@ -15,13 +15,16 @@ interface IPokeCardProps {
 const PokeCard = (props: IPokeCardProps) => (
   <GlobalContextConsumer>
     {value => {
-      const openModalWithPokemonInfo = () =>
-        PokeService.getPokemonByNameOrId(props.idNum).then((details: any) =>
+      const openModalWithPokemonInfo = () => {
+        value.toggleLoading();
+        PokeService.getPokemonByNameOrId(props.idNum).then((details: any) => {
+          value.toggleLoading();
           value.openModalWithReactNode(
             <PokeDetails {...details} />,
             PokemonTypeColor[details.types[0].type.name]
-          )
-        );
+          );
+        });
+      };
 
       return (
         <div className="poke-ball" onClick={openModalWithPokemonInfo}>
@@ -30,10 +33,7 @@ const PokeCard = (props: IPokeCardProps) => (
             <h6>{props.idNum}</h6>
           </div>
           <div className="ava-wrapper">
-            <img
-              className="poke-ava"
-              src={props.imageUrl}
-            />
+            <img className="poke-ava" src={props.imageUrl} />
           </div>
           <div className="poke-ball-bottom" />
         </div>

@@ -3,10 +3,13 @@ import * as React from "react";
 interface IGlobalContext {
   closeModal: () => void;
   openModalWithReactNode: (ReactNode: React.ReactNode, color: string) => void;
+  toggleLoading: () => void;
 }
 
 // tslint:disable-next-line:no-empty
 const closeModal: () => void = () => {};
+// tslint:disable-next-line:no-empty
+const toggleLoading: () => void = () => {};
 const openModalWithReactNode: (
   ReactNode: React.ReactNode,
   color: string
@@ -15,7 +18,8 @@ void = () => {};
 
 const globalContext = {
   closeModal,
-  openModalWithReactNode
+  openModalWithReactNode,
+  toggleLoading,
 };
 
 const {

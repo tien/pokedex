@@ -9,6 +9,7 @@ import PokeListPage from "./pokemonListPage/PokeListPage";
 const menuCategory = ["Pokemon List", "delays & cancellations"];
 
 interface IAppState {
+  loading: boolean;
   modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
@@ -19,11 +20,13 @@ class App extends React.Component<{}, IAppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
+      loading: false,
       modalContent: null,
       modalIsOpen: false,
       navMenuIsOpen: false
     };
     this.closeModal = this.closeModal.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
   }
@@ -34,6 +37,10 @@ class App extends React.Component<{}, IAppState> {
       modalContent: ReactNode,
       modalIsOpen: true
     });
+  }
+
+  public toggleLoading() {
+    this.setState((prevState: any) => ({ loading: !prevState.loading }));
   }
 
   public closeModal() {
@@ -51,7 +58,8 @@ class App extends React.Component<{}, IAppState> {
       <GlobalContextProvider
         value={{
           closeModal: this.closeModal,
-          openModalWithReactNode: this.openModalWithReactNode
+          openModalWithReactNode: this.openModalWithReactNode,
+          toggleLoading: this.toggleLoading
         }}>
         <NavMenu
           links={menuCategory}
@@ -63,7 +71,18 @@ class App extends React.Component<{}, IAppState> {
             height: "100vh",
             overflowY: this.state.modalIsOpen ? "hidden" : "auto"
           }}>
-          <Route path="/Pokemon-List" component={PokeListPage} />
+          <Route
+            path="/Pokemon-List"
+            render={
+              // tslint:disable-next-line:jsx-no-lambda
+              () => <PokeListPage toggleLoading={this.toggleLoading} />
+            }
+          />
+        </div>
+        <div
+          id="spinner-container"
+          style={{ display: this.state.loading ? "block" : "none" }}>
+          <div id="spinner" />
         </div>
         <Modal
           style={{

@@ -2,14 +2,21 @@ import * as React from "react";
 import PokeService from "../../services/pokeService";
 import PokeBall from "./PokeBall";
 
+interface IPokeListPageProps {
+  toggleLoading: () => void;
+}
+
 interface IPokeListPageState {
   pokemons: [];
   next: string | null;
   prev: string | null;
 }
 
-class PokeListPage extends React.Component<{}, IPokeListPageState> {
-  constructor(props: {}) {
+class PokeListPage extends React.Component<
+  IPokeListPageProps,
+  IPokeListPageState
+> {
+  constructor(props: IPokeListPageProps) {
     super(props);
     this.state = {
       next: null,
@@ -19,9 +26,11 @@ class PokeListPage extends React.Component<{}, IPokeListPageState> {
   }
 
   public componentDidMount() {
-    PokeService.getAllPokemonWithLimitAndOffset(39, 0).then((data: any) =>
-      this.setState({ pokemons: data })
-    );
+    this.props.toggleLoading();
+    PokeService.getAllPokemonWithLimitAndOffset(39, 0).then((data: any) => {
+      this.props.toggleLoading();
+      this.setState({ pokemons: data });
+    });
   }
 
   public render() {
