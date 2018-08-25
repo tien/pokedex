@@ -32,23 +32,31 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <h2>{props.name}</h2>
       </div>
       <div className="details-modal-content">
-        <div className="details-header">
+        <div className="details-1st-child">
           <img src={props.sprites.front_default} />
-          {props.types.map((type: any) => (
-            <div
-              style={{ color: PokemonTypeColors[type.type.name] }}
-              className={`${type.type.name}-type`}>
-              {type.type.name}
-            </div>
-          ))}
-          <div>{props.id}</div>
-          <PokeStats stats={props.stats} />
+          <div>
+            <div>Number: #{props.id}</div>
+            {props.types.map((type: any) => (
+              <div
+                style={{ color: PokemonTypeColors[type.type.name] }}
+                className={`${type.type.name}-type`}>
+                {type.type.name}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>{props.height}</div>
-        <div>{props.weight}</div>
-        <div>{props.name}</div>
-        {/* <div>{this.state.evolutionChain}</div> */}
-        {/* <div>{this.state.moves}</div> */}
+        <div className="details-2nd-child">
+          <PokeStats stats={props.stats} color={lightColor} />
+        </div>
+        <div className="details-3rd-child">
+          <div>Height: {props.height}m</div>
+          <div>
+            Weight: {props.weight}
+            kg
+          </div>
+          {/* <div>{this.state.evolutionChain}</div> */}
+          {/* <div>{this.state.moves}</div> */}
+        </div>
       </div>
     </div>
   );

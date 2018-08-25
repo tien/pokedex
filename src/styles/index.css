@@ -3,6 +3,9 @@
 :root {
   --main-color: #ff0000;
   --secondary-color: #cc0000;
+  --main-color-blue: #3b4cca;
+  --main-color-yellow: #ffde00;
+  --secondary-color-yellow: #B3A125;
 }
 
 body {
@@ -150,6 +153,7 @@ th {
 }
 
 #page-container {
+  background-color: #758880;
   padding: 20px 16px 85px 16px;
   display: flex;
   flex-direction: column;

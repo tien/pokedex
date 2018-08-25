@@ -1,0 +1,43 @@
+.stats {
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.stat {
+  margin-top: 2px;
+  display: flex;
+}
+
+.stat-label {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.stat-bar-bg {
+  z-index: 1;
+  flex-basis: 0;
+  background-color: #ededed;
+  flex-grow: 2;
+  position: relative;
+}
+
+.stat-bar {
+  z-index: 2;
+  transform-origin: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.stat-number {
+  margin-left: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  z-index: 3;
+}

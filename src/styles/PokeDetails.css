@@ -20,3 +20,21 @@
   background-color: white;
   padding: 15px;
 }
+
+.details-1st-child {
+  display: flex;
+  justify-content: space-around;
+}
+
+.details-1st-child > img {
+  width: 110px;
+  height: 110px;
+}
+
+@media all and (min-width: 576px) {
+  .details-modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}

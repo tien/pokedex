@@ -1,15 +1,33 @@
 import * as React from "react";
+import "../../styles/PokeStats.css";
 
 interface IPokeStatsProps {
   stats: [] | null;
+  color: string;
 }
 
 const PokeStats = (props: IPokeStatsProps) => (
-  <div>
+  <div className="stats">
     {props.stats &&
       props.stats.map((stat: any) => (
-        <div>
-          {stat.stat.name} {stat.base_stat}
+        <div className="stat">
+          <div className="stat-label">
+            {stat.stat.name === "special-defense"
+              ? "sd"
+              : stat.stat.name === "special-attack"
+                ? "sp"
+                : stat.stat.name}
+          </div>
+          <div className="stat-bar-bg">
+            <div
+              className="stat-bar"
+              style={{
+                backgroundColor: props.color,
+                transform: `scaleX(${stat.base_stat / 255})`
+              }}
+            />
+            <div className="stat-number">{stat.base_stat}</div>
+          </div>
         </div>
       ))}
   </div>
