@@ -19,7 +19,7 @@ class PokeListPage extends React.Component<{}, IPokeListPageState> {
   }
 
   public componentDidMount() {
-    PokeService.getAllPokemonWithLimitAndOffset(40, 0).then((data: any) =>
+    PokeService.getAllPokemonWithLimitAndOffset(39, 0).then((data: any) =>
       this.setState({ pokemons: data })
     );
   }

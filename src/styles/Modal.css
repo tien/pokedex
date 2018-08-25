@@ -11,7 +11,7 @@
   align-items: center;
   padding: 0 10px 0 10px;
   overflow-y: auto;
-  transition: 1s ease;
+  transition: 0.5s ease;
 }
 
 #modal.active {

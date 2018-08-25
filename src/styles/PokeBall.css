@@ -1,3 +1,12 @@
+@keyframes bounce {
+  from {
+    transform: scale(1.05) translateY(0px);
+  }
+  to {
+    transform: scale(1.10) translateY(-15px);
+  }
+}
+
 .poke-ball {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -8,8 +17,12 @@
     0 1px 3px 1px rgba(60, 64, 67, 0.16);
   overflow: hidden;
   border-radius: 50%;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  cursor:pointer;
+  margin-bottom: 30px;
+}
+
+.poke-ball:hover {
+  animation: bounce 0.75s infinite alternate;
 }
 
 .poke-ball-top {
