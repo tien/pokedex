@@ -1,6 +1,7 @@
 import * as Color from "color";
 import * as React from "react";
-import PokemonTypeColors from "../../enums/PokemonTypeColors";
+import * as MovesList from "../../assets/moves.json";
+import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import "../../styles/PokeDetails.css";
 import PokeStats from "./PokeStats";
 
@@ -54,8 +55,16 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             Weight: {props.weight}
             kg
           </div>
-          {/* <div>{this.state.evolutionChain}</div> */}
-          {/* <div>{this.state.moves}</div> */}
+          <div>
+            {props.moves.map((move: any) => (
+              <div
+                style={{
+                  color: PokemonTypeColors[MovesList[move.move.name].type]
+                }}>
+                {move.move.name}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 // import * as Color from "color";
 import * as React from "react";
+import PokemonTypeColor from "../../assets/PokemonTypeColors";
 import { GlobalContextConsumer } from "../../contexts/GlobalContext";
-import PokemonTypeColor from "../../enums/PokemonTypeColors";
 import PokeService from "../../services/pokeService";
 import "../../styles/PokeBall.css";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";

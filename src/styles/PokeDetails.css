@@ -18,7 +18,7 @@
 
 .details-modal-content {
   background-color: white;
-  padding: 15px;
+  padding: 16px;
 }
 
 .details-1st-child {
@@ -35,6 +35,5 @@
   .details-modal-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
   }
 }
