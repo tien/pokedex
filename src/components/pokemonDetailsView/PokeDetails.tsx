@@ -4,6 +4,7 @@ import * as MovesList from "../../assets/moves.json";
 import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import "../../styles/PokeDetails.css";
 import PokeStats from "./PokeStats";
+import PokeTypeCard from "./PokeTypeCard";
 
 interface IPokeDetailsProps {
   abilities: [];
@@ -55,13 +56,11 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             Weight: {props.weight}
             kg
           </div>
-          <div>
+          <div className="poke-moves-detail-list">
             {props.moves.map((move: any) => (
-              <div
-                style={{
-                  color: PokemonTypeColors[MovesList[move.move.name].type]
-                }}>
-                {move.move.name}
+              <div className="poke-move-detail">
+                <div className="poke-move-name">{move.move.name}</div>
+                <PokeTypeCard type={MovesList[move.move.name].type} style={{flexBasis:"30%"}}/>
               </div>
             ))}
           </div>

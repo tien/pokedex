@@ -31,6 +31,23 @@
   height: 110px;
 }
 
+.details-3rd-child {
+  grid-area: 2 / 1 / 3 /3;
+}
+
+.poke-moves-detail-list {
+  width: 100%;
+}
+
+.poke-move-detail {
+  margin: 2px 0;
+  display: flex;
+}
+
+.poke-move-name {
+  flex-basis: 70%;
+}
+
 @media all and (min-width: 576px) {
   .details-modal-content {
     display: grid;
