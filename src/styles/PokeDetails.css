@@ -45,7 +45,7 @@
 }
 
 .poke-move-name {
-  flex-basis: 70%;
+  flex-basis: 50%;
 }
 
 @media all and (min-width: 576px) {

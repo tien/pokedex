@@ -60,7 +60,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             {props.moves.map((move: any) => (
               <div className="poke-move-detail">
                 <div className="poke-move-name">{move.move.name}</div>
-                <PokeTypeCard type={MovesList[move.move.name].type} style={{flexBasis:"30%"}}/>
+                <PokeTypeCard type={MovesList[move.move.name].type} style={{flexBasis:"25%", marginRight:"2px"}}/>
+                <PokeTypeCard category={MovesList[move.move.name].category} style={{flexBasis:"25%"}}/>
               </div>
             ))}
           </div>
