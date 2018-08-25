@@ -1,6 +1,6 @@
 import * as React from "react";
 import PokeService from "../../services/pokeService";
-import PokeCard from "./PokeCard";
+import PokeBall from "./PokeBall";
 
 interface IPokeListPageState {
   pokemons: [];
@@ -28,7 +28,7 @@ class PokeListPage extends React.Component<{}, IPokeListPageState> {
     return (
       <div id="page-container" className="grid-on-lg">
         {this.state.pokemons.map((pokemon: any) => (
-          <PokeCard
+          <PokeBall
             key={pokemon.name}
             idNum={pokemon.id}
             name={pokemon.name}

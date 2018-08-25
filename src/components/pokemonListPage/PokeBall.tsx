@@ -3,6 +3,7 @@ import * as React from "react";
 import { GlobalContextConsumer } from "../../contexts/GlobalContext";
 import PokemonTypeColor from "../../enums/PokemonTypeColors";
 import PokeService from "../../services/pokeService";
+import "../../styles/PokeBall.css"
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 
 interface IPokeCardProps {
@@ -23,15 +24,18 @@ const PokeCard = (props: IPokeCardProps) => (
         );
 
       return (
-        <div
-          className="card-section profile"
-          onClick={openModalWithPokemonInfo}>
-          <div className="profile-title">
-            <img className="ava" src={props.imageUrl} />
-            <h3>{props.name}</h3>
+        <div className="poke-ball" onClick={openModalWithPokemonInfo}>
+          <div className="poke-ball-top">
+            <h3 className="poke-ball-name">{props.name}</h3>
             <h6>{props.idNum}</h6>
           </div>
-          <div className="profile-content" />
+          <div className="ava-wrapper">
+            <img
+              className="poke-ava"
+              src={props.imageUrl}
+            />
+          </div>
+          <div className="poke-ball-bottom" />
         </div>
       );
     }}
