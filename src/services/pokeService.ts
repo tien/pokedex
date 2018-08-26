@@ -42,7 +42,7 @@ class PokeService {
         pokemons.map((pokemon: any, index: number) => ({
           ...pokemon,
           id: index + offset + 1,
-          imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+          imageUrl: `${
             this.imageUrlBase
           }${index + offset + 1}.png`
         }))
@@ -50,19 +50,28 @@ class PokeService {
   }
 
   private static recursiveBuildChain(currGen: any) {
+    const url = `${this.imageUrlBase}${
+      currGen.species.url.split("/").slice(-2, -1)[0]
+    }.png`;
     if (currGen.evolves_to.length === 0) {
-      return { name: currGen.species.name, children: [] };
+      return { name: currGen.species.name, imageUrl: url, children: [] };
     } else {
       const children: any[] = [];
       for (const child of currGen.evolves_to) {
         children.push(this.recursiveBuildChain(child));
       }
-      return { name: currGen.species.name, children };
+      return { name: currGen.species.name, imageUrl: url, children };
     }
   }
 
   private static buildChain(data: any) {
-    const thisGen: any = { name: data.species.name, children: [] };
+    const thisGen: any = {
+      children: [],
+      imageUrl: `${this.imageUrlBase}${
+        data.species.url.split("/").slice(-2, -1)[0]
+      }.png`,
+      name: data.species.name
+    };
     const nextChain = data.evolves_to;
     if (nextChain.length !== 0) {
       nextChain.forEach((e: any) =>
