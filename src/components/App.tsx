@@ -5,7 +5,6 @@ import "../styles/App.css";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import PokeListPage from "./pokemonListPage/PokeListPage";
-import Test from "./Test";
 
 const menuCategory = ["Pokemon List", "Test"];
 
@@ -79,7 +78,6 @@ class App extends React.Component<{}, IAppState> {
               () => <PokeListPage toggleLoading={this.toggleLoading} />
             }
           />
-          <Route path="/Test" component={Test} />
         </div>
         <div
           id="spinner-container"
