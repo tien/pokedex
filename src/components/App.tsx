@@ -1,12 +1,13 @@
 import * as React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import "../styles/App.css";
+import About from "./About";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import PokeListPage from "./pokemonListPage/PokeListPage";
 
-const menuCategory = ["Pokemon List", "Test"];
+const menuCategory = ["pokemon list", "about"];
 
 interface IAppState {
   loading: boolean;
@@ -56,6 +57,9 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
+    const pokesListPage = () => (
+      <PokeListPage toggleLoading={this.toggleLoading} />
+    );
     return (
       <GlobalContextProvider
         value={{
@@ -68,13 +72,9 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Route
-          path="/Pokemon-List"
-          render={
-            // tslint:disable-next-line:jsx-no-lambda
-            () => <PokeListPage toggleLoading={this.toggleLoading} />
-          }
-        />
+        <Redirect exact={true} path="/"  to="/pokemon-list"/>
+        <Route path="/pokemon-list" render={pokesListPage} />
+        <Route path="/about" component={About} />
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}>
