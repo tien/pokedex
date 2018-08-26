@@ -5,14 +5,16 @@ class PokeService {
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
   public static getPokemonEvolutionChainById(id: number) {
-    regrest
-      .get(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
-      .then((res: any) => res.json.chain);
+    return regrest
+      .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+      .then((res: any) => regrest.get(res.json.evolution_chain.url))
+      .then((res: any) => res.json.chain)
+      .then((data: any) => this.buildChain(data));
   }
 
-  public static getPokemonByNameOrId(id: number): any {
+  public static getPokemonByNameOrId(id: number | string): any {
     return regrest
-      .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then((res: any) => res.json)
       .then((data: any) => data)
       .then((details: any) => ({
@@ -45,6 +47,29 @@ class PokeService {
           }${index + offset + 1}.png`
         }))
       );
+  }
+
+  private static recursiveBuildChain(currGen: any) {
+    if (currGen.evolves_to.length === 0) {
+      return { name: currGen.species.name, children: [] };
+    } else {
+      const children: any[] = [];
+      for (const child of currGen.evolves_to) {
+        children.push(this.recursiveBuildChain(child));
+      }
+      return { name: currGen.species.name, children };
+    }
+  }
+
+  private static buildChain(data: any) {
+    const thisGen: any = { name: data.species.name, children: [] };
+    const nextChain = data.evolves_to;
+    if (nextChain.length !== 0) {
+      nextChain.forEach((e: any) =>
+        thisGen.children.push(this.recursiveBuildChain(e))
+      );
+    }
+    return thisGen;
   }
 }
 

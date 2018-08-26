@@ -1,0 +1,10 @@
+.poke-evo-parent {
+  display: flex;
+  align-items: center;
+}
+
+.poke-evo-children-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
