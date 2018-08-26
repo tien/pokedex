@@ -4,7 +4,7 @@ class PokeService {
   public static imageUrlBase: string =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
-  public static getPokemonEvolutionChainById(id: number) {
+  public static getPokemonEvolutionChainByNameOrId(id: number | string) {
     return regrest
       .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
       .then((res: any) => regrest.get(res.json.evolution_chain.url))
@@ -31,6 +31,29 @@ class PokeService {
       }));
   }
 
+  public static getPokemonDetailsAndEvolutionChainByNameOrId(
+    id: number | string
+  ) {
+    return Promise.all([
+      this.getPokemonByNameOrId(id),
+      this.getPokemonEvolutionChainByNameOrId(id)
+    ]).then(([details, evolutionChain]) => ({
+      ...{
+        abilities: details.abilities,
+        evolutionChain: details.evolutionChain,
+        height: details.height,
+        id: details.id,
+        moves: details.moves,
+        name: details.name,
+        sprites: details.sprites,
+        stats: details.stats,
+        types: details.types,
+        weight: details.weight
+      },
+      evolutionChain
+    }));
+  }
+
   public static getAllPokemonWithLimitAndOffset(
     limit: number,
     offset: number
@@ -42,9 +65,7 @@ class PokeService {
         pokemons.map((pokemon: any, index: number) => ({
           ...pokemon,
           id: index + offset + 1,
-          imageUrl: `${
-            this.imageUrlBase
-          }${index + offset + 1}.png`
+          imageUrl: `${this.imageUrlBase}${index + offset + 1}.png`
         }))
       );
   }

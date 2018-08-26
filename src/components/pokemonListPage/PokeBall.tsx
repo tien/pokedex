@@ -17,13 +17,12 @@ const PokeCard = (props: IPokeCardProps) => (
     {value => {
       const openModalWithPokemonInfo = () => {
         value.toggleLoading();
-        Promise.all([
-          PokeService.getPokemonByNameOrId(props.idNum),
-          PokeService.getPokemonEvolutionChainById(props.idNum)
-        ]).then(([details, evolution]) => {
+        PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
+          props.idNum
+        ).then((details: any) => {
           value.toggleLoading();
           value.openModalWithReactNode(
-            <PokeDetails {...details} evolutionChain={evolution} />,
+            <PokeDetails {...details} />,
             PokemonTypeColor[details.types[0].type.name]
           );
         });
