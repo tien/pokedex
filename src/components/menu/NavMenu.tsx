@@ -19,7 +19,7 @@ const NavMenu = (props: INavMenuProps) => (
         if (e.key === "Enter" && e.target) {
           value.toggleLoading();
           PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-            e.target.value
+            e.target.value.toLowerCase()
           )
             .then((details: any) => {
               value.toggleLoading();
@@ -30,8 +30,8 @@ const NavMenu = (props: INavMenuProps) => (
             })
             .catch(
               (error: Error) =>
-                error.message === "404 Not Found" &&
-                alert("No pokemon found") ||
+                (error.message === "404 Not Found" &&
+                  alert("No pokemon found")) ||
                 value.toggleLoading()
             );
         }
