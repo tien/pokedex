@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../../styles/PokeEvolution.css"
+import "../../styles/PokeEvolution.css";
 
 interface IPokeEvolutionProps {
   chain: any;
@@ -8,13 +8,22 @@ interface IPokeEvolutionProps {
 
 const RecursivePokeEvolution = (currGen: any) => {
   if (currGen.children.length === 0) {
-    return <div>{currGen.name}</div>;
+    return (
+      <div>
+        <img className="poke-evo-children-group" src={currGen.imageUrl} />
+        {currGen.name}
+      </div>
+    );
   } else {
     const children: JSX.Element[] = [];
     for (const child of currGen.children) {
       children.push(
         <div className="poke-evo-parent">
-          <img src="" />{currGen.name} -> <div className="poke-evo-children-group">{RecursivePokeEvolution(child)}</div>
+          <img src={currGen.imageUrl} />
+          {currGen.name} ->{" "}
+          <div className="poke-evo-children-group">
+            {RecursivePokeEvolution(child)}
+          </div>
         </div>
       );
     }
