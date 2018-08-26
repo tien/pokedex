@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Bungee");
 
 :root {
-  --main-color: #ff0000;
-  --secondary-color: #cc0000;
+  --main-color: #dd1414;
+  --secondary-color: #a10000;
   --main-color-blue: #3b4cca;
   --main-color-yellow: #ffde00;
   --secondary-color-yellow: #b3a125;
 }
 
 body {
+  background-color: #8da098;
   margin: 0 auto;
   font-family: "Bungee", cursive;
   font-size: small;
@@ -148,9 +149,8 @@ th {
 }
 
 #page-container {
-  min-height: 100vh;
-  background-color: #758880;
-  padding: 20px 16px 85px 16px;
+  min-height: calc(100vh - 16px);
+  padding: 20px 16px 0 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -374,7 +374,8 @@ th {
     font-size: medium;
   }
   #page-container {
-    padding: 50px 40px 20px 40px;
+    min-height: calc(100vh - 50px);
+    padding: 50px 40px 0 40px;
   }
   #main-nav {
     width: 25rem;
