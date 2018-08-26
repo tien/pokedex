@@ -30,6 +30,7 @@ class App extends React.Component<{}, IAppState> {
     this.toggleLoading = this.toggleLoading.bind(this);
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
+    this.pokesListPage = this.pokesListPage.bind(this);
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
@@ -57,9 +58,6 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
-    const pokesListPage = () => (
-      <PokeListPage toggleLoading={this.toggleLoading} />
-    );
     return (
       <GlobalContextProvider
         value={{
@@ -72,8 +70,8 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Redirect exact={true} path="/"  to="/pokemon-list"/>
-        <Route path="/pokemon-list" render={pokesListPage} />
+        <Redirect exact={true} path="/" to="/pokemon-list" />
+        <Route path="/pokemon-list" render={this.pokesListPage} />
         <Route path="/about" component={About} />
         <div
           id="spinner-container"
@@ -92,6 +90,10 @@ class App extends React.Component<{}, IAppState> {
         </Modal>
       </GlobalContextProvider>
     );
+  }
+
+  private pokesListPage() {
+    return <PokeListPage toggleLoading={this.toggleLoading} />;
   }
 }
 
