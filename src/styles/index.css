@@ -5,18 +5,13 @@
   --secondary-color: #cc0000;
   --main-color-blue: #3b4cca;
   --main-color-yellow: #ffde00;
-  --secondary-color-yellow: #B3A125;
+  --secondary-color-yellow: #b3a125;
 }
 
 body {
   margin: 0 auto;
-  /* font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    "Lucida Grande";
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif; */
   font-family: "Bungee", cursive;
+  font-size: small;
   min-height: 100vh;
   position: relative;
 }
@@ -153,6 +148,7 @@ th {
 }
 
 #page-container {
+  min-height: 100vh;
   background-color: #758880;
   padding: 20px 16px 85px 16px;
   display: flex;
@@ -400,6 +396,9 @@ th {
 }
 
 @media all and (min-width: 576px) {
+  body {
+    font-size: medium;
+  }
   #page-container {
     padding: 50px 40px 20px 40px;
   }
