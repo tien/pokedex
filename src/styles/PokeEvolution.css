@@ -1,6 +1,13 @@
-.poke-evo-parent {
+.poke-evo-wrapper {
   display: flex;
   align-items: center;
+}
+
+.poke-evo-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .poke-evo-children-group {

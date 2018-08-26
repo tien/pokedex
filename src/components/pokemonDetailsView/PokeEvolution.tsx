@@ -9,8 +9,8 @@ interface IPokeEvolutionProps {
 const RecursivePokeEvolution = (currGen: any) => {
   if (currGen.children.length === 0) {
     return (
-      <div>
-        <img className="poke-evo-children-group" src={currGen.imageUrl} />
+      <div className="poke-evo-children-group">
+        <img src={currGen.imageUrl} />
         {currGen.name}
       </div>
     );
@@ -18,9 +18,12 @@ const RecursivePokeEvolution = (currGen: any) => {
     const children: JSX.Element[] = [];
     for (const child of currGen.children) {
       children.push(
-        <div className="poke-evo-parent">
-          <img src={currGen.imageUrl} />
-          {currGen.name} ->{" "}
+        <div className="poke-evo-wrapper">
+          <div className="poke-evo-parent">
+            <img src={currGen.imageUrl} />
+            {currGen.name}
+          </div>
+          -->
           <div className="poke-evo-children-group">
             {RecursivePokeEvolution(child)}
           </div>
