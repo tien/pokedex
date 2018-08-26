@@ -10,7 +10,18 @@ interface IPokeEvolutionProps {
   color: string;
 }
 
-const RecursivePokeEvolution = (currGen: any) => (
+const Arrow = (props: any) => (
+  <svg
+    style={props.style}
+    xmlns="http://www.w3.org/2000/svg"
+    width="48"
+    height="48"
+    viewBox="0 0 48 48">
+    <path d="M24 16V8l16 16-16 16v-8H8V16z" />
+  </svg>
+);
+
+const RecursivePokeEvolution = (currGen: any, color: string) => (
   <GlobalContextConsumer>
     {value => {
       const openModalWithPokemonInfo = () => {
@@ -37,7 +48,7 @@ const RecursivePokeEvolution = (currGen: any) => (
       } else {
         const children: JSX.Element[] = [];
         for (const child of currGen.children) {
-          children.push(RecursivePokeEvolution(child));
+          children.push(RecursivePokeEvolution(child, color));
         }
         return (
           <div className="poke-evo-wrapper">
@@ -45,7 +56,8 @@ const RecursivePokeEvolution = (currGen: any) => (
               <img src={currGen.imageUrl} />
               {currGen.name}
             </div>
-            ----> <div className="poke-evo-children-group">{children}</div>
+            <Arrow style={{ fill: color, stroke: color }} />
+            <div className="poke-evo-children-group">{children}</div>
           </div>
         );
       }
@@ -55,7 +67,7 @@ const RecursivePokeEvolution = (currGen: any) => (
 
 const PokeEvolution = (props: IPokeEvolutionProps) => (
   <div className="poke-evo-tree">
-    {RecursivePokeEvolution(props.evolutionChain)}
+    {RecursivePokeEvolution(props.evolutionChain, props.color)}
   </div>
 );
 
