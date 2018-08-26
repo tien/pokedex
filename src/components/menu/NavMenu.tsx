@@ -31,7 +31,7 @@ const NavMenu = (props: INavMenuProps) => (
             .catch(
               (error: Error) =>
                 (error.message === "404 Not Found" &&
-                  alert("No pokemon found")) ||
+                  value.openModalWithReactNode(<h1>No Pokemon found</h1>)) ||
                 value.toggleLoading()
             );
         }
