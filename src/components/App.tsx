@@ -34,7 +34,7 @@ class App extends React.Component<{}, IAppState> {
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
     document.body.style.overflow = "hidden";
     this.setState({
-      modalColor: color,
+      modalColor: color || "grey",
       modalContent: ReactNode,
       modalIsOpen: true
     });

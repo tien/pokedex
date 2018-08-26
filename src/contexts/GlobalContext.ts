@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface IGlobalContext {
   closeModal: () => void;
-  openModalWithReactNode: (ReactNode: React.ReactNode, color: string) => void;
+  openModalWithReactNode: (ReactNode: React.ReactNode, color?: string) => void;
   toggleLoading: () => void;
 }
 
@@ -12,7 +12,7 @@ const closeModal: () => void = () => {};
 const toggleLoading: () => void = () => {};
 const openModalWithReactNode: (
   ReactNode: React.ReactNode,
-  color: string
+  color?: string
 ) => // tslint:disable-next-line:no-empty
 void = () => {};
 
