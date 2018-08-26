@@ -35,7 +35,9 @@ const RecursivePokeEvolution = (currGen: any) => {
 };
 
 const PokeEvolution = (props: IPokeEvolutionProps) => (
-  <div>{RecursivePokeEvolution(props.evolutionChain)}</div>
+  <div className="poke-evo-tree">
+    {RecursivePokeEvolution(props.evolutionChain)}
+  </div>
 );
 
 export default PokeEvolution;

@@ -1,3 +1,8 @@
+.poke-evo-tree {
+  display: flex;
+  justify-content: center;
+}
+
 .poke-evo-wrapper {
   display: flex;
   align-items: center;
