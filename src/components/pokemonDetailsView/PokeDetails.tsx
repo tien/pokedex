@@ -51,17 +51,33 @@ const PokeDetails = (props: IPokeDetailsProps) => {
           <PokeStats stats={props.stats} color={lightColor} />
         </div>
         <div className="details-3rd-child">
+          <div
+            className="details-section-header"
+            style={{ backgroundColor: darkColor }}>
+            Profile
+          </div>
           <div>Height: {props.height}m</div>
           <div>
             Weight: {props.weight}
             kg
           </div>
+          <div
+            className="details-section-header"
+            style={{ backgroundColor: darkColor }}>
+            Moves
+          </div>
           <div className="poke-moves-detail-list">
             {props.moves.map((move: any) => (
               <div className="poke-move-detail">
                 <div className="poke-move-name">{move.move.name}</div>
-                <PokeTypeCard type={MovesList[move.move.name].type} style={{flexBasis:"25%", marginRight:"2px"}}/>
-                <PokeTypeCard category={MovesList[move.move.name].category} style={{flexBasis:"25%"}}/>
+                <PokeTypeCard
+                  type={MovesList[move.move.name].type}
+                  style={{ flexBasis: "25%", marginRight: "2px" }}
+                />
+                <PokeTypeCard
+                  category={MovesList[move.move.name].category}
+                  style={{ flexBasis: "25%" }}
+                />
               </div>
             ))}
           </div>

@@ -48,6 +48,13 @@
   flex-basis: 50%;
 }
 
+.details-section-header {
+  color: white;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 20px;
+}
+
 @media all and (min-width: 576px) {
   .details-modal-content {
     display: grid;
