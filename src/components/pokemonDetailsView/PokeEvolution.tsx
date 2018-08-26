@@ -1,38 +1,62 @@
 import * as React from "react";
+import PokemonTypeColors from "../../assets/PokemonTypeColors";
+import { GlobalContextConsumer } from "../../contexts/GlobalContext";
+import PokeService from "../../services/pokeService";
 import "../../styles/PokeEvolution.css";
+import PokeDetails from "./PokeDetails";
 
 interface IPokeEvolutionProps {
   evolutionChain: any;
   color: string;
 }
 
-const RecursivePokeEvolution = (currGen: any) => {
-  if (currGen.children.length === 0) {
-    return (
-      <div className="poke-evo-children-group">
-        <img src={currGen.imageUrl} />
-        {currGen.name}
-      </div>
-    );
-  } else {
-    const children: JSX.Element[] = [];
-    for (const child of currGen.children) {
-      children.push(
-        <div className="poke-evo-wrapper">
-          <div className="poke-evo-parent">
-            <img src={currGen.imageUrl} />
-            {currGen.name}
-          </div>
-          ---->
+const RecursivePokeEvolution = (currGen: any) => (
+  <GlobalContextConsumer>
+    {value => {
+      const openModalWithPokemonInfo = () => {
+        value.toggleLoading();
+        PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
+          currGen.name
+        ).then((details: any) => {
+          value.toggleLoading();
+          value.openModalWithReactNode(
+            <PokeDetails {...details} />,
+            PokemonTypeColors[details.types[0].type.name]
+          );
+        });
+      };
+      if (currGen.children.length === 0) {
+        return (
           <div className="poke-evo-children-group">
-            {RecursivePokeEvolution(child)}
+            <div className="poke-evo-parent" onClick={openModalWithPokemonInfo}>
+              <img src={currGen.imageUrl} />
+              {currGen.name}
+            </div>
           </div>
-        </div>
-      );
-    }
-    return children;
-  }
-};
+        );
+      } else {
+        const children: JSX.Element[] = [];
+        for (const child of currGen.children) {
+          children.push(
+            <div className="poke-evo-wrapper">
+              <div
+                className="poke-evo-parent"
+                onClick={openModalWithPokemonInfo}>
+                <img src={currGen.imageUrl} />
+                {currGen.name}
+              </div>
+              ---->
+              <div className="poke-evo-children-group">
+                {RecursivePokeEvolution(child)}
+              </div>
+            </div>
+          );
+        }
+        return children;
+      }
+    }}
+  </GlobalContextConsumer>
+);
 
 const PokeEvolution = (props: IPokeEvolutionProps) => (
   <div className="poke-evo-tree">
