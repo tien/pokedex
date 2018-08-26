@@ -37,22 +37,17 @@ const RecursivePokeEvolution = (currGen: any) => (
       } else {
         const children: JSX.Element[] = [];
         for (const child of currGen.children) {
-          children.push(
-            <div className="poke-evo-wrapper">
-              <div
-                className="poke-evo-parent"
-                onClick={openModalWithPokemonInfo}>
-                <img src={currGen.imageUrl} />
-                {currGen.name}
-              </div>
-              ---->
-              <div className="poke-evo-children-group">
-                {RecursivePokeEvolution(child)}
-              </div>
-            </div>
-          );
+          children.push(RecursivePokeEvolution(child));
         }
-        return children;
+        return (
+          <div className="poke-evo-wrapper">
+            <div className="poke-evo-parent" onClick={openModalWithPokemonInfo}>
+              <img src={currGen.imageUrl} />
+              {currGen.name}
+            </div>
+            ----> <div className="poke-evo-children-group">{children}</div>
+          </div>
+        );
       }
     }}
   </GlobalContextConsumer>
