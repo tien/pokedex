@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as InfiniteScroll from "react-infinite-scroller";
 import PokeService from "../../services/pokeService";
 import PokeBall from "./PokeBall";
 
@@ -7,9 +8,9 @@ interface IPokeListPageProps {
 }
 
 interface IPokeListPageState {
-  pokemons: [];
+  pokemons: any[];
+  offset: number;
   next: string | null;
-  prev: string | null;
 }
 
 class PokeListPage extends React.Component<
@@ -20,31 +21,52 @@ class PokeListPage extends React.Component<
     super(props);
     this.state = {
       next: null,
-      pokemons: [],
-      prev: null
+      offset: 0,
+      pokemons: []
     };
+    this.loadPokemons = this.loadPokemons.bind(this);
+  }
+
+  public loadPokemons() {
+    return PokeService.getAllPokemonWithLimitAndOffset(
+      40,
+      this.state.offset
+    ).then((data: any) => {
+      this.setState((prevState: IPokeListPageState) => ({
+        next: data.next,
+        offset: prevState.offset + 40,
+        pokemons: [...prevState.pokemons, ...data.pokemons]
+      }));
+    });
   }
 
   public componentDidMount() {
     this.props.toggleLoading();
-    PokeService.getAllPokemonWithLimitAndOffset(39, 0).then((data: any) => {
-      this.props.toggleLoading();
-      this.setState({ pokemons: data });
-    });
+    this.loadPokemons().then((_: any) => this.props.toggleLoading());
   }
 
   public render() {
     return (
-      <div id="page-container" className="grid-on-lg">
-        {this.state.pokemons.map((pokemon: any) => (
-          <PokeBall
-            key={pokemon.name}
-            idNum={pokemon.id}
-            name={pokemon.name}
-            imageUrl={pokemon.imageUrl}
-          />
-        ))}
-      </div>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.loadPokemons}
+        hasMore={this.state.next ? true : false}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }>
+        <div id="page-container" className="grid-on-lg">
+          {this.state.pokemons.map((pokemon: any) => (
+            <PokeBall
+              key={pokemon.name}
+              idNum={pokemon.id}
+              name={pokemon.name}
+              imageUrl={pokemon.imageUrl}
+            />
+          ))}
+        </div>
+      </InfiniteScroll>
     );
   }
 }

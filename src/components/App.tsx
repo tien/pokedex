@@ -32,6 +32,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
+    document.body.style.overflow = "hidden";
     this.setState({
       modalColor: color,
       modalContent: ReactNode,
@@ -45,6 +46,7 @@ class App extends React.Component<{}, IAppState> {
 
   public closeModal() {
     this.setState({ modalIsOpen: false, modalContent: null });
+    document.body.style.overflow = "auto";
   }
 
   public toggleNavMenuActiveState() {
@@ -66,19 +68,13 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <div
-          style={{
-            height: "100vh",
-            overflowY: this.state.modalIsOpen ? "hidden" : "auto"
-          }}>
-          <Route
-            path="/Pokemon-List"
-            render={
-              // tslint:disable-next-line:jsx-no-lambda
-              () => <PokeListPage toggleLoading={this.toggleLoading} />
-            }
-          />
-        </div>
+        <Route
+          path="/Pokemon-List"
+          render={
+            // tslint:disable-next-line:jsx-no-lambda
+            () => <PokeListPage toggleLoading={this.toggleLoading} />
+          }
+        />
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}>

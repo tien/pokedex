@@ -60,14 +60,15 @@ class PokeService {
   ): any {
     return regrest
       .get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
-      .then((res: any) => res.json.results)
-      .then((pokemons: any) =>
-        pokemons.map((pokemon: any, index: number) => ({
+      .then((res: any) => res.json)
+      .then(({ results: pokemons, next }: any) => ({
+        next,
+        pokemons: pokemons.map((pokemon: any, index: number) => ({
           ...pokemon,
           id: index + offset + 1,
           imageUrl: `${this.imageUrlBase}${index + offset + 1}.png`
         }))
-      );
+      }));
   }
 
   private static recursiveBuildChain(currGen: any) {
