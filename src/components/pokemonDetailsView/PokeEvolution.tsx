@@ -2,7 +2,7 @@ import * as React from "react";
 import "../../styles/PokeEvolution.css";
 
 interface IPokeEvolutionProps {
-  chain: any;
+  evolutionChain: any;
   color: string;
 }
 
@@ -23,7 +23,7 @@ const RecursivePokeEvolution = (currGen: any) => {
             <img src={currGen.imageUrl} />
             {currGen.name}
           </div>
-          -->
+          ---->
           <div className="poke-evo-children-group">
             {RecursivePokeEvolution(child)}
           </div>
@@ -35,7 +35,7 @@ const RecursivePokeEvolution = (currGen: any) => {
 };
 
 const PokeEvolution = (props: IPokeEvolutionProps) => (
-  <div>{RecursivePokeEvolution(props.chain)}</div>
+  <div>{RecursivePokeEvolution(props.evolutionChain)}</div>
 );
 
 export default PokeEvolution;

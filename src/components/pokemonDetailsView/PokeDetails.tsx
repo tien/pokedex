@@ -3,6 +3,7 @@ import * as React from "react";
 import * as MovesList from "../../assets/moves.json";
 import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import "../../styles/PokeDetails.css";
+import PokeEvolution from "./PokeEvolution";
 import PokeStats from "./PokeStats";
 import PokeTypeCard from "./PokeTypeCard";
 
@@ -61,6 +62,15 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             Weight: {props.weight}
             kg
           </div>
+          <div
+            className="details-section-header"
+            style={{ backgroundColor: darkColor }}>
+            Evolution
+          </div>
+          <PokeEvolution
+            evolutionChain={props.evolutionChain}
+            color={darkColor}
+          />
           <div
             className="details-section-header"
             style={{ backgroundColor: darkColor }}>
