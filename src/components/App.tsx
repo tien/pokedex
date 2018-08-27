@@ -35,6 +35,7 @@ class App extends React.Component<{}, IAppState> {
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
     this.setState({
       modalColor: color || "grey",
       modalContent: ReactNode,
@@ -49,6 +50,7 @@ class App extends React.Component<{}, IAppState> {
   public closeModal() {
     this.setState({ modalIsOpen: false, modalContent: null });
     document.body.style.overflow = "auto";
+    document.body.style.position = "relative";
   }
 
   public toggleNavMenuActiveState() {
