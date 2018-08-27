@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import "../styles/App.css";
 import About from "./About";
@@ -7,10 +7,9 @@ import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import PokeListPage from "./pokemonListPage/PokeListPage";
 
-const menuCategory = ["pokedex", "about"];
-
 interface IAppState {
   loading: boolean;
+  menuCategory: string[];
   modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
@@ -23,6 +22,7 @@ class App extends React.Component<{}, IAppState> {
     super(props);
     this.state = {
       loading: false,
+      menuCategory: ["pokedex", "about"],
       modalContent: null,
       modalIsOpen: false,
       navMenuIsOpen: false,
@@ -73,13 +73,13 @@ class App extends React.Component<{}, IAppState> {
           toggleLoading: this.toggleLoading
         }}>
         <NavMenu
-          links={menuCategory}
+          links={this.state.menuCategory}
+          root="pokedex"
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Redirect exact={true} path="/" to="/pokedex" />
-        <Route path="/pokedex" render={this.pokesListPage} />
-        <Route path="/about" component={About} />
+        <Route exact={true} path="/" render={this.pokesListPage} />
+        <Route exact={true} path="/about" component={About} />
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}>
