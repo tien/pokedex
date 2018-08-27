@@ -12,6 +12,7 @@
   padding: 0 10px 0 10px;
   overflow-y: auto;
   transition: 1s ease;
+  -webkit-overflow-scrolling: touch;
 }
 
 #modal.active {
