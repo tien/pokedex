@@ -369,7 +369,7 @@ th {
 }
 
 #search-box::placeholder {
-  font-size: xx-small;
+  font-size: small;
 }
 
 #timetable {
