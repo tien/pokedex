@@ -8,6 +8,7 @@ import ToggleNavButton from "./ToggleNavButton";
 
 interface INavMenuProps {
   links: string[];
+  root?: string;
   active: boolean;
   toggleNav: () => void;
 }
@@ -46,10 +47,13 @@ const NavMenu = (props: INavMenuProps) => (
             />
             {props.links.map((link: string, index: number) => (
               <NavLink
+                exact={true}
                 onClick={props.toggleNav}
                 className="nav-item"
                 key={index}
-                to={`/${link.trim().replace(/\s+/g, "-")}`}>
+                to={`/${
+                  link === props.root ? "" : link.trim().replace(/\s+/g, "-")
+                }`}>
                 {link}
               </NavLink>
             ))}
