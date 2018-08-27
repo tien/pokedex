@@ -16,7 +16,7 @@
 
 #modal.active {
   opacity: 100;
-  left: 0;
+  transform: translateX(-100%);
 }
 
 #modal-content {
@@ -67,6 +67,6 @@
     top: 100%;
   }
   #modal.active {
-    top: 0;
+    transform: translateY(-100%);
   }
 }
