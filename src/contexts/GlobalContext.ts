@@ -27,4 +27,4 @@ const {
   Consumer: GlobalContextConsumer
 } = React.createContext<IGlobalContext>(globalContext);
 
-export { GlobalContextProvider, GlobalContextConsumer };
+export { GlobalContextProvider, GlobalContextConsumer, IGlobalContext };

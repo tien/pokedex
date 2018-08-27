@@ -9,8 +9,8 @@ interface IPokeStatsProps {
 const PokeStats = (props: IPokeStatsProps) => (
   <div className="stats">
     {props.stats &&
-      props.stats.map((stat: any) => (
-        <div className="stat">
+      props.stats.map((stat: any, index: number) => (
+        <div key={index} className="stat">
           <div className="stat-label">
             {stat.stat.name === "special-defense"
               ? "sd"
