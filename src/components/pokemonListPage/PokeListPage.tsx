@@ -52,9 +52,9 @@ class PokeListPage extends React.Component<
         loadMore={this.loadPokemons}
         hasMore={this.state.next ? true : false}
         loader={
-          <div className="loader" key={0}>
+          <h2 className="loader" key={0} style={{ textAlign: "right" }}>
             Loading ...
-          </div>
+          </h2>
         }>
         <div id="page-container" className="grid-on-lg">
           {this.state.pokemons.map((pokemon: any) => (
