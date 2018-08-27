@@ -39,8 +39,9 @@ const PokeDetails = (props: IPokeDetailsProps) => {
           <img src={props.sprites.front_default} />
           <div className="poke-number-details">Number: #{props.id}</div>
           <div className="poke-types-details">
-            {props.types.map((type: any) => (
+            {props.types.map((type: any, index: number) => (
               <div
+                key={index}
                 style={{ color: PokemonTypeColors[type.type.name] }}
                 className="poke-type">
                 {type.type.name}
@@ -77,8 +78,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             Moves
           </div>
           <div className="poke-moves-detail-list">
-            {props.moves.map((move: any) => (
-              <div className="poke-move-detail">
+            {props.moves.map((move: any, index: number) => (
+              <div key={index} className="poke-move-detail">
                 <div className="poke-move-name">{move.move.name}</div>
                 <PokeTypeCard
                   type={MovesList[move.move.name].type}
