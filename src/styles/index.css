@@ -100,7 +100,7 @@ th {
 }
 
 #main-nav.active {
-  left: 0;
+  transform: translateX(100%);
   opacity: 100;
 }
 
