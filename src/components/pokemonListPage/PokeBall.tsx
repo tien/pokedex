@@ -17,15 +17,17 @@ const PokeCard = (props: IPokeCardProps) => (
     {value => {
       const openModalWithPokemonInfo = () => {
         value.toggleLoading();
-        PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-          props.idNum
-        ).then((details: any) => {
-          value.toggleLoading();
-          value.openModalWithReactNode(
-            <PokeDetails {...details} />,
-            PokemonTypeColor[details.types[0].type.name]
-          );
-        });
+        PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(props.idNum)
+          .then((details: any) => {
+            value.toggleLoading();
+            value.openModalWithReactNode(
+              <PokeDetails {...details} />,
+              PokemonTypeColor[details.types[0].type.name]
+            );
+          })
+          .catch((error: Error) => {
+            value.toggleLoading();
+          });
       };
 
       return (
