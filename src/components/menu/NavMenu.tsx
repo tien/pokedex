@@ -18,6 +18,7 @@ const NavMenu = (props: INavMenuProps) => (
     {value => {
       const openModalWithPokemonInfo = (e: any) => {
         if (e.key === "Enter" && e.target) {
+          e.target.blur();
           value.toggleLoading();
           PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
             e.target.value.toLowerCase()
