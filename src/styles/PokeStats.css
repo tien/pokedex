@@ -1,10 +1,11 @@
 .stats {
+  flex: 1;
   min-width: 200px;
   max-width: 300px;
 }
 
 .stat {
-  margin-top: 2px;
+  margin-bottom: 2px;
   display: flex;
 }
 
