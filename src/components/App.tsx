@@ -15,6 +15,7 @@ interface IAppState {
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
   navMenuIsOpen: boolean;
+  scrollPos: number;
 }
 
 class App extends React.Component<{}, IAppState> {
@@ -24,7 +25,8 @@ class App extends React.Component<{}, IAppState> {
       loading: false,
       modalContent: null,
       modalIsOpen: false,
-      navMenuIsOpen: false
+      navMenuIsOpen: false,
+      scrollPos: 0
     };
     this.closeModal = this.closeModal.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
@@ -34,13 +36,14 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
     this.setState({
       modalColor: color || "grey",
       modalContent: ReactNode,
-      modalIsOpen: true
+      modalIsOpen: true,
+      scrollPos: document.documentElement.scrollTop + document.body.scrollTop
     });
+    document.body.classList.add("freeze-page");
+    document.documentElement.classList.add("freeze-page");
   }
 
   public toggleLoading() {
@@ -48,9 +51,11 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public closeModal() {
+    document.body.classList.remove("freeze-page");
+    document.documentElement.classList.remove("freeze-page");
+    document.documentElement.scrollTop = this.state.scrollPos;
+    document.body.scrollTop = this.state.scrollPos;
     this.setState({ modalIsOpen: false, modalContent: null });
-    document.body.style.overflow = "auto";
-    document.body.style.position = "relative";
   }
 
   public toggleNavMenuActiveState() {
