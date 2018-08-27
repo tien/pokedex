@@ -7,7 +7,7 @@ import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import PokeListPage from "./pokemonListPage/PokeListPage";
 
-const menuCategory = ["pokemon list", "about"];
+const menuCategory = ["pokedex", "about"];
 
 interface IAppState {
   loading: boolean;
@@ -72,8 +72,8 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Redirect exact={true} path="/" to="/pokemon-list" />
-        <Route path="/pokemon-list" render={this.pokesListPage} />
+        <Redirect exact={true} path="/" to="/pokedex" />
+        <Route path="/pokedex" render={this.pokesListPage} />
         <Route path="/about" component={About} />
         <div
           id="spinner-container"
