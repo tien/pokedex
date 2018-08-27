@@ -37,12 +37,12 @@ const PokeDetails = (props: IPokeDetailsProps) => {
       <div className="details-modal-content">
         <div className="details-1st-child">
           <img src={props.sprites.front_default} />
-          <div>
-            <div>Number: #{props.id}</div>
+          <div className="poke-number-details">Number: #{props.id}</div>
+          <div className="poke-types-details">
             {props.types.map((type: any) => (
               <div
                 style={{ color: PokemonTypeColors[type.type.name] }}
-                className={`${type.type.name}-type`}>
+                className="poke-type">
                 {type.type.name}
               </div>
             ))}
