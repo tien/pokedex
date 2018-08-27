@@ -14,6 +14,7 @@ body {
   font-family: "Bungee", cursive;
   font-size: small;
   min-height: 100vh;
+  width: 100%;
   position: relative;
 }
 
