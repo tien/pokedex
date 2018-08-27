@@ -18,6 +18,8 @@ interface IAppState {
 }
 
 class App extends React.Component<{}, IAppState> {
+  private menuRef: React.RefObject<HTMLDivElement>;
+
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -30,9 +32,13 @@ class App extends React.Component<{}, IAppState> {
     };
     this.closeModal = this.closeModal.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
+    this.openNavMenu = this.openNavMenu.bind(this);
+    this.closeNavMenu = this.closeNavMenu.bind(this);
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
+    this.closeMenuOnOutsideClick = this.closeMenuOnOutsideClick.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
     this.pokesListPage = this.pokesListPage.bind(this);
+    this.menuRef = React.createRef();
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
@@ -59,9 +65,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public toggleNavMenuActiveState() {
-    this.setState((prevState: IAppState) => ({
-      navMenuIsOpen: !prevState.navMenuIsOpen
-    }));
+    this.state.navMenuIsOpen ? this.closeNavMenu() : this.openNavMenu();
   }
 
   public render() {
@@ -72,12 +76,14 @@ class App extends React.Component<{}, IAppState> {
           openModalWithReactNode: this.openModalWithReactNode,
           toggleLoading: this.toggleLoading
         }}>
-        <NavMenu
-          links={this.state.menuCategory}
-          root="pokedex"
-          active={this.state.navMenuIsOpen}
-          toggleNav={this.toggleNavMenuActiveState}
-        />
+        <div ref={this.menuRef}>
+          <NavMenu
+            links={this.state.menuCategory}
+            root="pokedex"
+            active={this.state.navMenuIsOpen}
+            toggleNav={this.toggleNavMenuActiveState}
+          />
+        </div>
         <Route exact={true} path="/" render={this.pokesListPage} />
         <Route exact={true} path="/about" component={About} />
         <div
@@ -97,6 +103,33 @@ class App extends React.Component<{}, IAppState> {
         </Modal>
       </GlobalContextProvider>
     );
+  }
+
+  private openNavMenu() {
+    this.setState({ navMenuIsOpen: true }, () =>
+      document.documentElement.addEventListener(
+        "click",
+        this.closeMenuOnOutsideClick
+      )
+    );
+  }
+
+  private closeNavMenu() {
+    this.setState({ navMenuIsOpen: false }, () =>
+      document.documentElement.removeEventListener(
+        "click",
+        this.closeMenuOnOutsideClick
+      )
+    );
+  }
+
+  private closeMenuOnOutsideClick(event: Event) {
+    if (
+      this.menuRef.current !== null &&
+      !this.menuRef.current.contains(event.target as Node)
+    ) {
+      this.closeNavMenu();
+    }
   }
 
   private pokesListPage() {
