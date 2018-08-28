@@ -63,6 +63,12 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             Weight: {props.weight}
             kg
           </div>
+          <div>
+            Abilities:{" "}
+            {props.abilities
+              .map((ability: any) => ability.ability.name)
+              .join(", ")}
+          </div>
           <div
             className="details-section-header"
             style={{ backgroundColor: darkColor }}>

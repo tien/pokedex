@@ -7,9 +7,18 @@ class PokeService {
   public static getPokemonEvolutionChainByNameOrId(id: number | string) {
     return regrest
       .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
-      .then((res: any) => regrest.get(res.json.evolution_chain.url))
-      .then((res: any) => res.json.chain)
-      .then((data: any) => this.buildChain(data));
+      .then((res: any) =>
+        regrest.get(res.json.evolution_chain.url).then((evoRes: any) => ({
+          captureRate: res.capture_rate,
+          evolutionChain: evoRes.json.chain,
+          genderRate: res.gender_rate
+        }))
+      )
+      .then((data: any) => ({
+        captureRate: data.captureRate,
+        evolutionChain: this.buildChain(data.evolutionChain),
+        genderRate: data.genderRate
+      }));
   }
 
   public static getPokemonByNameOrId(id: number | string): any {
@@ -50,7 +59,7 @@ class PokeService {
         types: details.types,
         weight: details.weight
       },
-      evolutionChain
+      ...evolutionChain
     }));
   }
 
