@@ -19,6 +19,7 @@ interface IAppState {
 
 class App extends React.Component<{}, IAppState> {
   private menuRef: React.RefObject<HTMLDivElement>;
+  private modalRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: {}) {
     super(props);
@@ -39,6 +40,7 @@ class App extends React.Component<{}, IAppState> {
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
     this.pokesListPage = this.pokesListPage.bind(this);
     this.menuRef = React.createRef();
+    this.modalRef = React.createRef();
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
@@ -91,16 +93,18 @@ class App extends React.Component<{}, IAppState> {
           style={{ display: this.state.loading ? "block" : "none" }}>
           <div id="spinner" />
         </div>
-        <Modal
-          style={{
-            backgroundColor: this.state.modalColor
-              ? this.state.modalColor
-              : "white"
-          }}
-          active={this.state.modalIsOpen}
-          closeModal={this.closeModal}>
-          {this.state.modalContent}
-        </Modal>
+        <div ref={this.modalRef}>
+          <Modal
+            style={{
+              backgroundColor: this.state.modalColor
+                ? this.state.modalColor
+                : "white"
+            }}
+            active={this.state.modalIsOpen}
+            closeModal={this.closeModal}>
+            {this.state.modalContent}
+          </Modal>
+        </div>
       </GlobalContextProvider>
     );
   }
@@ -125,8 +129,10 @@ class App extends React.Component<{}, IAppState> {
 
   private closeMenuOnOutsideClick(event: Event) {
     if (
-      this.menuRef.current !== null &&
-      !this.menuRef.current.contains(event.target as Node)
+      this.menuRef.current &&
+      this.modalRef.current &&
+      !this.menuRef.current.contains(event.target as Node) &&
+      !this.modalRef.current.contains(event.target as Node)
     ) {
       this.closeNavMenu();
     }
