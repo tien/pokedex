@@ -77,6 +77,19 @@
   font-size: 20px;
 }
 
+.details-profile {
+  display: flex;
+  padding: 0 10px 0;
+}
+
+.details-profile > div {
+  flex: 1;
+}
+
+.details-profile > div > div {
+  margin-bottom: 5px;
+}
+
 @media all and (min-width: 576px) {
   .details-modal-content {
     display: grid;

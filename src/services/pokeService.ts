@@ -7,8 +7,9 @@ class PokeService {
   public static getPokemonEvolutionChainByNameOrId(id: number | string) {
     return regrest
       .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+      .then((res: any) => res.json)
       .then((res: any) =>
-        regrest.get(res.json.evolution_chain.url).then((evoRes: any) => ({
+        regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
           captureRate: res.capture_rate,
           evolutionChain: evoRes.json.chain,
           genderRate: res.gender_rate

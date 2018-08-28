@@ -9,7 +9,9 @@ import PokeTypeCard from "./PokeTypeCard";
 
 interface IPokeDetailsProps {
   abilities: [];
+  captureRate: number;
   evolutionChain: [];
+  genderRate: number;
   height: number;
   id: number;
   moves: [];
@@ -25,6 +27,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
   const darkColor = Color(lightColor)
     .darken(0.35)
     .string();
+  const femaleRate = ((props.genderRate * 100) / 8).toFixed(2);
+  const maleRate = (100 - parseFloat(femaleRate)).toFixed(2);
   return (
     <div className="poke-details-container" style={{ borderColor: darkColor }}>
       <div
@@ -58,16 +62,26 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             style={{ backgroundColor: darkColor }}>
             Profile
           </div>
-          <div>Height: {props.height}m</div>
-          <div>
-            Weight: {props.weight}
-            kg
-          </div>
-          <div>
-            Abilities:{" "}
-            {props.abilities
-              .map((ability: any) => ability.ability.name)
-              .join(", ")}
+          <div className="details-profile">
+            <div>
+              <div>Height: {props.height}m</div>
+              <div>
+                Weight: {props.weight}
+                kg
+              </div>
+              <div>
+                Abilities:{" "}
+                {props.abilities
+                  .map((ability: any) => ability.ability.name)
+                  .join(", ")}
+              </div>
+            </div>
+            <div>
+              <div>Capture rate: {(props.captureRate / 255).toFixed(2)}</div>
+              <div>
+                Gender rate: {femaleRate} {"\u2640"} {maleRate} {"\u2642"}
+              </div>
+            </div>
           </div>
           <div
             className="details-section-header"
