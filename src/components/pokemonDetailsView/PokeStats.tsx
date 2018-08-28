@@ -15,7 +15,7 @@ const PokeStats = (props: IPokeStatsProps) => (
             {stat.stat.name === "special-defense"
               ? "sd"
               : stat.stat.name === "special-attack"
-                ? "sp"
+                ? "sa"
                 : stat.stat.name}
           </div>
           <div className="stat-bar-bg">
