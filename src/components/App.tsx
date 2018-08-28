@@ -110,21 +110,29 @@ class App extends React.Component<{}, IAppState> {
   }
 
   private openNavMenu() {
-    this.setState({ navMenuIsOpen: true }, () =>
+    this.setState({ navMenuIsOpen: true }, () => {
       document.documentElement.addEventListener(
         "click",
         this.closeMenuOnOutsideClick
-      )
-    );
+      );
+      document.documentElement.addEventListener(
+        "touchstart",
+        this.closeMenuOnOutsideClick
+      );
+    });
   }
 
   private closeNavMenu() {
-    this.setState({ navMenuIsOpen: false }, () =>
+    this.setState({ navMenuIsOpen: false }, () => {
       document.documentElement.removeEventListener(
         "click",
         this.closeMenuOnOutsideClick
-      )
-    );
+      );
+      document.documentElement.removeEventListener(
+        "touchstart",
+        this.closeMenuOnOutsideClick
+      );
+    });
   }
 
   private closeMenuOnOutsideClick(event: Event) {
