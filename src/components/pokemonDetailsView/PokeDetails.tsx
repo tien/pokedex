@@ -68,9 +68,9 @@ const PokeDetails = (props: IPokeDetailsProps) => {
           </div>
           <div className="details-profile">
             <div>
-              <div>Height: {props.height}m</div>
+              <div>Height: {Math.round(props.height / 10)}m</div>
               <div>
-                Weight: {props.weight}
+                Weight: {Math.round(props.weight / 10)}
                 kg
               </div>
               <div>
