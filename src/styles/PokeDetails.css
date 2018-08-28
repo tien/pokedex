@@ -90,6 +90,10 @@
   margin-bottom: 5px;
 }
 
+.one-liner {
+  white-space: pre;
+}
+
 @media all and (min-width: 576px) {
   .details-modal-content {
     display: grid;

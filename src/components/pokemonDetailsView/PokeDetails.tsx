@@ -89,7 +89,13 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                 %
               </div>
               <div>
-                Gender rate: {femaleRate}% {"\u2640"} {maleRate}% {"\u2642"}
+                Gender rate:{" "}
+                <span className="one-liner">
+                  {femaleRate}% {"\u2640"}
+                </span>{" "}
+                <span className="one-liner">
+                  {maleRate}% {"\u2642"}
+                </span>
               </div>
             </div>
           </div>
