@@ -27,8 +27,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
   const darkColor = Color(lightColor)
     .darken(0.35)
     .string();
-  const femaleRate = ((props.genderRate * 100) / 8).toFixed(2);
-  const maleRate = (100 - parseFloat(femaleRate)).toFixed(2);
+  const femaleRate = parseFloat(((props.genderRate * 100) / 8).toFixed(2)).toString();
+  const maleRate = parseFloat((100 - parseFloat(femaleRate)).toFixed(2)).toString();
   return (
     <div className="poke-details-container" style={{ borderColor: darkColor }}>
       <div
@@ -79,7 +79,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             <div>
               <div>Capture rate: {(props.captureRate / 255).toFixed(2)}</div>
               <div>
-                Gender rate: {femaleRate} {"\u2640"} {maleRate} {"\u2642"}
+                Gender rate: {femaleRate}% {"\u2640"} {maleRate}% {"\u2642"}
               </div>
             </div>
           </div>
