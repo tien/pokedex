@@ -27,12 +27,19 @@ const PokeDetails = (props: IPokeDetailsProps) => {
   const darkColor = Color(lightColor)
     .darken(0.35)
     .string();
-  const femaleRate = parseFloat(
-    ((props.genderRate * 100) / 8).toFixed(2)
-  ).toString();
-  const maleRate = parseFloat(
-    (100 - parseFloat(femaleRate)).toFixed(2)
-  ).toString();
+  let genderRate;
+  switch (props.genderRate) {
+    case -1:
+      genderRate = "N/A";
+      break;
+    case 0:
+      genderRate = "0%\u2640 100%\u2642";
+      break;
+    default:
+      const female = Math.round(props.genderRate * 1250) / 100;
+      const male = 100 - female;
+      genderRate = `${female}%\u2640 ${male}%\u2642`;
+  }
   return (
     <div className="poke-details-container" style={{ borderColor: darkColor }}>
       <div
@@ -89,13 +96,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                 %
               </div>
               <div>
-                Gender rate:{" "}
-                <span className="one-liner">
-                  {femaleRate}% {"\u2640"}
-                </span>{" "}
-                <span className="one-liner">
-                  {maleRate}% {"\u2642"}
-                </span>
+                Gender rate: <span className="one-liner">{genderRate}</span>
               </div>
             </div>
           </div>
