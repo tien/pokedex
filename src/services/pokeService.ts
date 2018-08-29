@@ -69,7 +69,7 @@ class PokeService {
     offset: number
   ): any {
     return regrest
-      .get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
+      .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
       .then((res: any) => res.json)
       .then(({ results: pokemons, next }: any) => ({
         next,
