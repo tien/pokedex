@@ -44,16 +44,20 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
-    this.setState(prevState => ({
-      modalColor: color || "grey",
-      modalContent: ReactNode,
-      modalIsOpen: true,
-      scrollPos: prevState.modalIsOpen
-        ? prevState.scrollPos
-        : document.documentElement.scrollTop + document.body.scrollTop
-    }));
-    document.body.classList.add("freeze-page");
-    document.documentElement.classList.add("freeze-page");
+    this.setState(
+      prevState => ({
+        modalColor: color || "grey",
+        modalContent: ReactNode,
+        modalIsOpen: true,
+        scrollPos: prevState.modalIsOpen
+          ? prevState.scrollPos
+          : document.documentElement.scrollTop + document.body.scrollTop
+      }),
+      () => {
+        document.body.classList.add("freeze-page");
+        document.documentElement.classList.add("freeze-page");
+      }
+    );
   }
 
   public toggleLoading() {
