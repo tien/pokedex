@@ -89,11 +89,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             </div>
             <div>
               <div>
-                Capture rate:{" "}
-                {parseFloat(
-                  ((props.captureRate * 100) / 255).toFixed(2)
-                ).toString()}
-                %
+                Capture rate: {Math.round(props.captureRate * 100) / 100}%
               </div>
               <div>
                 Gender rate: <span className="one-liner">{genderRate}</span>
