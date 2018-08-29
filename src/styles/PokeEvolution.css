@@ -1,3 +1,12 @@
+@keyframes bounce {
+  from {
+    transform: scale(1.05) translateY(0px);
+  }
+  to {
+    transform: scale(1.10) translateY(-15px);
+  }
+}
+
 .poke-evo-tree {
   display: flex;
   justify-content: center;
@@ -14,6 +23,10 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.poke-evo-parent > img:hover {
+  animation: bounce 0.75s infinite alternate;
 }
 
 .poke-evo-children-group {
