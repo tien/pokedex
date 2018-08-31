@@ -57,12 +57,7 @@ class App extends React.Component<{}, IAppState> {
         document.body.classList.add("freeze-page");
         document.documentElement.classList.add("freeze-page");
         if (this.modalRef.current) {
-          // tslint:disable-next-line:no-console
-          console.log(this.modalRef.current.children[0]);
-          this.modalRef.current.children[0].scroll({
-            behavior: "smooth",
-            top: 0,
-          });
+          this.modalRef.current.children[0].scrollTop = 0;
         }
       }
     );
