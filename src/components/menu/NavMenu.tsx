@@ -59,7 +59,7 @@ const NavMenu = (props: INavMenuProps) => (
               </NavLink>
             ))}
           </nav>
-          <ToggleNavButton active={props.active} onCLick={props.toggleNav} />
+          <ToggleNavButton active={props.active} onClick={props.toggleNav} />
         </div>
       );
     }}
