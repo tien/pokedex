@@ -4,14 +4,14 @@ An interactive Pokedex built with React js using the [Pokéapi](https://pokeapi.
 
 - [Demo](https://crazycat9x.github.io/pokedex/)
 
-## Libraries used
+## 📚 Libraries used
 
 - [Regrest](https://github.com/crazycat9x/regrest)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [React Infinite Scroller](https://github.com/CassetteRocks/react-infinite-scroller#readme)
 - [Color](https://github.com/Qix-/color)
 
-## Development server
+## 🚧 Development server
 
 First, be sure to install the dependencies
 
@@ -25,7 +25,7 @@ Then start a dev server on localhost:3000
 npm start
 ```
 
-## Building
+## 🏗 Building
 
 ```js
 npm run build
