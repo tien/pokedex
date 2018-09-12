@@ -71,7 +71,7 @@ class PokeService {
         (pokemon: any) =>
           query.match(/^\d+$/g)
             ? pokemon.id === parseInt(query, 10)
-            : pokemon.name.includes(query)
+            : pokemon.name.includes(query.toLowerCase().replace(/\s/g, "-"))
       )
       .slice(0, 40);
   }
@@ -80,17 +80,6 @@ class PokeService {
     limit: number,
     offset: number
   ): any {
-    // return regrest
-    //   .get(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`)
-    //   .then((res: any) => res.json)
-    //   .then(({ results: pokemons, next }: any) => ({
-    //     next,
-    //     pokemons: pokemons.map((pokemon: any, index: number) => ({
-    //       ...pokemon,
-    //       id: index + offset + 1,
-    //       imageUrl: `${this.imageUrlBase}${index + offset + 1}.png`
-    //     }))
-    //   }));
     return Promise.resolve({
       next: offset + limit < pokemonsList.count,
       pokemons: pokemonsList.pokemons.slice(offset, offset + limit)
