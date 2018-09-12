@@ -1,21 +1,6 @@
 import regrest from "regrest";
 import pokemonsList from "../assets/pokemons.json";
 
-if (!String.prototype.includes) {
-  String.prototype.includes = function(search, start) {
-    "use strict";
-    if (typeof start !== "number") {
-      start = 0;
-    }
-
-    if (start + search.length > this.length) {
-      return false;
-    } else {
-      return this.indexOf(search, start) !== -1;
-    }
-  };
-}
-
 class PokeService {
   public static imageUrlBase: string =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
