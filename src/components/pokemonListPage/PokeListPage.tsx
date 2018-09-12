@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as InfiniteScroll from "react-infinite-scroller";
 import PokeService from "../../services/pokeService";
+import "../../styles/PokeListPage.css";
 import PokeBall from "./PokeBall";
 
 interface IPokeListPageProps {
@@ -8,9 +9,10 @@ interface IPokeListPageProps {
 }
 
 interface IPokeListPageState {
-  pokemons: any[];
+  next: boolean;
   offset: number;
-  next: string | null;
+  pokemons: any[];
+  searchQuery: string;
 }
 
 class PokeListPage extends React.Component<
@@ -20,11 +22,13 @@ class PokeListPage extends React.Component<
   constructor(props: IPokeListPageProps) {
     super(props);
     this.state = {
-      next: null,
+      next: true,
       offset: 0,
-      pokemons: []
+      pokemons: [],
+      searchQuery: ""
     };
     this.loadPokemons = this.loadPokemons.bind(this);
+    this.searchPokemons = this.searchPokemons.bind(this);
   }
 
   public loadPokemons() {
@@ -40,34 +44,68 @@ class PokeListPage extends React.Component<
     });
   }
 
-  public componentDidMount() {
-    this.props.toggleLoading();
-    this.loadPokemons().then((_: any) => this.props.toggleLoading());
+  public searchPokemons(event: React.SyntheticEvent) {
+    const value = (event.target as HTMLInputElement).value;
+    this.setState({
+      offset: 40,
+      pokemons: PokeService.searchPokemonByNameOrId(value),
+      searchQuery: value
+    });
   }
 
   public render() {
-    return (
+    const InfiniteScroller = (props: { children: JSX.Element }) => (
       <InfiniteScroll
         pageStart={0}
         loadMore={this.loadPokemons}
-        hasMore={this.state.next ? true : false}
+        hasMore={
+          this.state.searchQuery === ""
+            ? this.state.next
+              ? true
+              : false
+            : false
+        }
         loader={
           <h2
             className="loader"
             key={0}
-            style={{ textAlign: "right", marginRight: "20px" }}>... Loading</h2>
+            style={{ textAlign: "right", marginRight: "20px" }}>
+            ... Loading
+          </h2>
         }>
-        <div id="page-container" className="grid-on-lg">
-          {this.state.pokemons.map((pokemon: any) => (
-            <PokeBall
-              key={pokemon.name}
-              idNum={pokemon.id}
-              name={pokemon.name}
-              imageUrl={pokemon.imageUrl}
-            />
-          ))}
-        </div>
+        {props.children}
       </InfiniteScroll>
+    );
+
+    const Pokemons = (
+      <div id="page-container" className="grid-on-lg pokemons-list">
+        {this.state.pokemons.map((pokemon: any) => (
+          <PokeBall
+            key={pokemon.name}
+            idNum={pokemon.id}
+            name={pokemon.name}
+            imageUrl={pokemon.imageUrl}
+          />
+        ))}
+      </div>
+    );
+
+    return (
+      <React.Fragment>
+        <div id="pokemon-search-bar-wrapper">
+          <input
+            id="pokemon-search-bar"
+            value={this.state.searchQuery}
+            placeholder="Search for Pokémon"
+            onChange={this.searchPokemons}
+          />
+        </div>
+        {this.state.searchQuery === "" ? (
+          <InfiniteScroller>{Pokemons}</InfiniteScroller>
+        ) : (
+          Pokemons
+        )}
+      </React.Fragment>
     );
   }
 }
