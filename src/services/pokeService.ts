@@ -1,13 +1,16 @@
-import regrest from "regrest";
+import * as regrest from "regrest";
 import pokemonsList from "../assets/pokemons.json";
 
+
 class PokeService {
+  public static baseUrl = "https://pokeapi.co/api/v2/"
+
   public static imageUrlBase: string =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
   public static getPokemonEvolutionChainByNameOrId(id: number | string) {
     return regrest
-      .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+      .get(`${this.baseUrl}pokemon-species/${id}/`)
       .then((res: any) => res.json)
       .then((res: any) =>
         regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
@@ -25,7 +28,7 @@ class PokeService {
 
   public static getPokemonByNameOrId(id: number | string): any {
     return regrest
-      .get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      .get(`${this.baseUrl}pokemon/${id}/`)
       .then((res: any) => res.json)
       .then((data: any) => data)
       .then((details: any) => ({
