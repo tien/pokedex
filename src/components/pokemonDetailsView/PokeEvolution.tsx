@@ -27,7 +27,9 @@ const RecursivePokeEvolution = (
   key: number,
   callback: (id: number | string) => void
 ) => {
-  const onClick = () => callback(currGen.name);
+  // tslint:disable-next-line:no-console
+  console.log(currGen)
+  const onClick = () => callback(currGen.id);
   if (currGen.children.length === 0) {
     return (
       <div key={key} className="poke-evo-parent" onClick={onClick}>

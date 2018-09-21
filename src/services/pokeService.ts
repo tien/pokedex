@@ -1,9 +1,8 @@
 import * as regrest from "regrest";
 import pokemonsList from "../assets/pokemons.json";
 
-
 class PokeService {
-  public static baseUrl = "https://pokeapi.co/api/v2/"
+  public static baseUrl = "https://pokeapi.co/api/v2/";
 
   public static imageUrlBase: string =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
@@ -90,26 +89,34 @@ class PokeService {
   }
 
   private static recursiveBuildChain(currGen: any) {
-    const url = `${this.imageUrlBase}${
-      currGen.species.url.split("/").slice(-2, -1)[0]
-    }.png`;
+    const id = currGen.species.url.split("/").slice(-2, -1)[0];
     if (currGen.evolves_to.length === 0) {
-      return { name: currGen.species.name, imageUrl: url, children: [] };
+      return {
+        children: [],
+        id,
+        imageUrl: `${this.imageUrlBase}${id}.png`,
+        name: currGen.species.name
+      };
     } else {
       const children: any[] = [];
       for (const child of currGen.evolves_to) {
         children.push(this.recursiveBuildChain(child));
       }
-      return { name: currGen.species.name, imageUrl: url, children };
+      return {
+        children,
+        id,
+        imageUrl: `${this.imageUrlBase}${id}.png`,
+        name: currGen.species.name,
+      };
     }
   }
 
   private static buildChain(data: any) {
+    const id = data.species.url.split("/").slice(-2, -1)[0];
     const thisGen: any = {
       children: [],
-      imageUrl: `${this.imageUrlBase}${
-        data.species.url.split("/").slice(-2, -1)[0]
-      }.png`,
+      id,
+      imageUrl: `${this.imageUrlBase}${id}.png`,
       name: data.species.name
     };
     const nextChain = data.evolves_to;
