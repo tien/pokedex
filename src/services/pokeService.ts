@@ -39,7 +39,7 @@ class PokeService {
         name: details.name,
         sprites: details.sprites,
         stats: details.stats,
-        types: details.types,
+        types: details.types.sort((x:any)=>x.slot),
         weight: details.weight
       }));
   }
