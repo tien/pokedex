@@ -20,9 +20,7 @@ const NavMenu = (props: INavMenuProps) => (
         if (e.key === "Enter" && e.target) {
           e.target.blur();
           value.toggleLoading();
-          PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-            e.target.value.toLowerCase()
-          )
+          PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(e.target.value.toLowerCase())
             .then((details: any) => {
               value.toggleLoading();
               value.openModalWithReactNode(
@@ -30,11 +28,10 @@ const NavMenu = (props: INavMenuProps) => (
                 PokemonTypeColor[details.types[0].type.name]
               );
             })
-            .catch(
-              (error: Error) =>
-                value.openModalWithReactNode(<h1>No Pokemon found</h1>) ||
-                value.toggleLoading()
-            );
+            .catch((error: Error) => {
+              value.openModalWithReactNode(<h1>No Pokemon found</h1>);
+              value.toggleLoading();
+            });
         }
       };
       return (
@@ -52,9 +49,7 @@ const NavMenu = (props: INavMenuProps) => (
                 onClick={props.toggleNav}
                 className="nav-item"
                 key={index}
-                to={`/${
-                  link === props.root ? "" : link.trim().replace(/\s+/g, "-")
-                }`}>
+                to={`/${link === props.root ? "" : link.trim().replace(/\s+/g, "-")}`}>
                 {link}
               </NavLink>
             ))}
