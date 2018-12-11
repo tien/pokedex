@@ -14,7 +14,7 @@ const About = (props: any) => (
     <h2>Find more cool stuffs that I do here</h2>
     <h3>
       <a href="https://github.com/crazycat9x">GitHub</a> -{" "}
-      <a href="https://www.linkedin.com/in/nktien/">Linkedin</a>
+      <a href="https://www.linkedin.com/in/tien/">Linkedin</a>
     </h3>
   </div>
 );
