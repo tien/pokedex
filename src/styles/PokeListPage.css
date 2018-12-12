@@ -3,9 +3,13 @@
 }
 
 #pokemon-search-bar-wrapper {
+  position: sticky;
+  top: 0;
   background-color: var(--main-color);
   display: flex;
   padding: 10px;
+  transition: 0.3s ease;
+  z-index: 2;
 }
 
 #pokemon-search-bar {
@@ -14,7 +18,7 @@
   font-size: 1rem;
   border: 0;
   border-radius: 5px;
-  height:50px;
+  height: 50px;
   padding-left: 20px;
 }
 

@@ -19,6 +19,9 @@ class PokeListPage extends React.Component<
   IPokeListPageProps,
   IPokeListPageState
 > {
+  private prevScrollPos: number;
+  private searchBarRef: React.RefObject<HTMLDivElement>;
+
   constructor(props: IPokeListPageProps) {
     super(props);
     this.state = {
@@ -27,8 +30,20 @@ class PokeListPage extends React.Component<
       pokemons: [],
       searchQuery: ""
     };
+    this.prevScrollPos = 0;
     this.loadPokemons = this.loadPokemons.bind(this);
     this.searchPokemons = this.searchPokemons.bind(this);
+    this.autoHideSearchBar = this.autoHideSearchBar.bind(this);
+    this.searchBarRef = React.createRef();
+  }
+
+  public componentDidMount() {
+    this.prevScrollPos = window.pageYOffset;
+    window.addEventListener("scroll", this.autoHideSearchBar);
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener("scroll", this.autoHideSearchBar);
   }
 
   public loadPokemons() {
@@ -92,7 +107,7 @@ class PokeListPage extends React.Component<
 
     return (
       <React.Fragment>
-        <div id="pokemon-search-bar-wrapper">
+        <div ref={this.searchBarRef} id="pokemon-search-bar-wrapper">
           <input
             id="pokemon-search-bar"
             value={this.state.searchQuery}
@@ -107,6 +122,16 @@ class PokeListPage extends React.Component<
         )}
       </React.Fragment>
     );
+  }
+
+  private autoHideSearchBar() {
+    const currScrollPos = window.pageYOffset;
+    if (this.prevScrollPos > currScrollPos && this.searchBarRef.current) {
+      this.searchBarRef.current.style.transform = "";
+    } else if (this.searchBarRef.current) {
+      this.searchBarRef.current.style.transform = "translate(0, -70px)";
+    }
+    this.prevScrollPos = currScrollPos;
   }
 }
 
