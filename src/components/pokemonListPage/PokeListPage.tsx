@@ -61,11 +61,14 @@ class PokeListPage extends React.Component<
 
   public searchPokemons(event: React.SyntheticEvent) {
     const value = (event.target as HTMLInputElement).value;
-    this.setState({
-      offset: 40,
-      pokemons: PokeService.searchPokemonByNameOrId(value),
-      searchQuery: value
-    });
+    this.setState(
+      {
+        offset: 40,
+        pokemons: PokeService.searchPokemonByNameOrId(value),
+        searchQuery: value
+      },
+      () => window.scrollTo(0, 0)
+    );
   }
 
   public render() {
