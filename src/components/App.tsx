@@ -51,11 +51,11 @@ class App extends React.Component<{}, IAppState> {
         modalIsOpen: true,
         scrollPos: prevState.modalIsOpen
           ? prevState.scrollPos
-          : document.documentElement.scrollTop + document.body.scrollTop
+          : document.documentElement!.scrollTop + document.body.scrollTop
       }),
       () => {
         document.body.classList.add("freeze-page");
-        document.documentElement.classList.add("freeze-page");
+        document.documentElement!.classList.add("freeze-page");
         if (this.modalRef.current) {
           this.modalRef.current.children[0].scrollTop = 0;
         }
@@ -69,8 +69,8 @@ class App extends React.Component<{}, IAppState> {
 
   public closeModal() {
     document.body.classList.remove("freeze-page");
-    document.documentElement.classList.remove("freeze-page");
-    document.documentElement.scrollTop = this.state.scrollPos;
+    document.documentElement!.classList.remove("freeze-page");
+    document.documentElement!.scrollTop = this.state.scrollPos;
     document.body.scrollTop = this.state.scrollPos;
     this.setState({ modalIsOpen: false, modalContent: null });
   }
@@ -120,11 +120,11 @@ class App extends React.Component<{}, IAppState> {
 
   private openNavMenu() {
     this.setState({ navMenuIsOpen: true }, () => {
-      document.documentElement.addEventListener(
+      document.documentElement!.addEventListener(
         "click",
         this.closeMenuOnOutsideClick
       );
-      document.documentElement.addEventListener(
+      document.documentElement!.addEventListener(
         "touchstart",
         this.closeMenuOnOutsideClick
       );
@@ -133,11 +133,11 @@ class App extends React.Component<{}, IAppState> {
 
   private closeNavMenu() {
     this.setState({ navMenuIsOpen: false }, () => {
-      document.documentElement.removeEventListener(
+      document.documentElement!.removeEventListener(
         "click",
         this.closeMenuOnOutsideClick
       );
-      document.documentElement.removeEventListener(
+      document.documentElement!.removeEventListener(
         "touchstart",
         this.closeMenuOnOutsideClick
       );
