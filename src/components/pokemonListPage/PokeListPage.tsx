@@ -129,7 +129,9 @@ class PokeListPage extends React.Component<
     if (this.prevScrollPos > currScrollPos && this.searchBarRef.current) {
       this.searchBarRef.current.style.transform = "";
     } else if (this.searchBarRef.current) {
-      this.searchBarRef.current.style.transform = "translate(0, -70px)";
+      this.searchBarRef.current.style.transform = `translate(0, -${
+        this.searchBarRef.current.clientHeight
+      }px)`;
     }
     this.prevScrollPos = currScrollPos;
   }
