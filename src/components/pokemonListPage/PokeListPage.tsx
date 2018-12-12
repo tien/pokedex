@@ -136,7 +136,9 @@ class PokeListPage extends React.Component<
         this.searchBarRef.current.clientHeight
       }px)`;
     }
-    this.prevScrollPos = currScrollPos;
+    if (currScrollPos >= 0) {
+      this.prevScrollPos = currScrollPos;
+    }
   }
 }
 
