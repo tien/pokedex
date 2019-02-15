@@ -8,6 +8,10 @@
   --secondary-color-yellow: #b3a125;
 }
 
+html {
+  line-height: 1.2;
+}
+
 body.freeze-page,
 html.freeze-page {
   overflow: hidden;
