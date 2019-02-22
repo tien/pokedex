@@ -34,7 +34,7 @@ const PokeCard = (props: IPokeCardProps) => (
         <div className="poke-ball" onClick={openModalWithPokemonInfo}>
           <div className="poke-ball-top">
             <h3 className="poke-ball-name">{props.name}</h3>
-            <h6>{props.name}</h6>
+            <h6>{props.idNum}</h6>
           </div>
           <div className="ava-wrapper">
             <img className="poke-ava" src={props.imageUrl} />
