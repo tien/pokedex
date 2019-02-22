@@ -8,21 +8,23 @@ class PokeService {
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
   public static getPokemonEvolutionChainByNameOrId(id: number | string) {
-    return regrest
-      .get(`${this.baseUrl}pokemon-species/${id}/`)
-      .then((res: any) => res.json)
-      .then((res: any) =>
-        regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
-          captureRate: res.capture_rate,
-          evolutionChain: evoRes.json.chain,
-          genderRate: res.gender_rate
+    return regrest.get(`${this.baseUrl}pokemon/${id}/`).then(res1 =>
+      regrest
+        .get(`${this.baseUrl}pokemon-species/${res1.json.species.name}/`)
+        .then((res: any) => res.json)
+        .then((res: any) =>
+          regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
+            captureRate: res.capture_rate,
+            evolutionChain: evoRes.json.chain,
+            genderRate: res.gender_rate
+          }))
+        )
+        .then((data: any) => ({
+          captureRate: data.captureRate,
+          evolutionChain: this.buildChain(data.evolutionChain),
+          genderRate: data.genderRate
         }))
-      )
-      .then((data: any) => ({
-        captureRate: data.captureRate,
-        evolutionChain: this.buildChain(data.evolutionChain),
-        genderRate: data.genderRate
-      }));
+    );
   }
 
   public static getPokemonByNameOrId(id: number | string): any {
@@ -39,7 +41,7 @@ class PokeService {
         name: details.name,
         sprites: details.sprites,
         stats: details.stats,
-        types: details.types.sort((x:any)=>x.slot),
+        types: details.types.sort((x: any) => x.slot),
         weight: details.weight
       }));
   }
@@ -69,11 +71,10 @@ class PokeService {
 
   public static searchPokemonByNameOrId(query: string) {
     return pokemonsList.pokemons
-      .filter(
-        (pokemon: any) =>
-          query.match(/^\d+$/g)
-            ? pokemon.id === parseInt(query, 10)
-            : pokemon.name.includes(query.toLowerCase().replace(/\s/g, "-"))
+      .filter((pokemon: any) =>
+        query.match(/^\d+$/g)
+          ? pokemon.id === parseInt(query, 10)
+          : pokemon.name.includes(query.toLowerCase().replace(/\s/g, "-"))
       )
       .slice(0, 40);
   }
@@ -106,7 +107,7 @@ class PokeService {
         children,
         id,
         imageUrl: `${this.imageUrlBase}${id}.png`,
-        name: currGen.species.name,
+        name: currGen.species.name
       };
     }
   }
