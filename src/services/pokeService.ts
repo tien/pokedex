@@ -7,27 +7,25 @@ class PokeService {
   public static imageUrlBase: string =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
-  public static getPokemonEvolutionChainByNameOrId(id: number | string) {
-    return regrest.get(`${this.baseUrl}pokemon/${id}/`).then(res1 =>
-      regrest
-        .get(`${this.baseUrl}pokemon-species/${res1.json.species.name}/`)
-        .then((res: any) => res.json)
-        .then((res: any) =>
-          regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
-            captureRate: res.capture_rate,
-            evolutionChain: evoRes.json.chain,
-            genderRate: res.gender_rate
-          }))
-        )
-        .then((data: any) => ({
-          captureRate: data.captureRate,
-          evolutionChain: this.buildChain(data.evolutionChain),
-          genderRate: data.genderRate
+  public static getPokemonEvolutionChainBySpeciesNameOrId(id: number | string) {
+    return regrest
+      .get(`${this.baseUrl}pokemon-species/${id}/`)
+      .then((res: any) => res.json)
+      .then((res: any) =>
+        regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
+          captureRate: res.capture_rate,
+          evolutionChain: evoRes.json.chain,
+          genderRate: res.gender_rate
         }))
-    );
+      )
+      .then((data: any) => ({
+        captureRate: data.captureRate,
+        evolutionChain: this.buildChain(data.evolutionChain),
+        genderRate: data.genderRate
+      }));
   }
 
-  public static getPokemonByNameOrId(id: number | string): any {
+  public static getPokemonByNameOrId(id: number | string) {
     return regrest
       .get(`${this.baseUrl}pokemon/${id}/`)
       .then((res: any) => res.json)
@@ -39,6 +37,7 @@ class PokeService {
         id: details.id,
         moves: details.moves,
         name: details.name,
+        species: details.species.name,
         sprites: details.sprites,
         stats: details.stats,
         types: details.types.sort((x: any) => x.slot),
@@ -49,24 +48,43 @@ class PokeService {
   public static getPokemonDetailsAndEvolutionChainByNameOrId(
     id: number | string
   ) {
-    return Promise.all([
-      this.getPokemonByNameOrId(id),
-      this.getPokemonEvolutionChainByNameOrId(id)
-    ]).then(([details, evolutionChain]) => ({
-      ...{
-        abilities: details.abilities,
-        evolutionChain: details.evolutionChain,
-        height: details.height,
-        id: details.id,
-        moves: details.moves,
-        name: details.name,
-        sprites: details.sprites,
-        stats: details.stats,
-        types: details.types,
-        weight: details.weight
-      },
-      ...evolutionChain
-    }));
+    return this.getPokemonByNameOrId(id).then(details =>
+      this.getPokemonEvolutionChainBySpeciesNameOrId(details.species).then(
+        evolutionChain => ({
+          ...{
+            abilities: details.abilities,
+            evolutionChain: details.evolutionChain,
+            height: details.height,
+            id: details.id,
+            moves: details.moves,
+            name: details.name,
+            sprites: details.sprites,
+            stats: details.stats,
+            types: details.types,
+            weight: details.weight
+          },
+          ...evolutionChain
+        })
+      )
+    );
+    // return Promise.all([
+    //   this.getPokemonByNameOrId(id),
+    //   this.getPokemonEvolutionChainBySpeciesNameOrId(id)
+    // ]).then(([details, evolutionChain]) => ({
+    //   ...{
+    //     abilities: details.abilities,
+    //     evolutionChain: details.evolutionChain,
+    //     height: details.height,
+    //     id: details.id,
+    //     moves: details.moves,
+    //     name: details.name,
+    //     sprites: details.sprites,
+    //     stats: details.stats,
+    //     types: details.types,
+    //     weight: details.weight
+    //   },
+    //   ...evolutionChain
+    // }));
   }
 
   public static searchPokemonByNameOrId(query: string) {
