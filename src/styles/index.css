@@ -231,6 +231,7 @@ th {
   cursor: pointer;
   text-transform: capitalize;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .nav-item.active,
