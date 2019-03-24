@@ -1,7 +1,7 @@
 import "../styles/App.css";
 
 import * as React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import About from "./About";
@@ -112,9 +112,11 @@ class App extends React.Component<{}, IAppState> {
             toggleNav={this.toggleNavMenuActiveState}
           />
         </div>
-        <Redirect from="/" to="/browse" />
-        <Route exact={true} path="/browse/:id?" render={this.pokesListPage} />
-        <Route exact={true} path="/about" component={About} />
+        <Switch>
+          <Redirect exact={true} from="/" to="/browse" />
+          <Route exact={true} path="/browse/:id?" render={this.pokesListPage} />
+          <Route exact={true} path="/about" component={About} />
+        </Switch>
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}
