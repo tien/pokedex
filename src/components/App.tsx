@@ -1,7 +1,9 @@
+import "../styles/App.css";
+
 import * as React from "react";
 import { Route } from "react-router-dom";
+
 import { GlobalContextProvider } from "../contexts/GlobalContext";
-import "../styles/App.css";
 import About from "./About";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
@@ -10,6 +12,7 @@ import PokeListPage from "./pokemonListPage/PokeListPage";
 interface IAppState {
   loading: boolean;
   menuCategory: string[];
+  modalCloseCallback: (() => void )| null;
   modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
@@ -26,6 +29,7 @@ class App extends React.Component<{}, IAppState> {
     this.state = {
       loading: false,
       menuCategory: ["pokedex", "about"],
+      modalCloseCallback: null,
       modalContent: null,
       modalIsOpen: false,
       navMenuIsOpen: false,
@@ -43,9 +47,10 @@ class App extends React.Component<{}, IAppState> {
     this.modalRef = React.createRef();
   }
 
-  public openModalWithReactNode(ReactNode: React.ReactNode, color?: string) {
+  public openModalWithReactNode(ReactNode: React.ReactNode, color?: string, callBack?: () => void) {
     this.setState(
       prevState => ({
+        modalCloseCallback: callBack || null,
         modalColor: color || "grey",
         modalContent: ReactNode,
         modalIsOpen: true,
@@ -72,7 +77,10 @@ class App extends React.Component<{}, IAppState> {
     document.documentElement!.classList.remove("freeze-page");
     document.documentElement!.scrollTop = this.state.scrollPos;
     document.body.scrollTop = this.state.scrollPos;
-    this.setState({ modalIsOpen: false, modalContent: null });
+    if(this.state.modalCloseCallback) {
+      this.state.modalCloseCallback()
+    }
+    this.setState({ modalIsOpen: false, modalContent: null, modalCloseCallback: null });
   }
 
   public toggleNavMenuActiveState() {
