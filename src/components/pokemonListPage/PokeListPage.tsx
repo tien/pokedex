@@ -2,7 +2,6 @@ import "../../styles/PokeListPage.css";
 
 import * as React from "react";
 import * as InfiniteScroll from "react-infinite-scroller";
-import { match as Match } from "react-router-dom";
 
 import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
@@ -10,8 +9,13 @@ import PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
 
-interface IPokeListPageProps {
-  match: Match<{ id?: string }>;
+import { RouteComponentProps } from "react-router-dom";
+
+interface IPokeListRouterProps {
+  id?: string;
+}
+
+interface IPokeListPageProps extends RouteComponentProps<IPokeListRouterProps> {
   toggleLoading: () => void;
 }
 
@@ -148,7 +152,7 @@ class PokeListPage extends React.Component<
     const value = this.context as IGlobalContext;
     const pokemonId = this.props.match && this.props.match.params.id;
 
-    if (!pokemonId || prevId && prevId === pokemonId) {
+    if (!pokemonId || (prevId && prevId === pokemonId)) {
       return;
     }
 
@@ -158,7 +162,8 @@ class PokeListPage extends React.Component<
         value.toggleLoading();
         value.openModalWithReactNode(
           <PokeDetails {...details} />,
-          PokemonTypeColors[details.types[0].type.name]
+          PokemonTypeColors[details.types[0].type.name],
+          () => this.props.history.goBack()
         );
       })
       .catch((error: Error) => {
