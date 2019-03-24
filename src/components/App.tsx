@@ -1,7 +1,7 @@
 import "../styles/App.css";
 
 import * as React from "react";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import About from "./About";
@@ -11,8 +11,8 @@ import PokeListPage from "./pokemonListPage/PokeListPage";
 
 interface IAppState {
   loading: boolean;
-  menuCategory: string[];
-  modalCloseCallback: (() => void )| null;
+  menuCategory: Array<string | { name: string; link: string }>;
+  modalCloseCallback: (() => void) | null;
   modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
@@ -28,7 +28,7 @@ class App extends React.Component<{}, IAppState> {
     super(props);
     this.state = {
       loading: false,
-      menuCategory: ["pokedex", "about"],
+      menuCategory: [{ name: "pokedex", link: "browse" }, "about"],
       modalCloseCallback: null,
       modalContent: null,
       modalIsOpen: false,
@@ -47,7 +47,11 @@ class App extends React.Component<{}, IAppState> {
     this.modalRef = React.createRef();
   }
 
-  public openModalWithReactNode(ReactNode: React.ReactNode, color?: string, callBack?: () => void) {
+  public openModalWithReactNode(
+    ReactNode: React.ReactNode,
+    color?: string,
+    callBack?: () => void
+  ) {
     this.setState(
       prevState => ({
         modalCloseCallback: callBack || null,
@@ -77,10 +81,14 @@ class App extends React.Component<{}, IAppState> {
     document.documentElement!.classList.remove("freeze-page");
     document.documentElement!.scrollTop = this.state.scrollPos;
     document.body.scrollTop = this.state.scrollPos;
-    if(this.state.modalCloseCallback) {
-      this.state.modalCloseCallback()
+    if (this.state.modalCloseCallback) {
+      this.state.modalCloseCallback();
     }
-    this.setState({ modalIsOpen: false, modalContent: null, modalCloseCallback: null });
+    this.setState({
+      modalCloseCallback: null,
+      modalContent: null,
+      modalIsOpen: false
+    });
   }
 
   public toggleNavMenuActiveState() {
@@ -104,7 +112,8 @@ class App extends React.Component<{}, IAppState> {
             toggleNav={this.toggleNavMenuActiveState}
           />
         </div>
-        <Route exact={true} path="/:id?" render={this.pokesListPage} />
+        <Redirect from="/" to="/browse" />
+        <Route exact={true} path="/browse/:id?" render={this.pokesListPage} />
         <Route exact={true} path="/about" component={About} />
         <div
           id="spinner-container"

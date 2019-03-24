@@ -7,7 +7,7 @@ import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import ToggleNavButton from "./ToggleNavButton";
 
 interface INavMenuProps {
-  links: string[];
+  links: Array<string | { name: string; link: string }>;
   root?: string;
   active: boolean;
   toggleNav: () => void;
@@ -20,7 +20,9 @@ const NavMenu = (props: INavMenuProps) => (
         if (e.key === "Enter" && e.target) {
           e.target.blur();
           value.toggleLoading();
-          PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(e.target.value.toLowerCase())
+          PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
+            e.target.value.toLowerCase()
+          )
             .then((details: any) => {
               value.toggleLoading();
               value.openModalWithReactNode(
@@ -43,16 +45,26 @@ const NavMenu = (props: INavMenuProps) => (
               id="search-box"
               onKeyPress={openModalWithPokemonInfo}
             />
-            {props.links.map((link: string, index: number) => (
-              <NavLink
-                exact={true}
-                onClick={props.toggleNav}
-                className="nav-item"
-                key={index}
-                to={`/${link === props.root ? "" : link.trim().replace(/\s+/g, "-")}`}>
-                {link}
-              </NavLink>
-            ))}
+            {props.links.map(
+              (
+                link: string | { name: string; link: string },
+                index: number
+              ) => {
+                const name = typeof link === "string" ? link : link.name;
+                const linkTo = typeof link === "string" ? link : link.link;
+                return (
+                  <NavLink
+                    exact={true}
+                    onClick={props.toggleNav}
+                    className="nav-item"
+                    key={index}
+                    to={`/${linkTo.trim().replace(/\s+/g, "-")}`}
+                  >
+                    {name}
+                  </NavLink>
+                );
+              }
+            )}
           </nav>
           <ToggleNavButton active={props.active} onClick={props.toggleNav} />
         </div>

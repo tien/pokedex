@@ -11,7 +11,8 @@ interface IPokeCardProps extends RouteComponentProps {
 }
 
 const PokeCard = (props: IPokeCardProps) => {
-  const goToPokemonRoute = () => props.history.push(`${props.name}`);
+  const goToPokemonRoute = () =>
+    props.history.push(`${props.match.url}/${props.name}`);
 
   return (
     <div className="poke-ball" onClick={goToPokemonRoute}>
