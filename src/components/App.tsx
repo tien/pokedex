@@ -86,7 +86,8 @@ class App extends React.Component<{}, IAppState> {
           closeModal: this.closeModal,
           openModalWithReactNode: this.openModalWithReactNode,
           toggleLoading: this.toggleLoading
-        }}>
+        }}
+      >
         <div ref={this.menuRef}>
           <NavMenu
             links={this.state.menuCategory}
@@ -95,11 +96,12 @@ class App extends React.Component<{}, IAppState> {
             toggleNav={this.toggleNavMenuActiveState}
           />
         </div>
-        <Route exact={true} path="/" render={this.pokesListPage} />
+        <Route exact={true} path="/:id?" render={this.pokesListPage} />
         <Route exact={true} path="/about" component={About} />
         <div
           id="spinner-container"
-          style={{ display: this.state.loading ? "block" : "none" }}>
+          style={{ display: this.state.loading ? "block" : "none" }}
+        >
           <div id="spinner" />
         </div>
         <div ref={this.modalRef}>
@@ -110,7 +112,8 @@ class App extends React.Component<{}, IAppState> {
                 : "white"
             }}
             active={this.state.modalIsOpen}
-            closeModal={this.closeModal}>
+            closeModal={this.closeModal}
+          >
             {this.state.modalContent}
           </Modal>
         </div>
@@ -155,8 +158,8 @@ class App extends React.Component<{}, IAppState> {
     }
   }
 
-  private pokesListPage() {
-    return <PokeListPage toggleLoading={this.toggleLoading} />;
+  private pokesListPage(props: any) {
+    return <PokeListPage {...props} toggleLoading={this.toggleLoading} />;
   }
 }
 

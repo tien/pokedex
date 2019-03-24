@@ -1,10 +1,17 @@
+import "../../styles/PokeListPage.css";
+
 import * as React from "react";
 import * as InfiniteScroll from "react-infinite-scroller";
+import { match as Match } from "react-router-dom";
+
+import PokemonTypeColors from "../../assets/PokemonTypeColors";
+import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
 import PokeService from "../../services/pokeService";
-import "../../styles/PokeListPage.css";
+import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
 
 interface IPokeListPageProps {
+  match: Match<{ id?: string }>;
   toggleLoading: () => void;
 }
 
@@ -19,6 +26,7 @@ class PokeListPage extends React.Component<
   IPokeListPageProps,
   IPokeListPageState
 > {
+  public static contextType = GlobalContext;
   private prevScrollPos: number;
   private searchBarRef: React.RefObject<HTMLDivElement>;
 
@@ -30,6 +38,7 @@ class PokeListPage extends React.Component<
       pokemons: [],
       searchQuery: ""
     };
+
     this.prevScrollPos = 0;
     this.loadPokemons = this.loadPokemons.bind(this);
     this.searchPokemons = this.searchPokemons.bind(this);
@@ -38,8 +47,14 @@ class PokeListPage extends React.Component<
   }
 
   public componentDidMount() {
+    this.openPokemonDetailsWithURL();
+
     this.prevScrollPos = window.pageYOffset;
     window.addEventListener("scroll", this.autoHideSearchBar);
+  }
+
+  public componentDidUpdate(prevProps: IPokeListPageProps) {
+    this.openPokemonDetailsWithURL(prevProps.match.params.id);
   }
 
   public componentWillUnmount() {
@@ -87,10 +102,12 @@ class PokeListPage extends React.Component<
           <h2
             className="loader"
             key={0}
-            style={{ textAlign: "right", marginRight: "20px" }}>
+            style={{ textAlign: "right", marginRight: "20px" }}
+          >
             ... Loading
           </h2>
-        }>
+        }
+      >
         {props.children}
       </InfiniteScroll>
     );
@@ -125,6 +142,28 @@ class PokeListPage extends React.Component<
         )}
       </React.Fragment>
     );
+  }
+
+  private openPokemonDetailsWithURL(prevId?: string) {
+    const value = this.context as IGlobalContext;
+    const pokemonId = this.props.match && this.props.match.params.id;
+
+    if (!pokemonId || prevId && prevId === pokemonId) {
+      return;
+    }
+
+    value.toggleLoading();
+    PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(pokemonId)
+      .then((details: any) => {
+        value.toggleLoading();
+        value.openModalWithReactNode(
+          <PokeDetails {...details} />,
+          PokemonTypeColors[details.types[0].type.name]
+        );
+      })
+      .catch((error: Error) => {
+        value.toggleLoading();
+      });
   }
 
   private autoHideSearchBar() {
