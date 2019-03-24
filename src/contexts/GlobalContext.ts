@@ -16,15 +16,17 @@ const openModalWithReactNode: (
 ) => // tslint:disable-next-line:no-empty
 void = () => {};
 
-const globalContext = {
+const defaultValue = {
   closeModal,
   openModalWithReactNode,
-  toggleLoading,
+  toggleLoading
 };
+
+const GlobalContext = React.createContext<IGlobalContext>(defaultValue);
 
 const {
   Provider: GlobalContextProvider,
   Consumer: GlobalContextConsumer
-} = React.createContext<IGlobalContext>(globalContext);
+} = GlobalContext;
 
-export { GlobalContextProvider, GlobalContextConsumer, IGlobalContext };
+export { GlobalContext, GlobalContextProvider, GlobalContextConsumer, IGlobalContext };
