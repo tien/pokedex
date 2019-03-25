@@ -163,7 +163,7 @@ class PokeListPage extends React.Component<
         value.openModalWithReactNode(
           <PokeDetails {...details} />,
           PokemonTypeColors[details.types[0].type.name],
-          () => this.props.history.goBack()
+          () => this.props.history.push("/browse")
         );
       })
       .catch((error: Error) => {
