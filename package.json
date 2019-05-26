@@ -2,7 +2,7 @@
   "name": "poke-dex",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://crazycat9x.github.io/pokedex/",
+  "homepage": "https://tien.github.io/pokedex/",
   "dependencies": {
     "@types/color": "^3.0.0",
     "@types/react-infinite-scroller": "^1.2.1",

@@ -13,11 +13,11 @@ const About = (props: any) => (
     <h1>Author: Tien Nguyen Khac</h1>
     <h2>Find more cool stuffs that I do here</h2>
     <h3>
-      <a href="https://github.com/crazycat9x">GitHub</a> -{" "}
+      <a href="https://github.com/tien">GitHub</a> -{" "}
       <a href="https://www.linkedin.com/in/tien/">Linkedin</a>
     </h3>
     <a
-      href="https://github.com/crazycat9x/pokedex"
+      href="https://github.com/tien/pokedex"
       className="github-corner"
       aria-label="View source on GitHub">
       <svg
