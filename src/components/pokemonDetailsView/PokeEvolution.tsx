@@ -1,11 +1,9 @@
-import * as React from "react";
-import PokemonTypeColors from "../../assets/PokemonTypeColors";
-import { GlobalContextConsumer } from "../../contexts/GlobalContext";
-import PokeService from "../../services/pokeService";
 import "../../styles/PokeEvolution.css";
-import PokeDetails from "./PokeDetails";
 
-interface IPokeEvolutionProps {
+import * as React from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
+interface IPokeEvolutionProps extends RouteComponentProps {
   evolutionChain: any;
   color: string;
 }
@@ -16,7 +14,8 @@ const Arrow = (props: any) => (
     xmlns="http://www.w3.org/2000/svg"
     width="48"
     height="48"
-    viewBox="0 0 48 48">
+    viewBox="0 0 48 48"
+  >
     <path d="M24 16V8l16 16-16 16v-8H8V16z" />
   </svg>
 );
@@ -53,33 +52,20 @@ const RecursivePokeEvolution = (
   }
 };
 
-const PokeEvolution = (props: IPokeEvolutionProps) => (
-  <GlobalContextConsumer>
-    {value => {
-      const openModalWithPokemonInfo = (id: number | string) => {
-        value.toggleLoading();
-        PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(id).then(
-          (details: any) => {
-            value.toggleLoading();
-            value.openModalWithReactNode(
-              <PokeDetails {...details} />,
-              PokemonTypeColors[details.types[0].type.name]
-            );
-          }
-        );
-      };
-      return (
-        <div className="poke-evo-tree">
-          {RecursivePokeEvolution(
-            props.evolutionChain,
-            props.color,
-            0,
-            openModalWithPokemonInfo
-          )}
-        </div>
-      );
-    }}
-  </GlobalContextConsumer>
-);
+const PokeEvolution = (props: IPokeEvolutionProps) => {
+  const goToPokemonRoute = (id: number | string) =>
+    props.history.replace(String(id));
 
-export default PokeEvolution;
+  return (
+    <div className="poke-evo-tree">
+      {RecursivePokeEvolution(
+        props.evolutionChain,
+        props.color,
+        0,
+        goToPokemonRoute
+      )}
+    </div>
+  );
+};
+
+export default withRouter(PokeEvolution);
