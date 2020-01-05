@@ -8,6 +8,13 @@ interface IPokeEvolutionProps extends RouteComponentProps {
   color: string;
 }
 
+interface IRecursivePokeEvolution {
+  currGen: any;
+  color: string;
+  key: number;
+  callback: (id: number | string) => void;
+}
+
 const Arrow = (props: any) => (
   <svg
     style={props.style}
@@ -20,13 +27,13 @@ const Arrow = (props: any) => (
   </svg>
 );
 
-const RecursivePokeEvolution = (
-  currGen: any,
-  color: string,
-  key: number,
-  callback: (id: number | string) => void
-) => {
-  const onClick = () => callback(currGen.id);
+const RecursivePokeEvolution = ({
+  currGen,
+  color,
+  key,
+  callback
+}: IRecursivePokeEvolution) => {
+  const onClick = () => callback(currGen.name);
   if (currGen.children.length === 0) {
     return (
       <div key={key} className="poke-evo-parent" onClick={onClick}>
@@ -43,9 +50,14 @@ const RecursivePokeEvolution = (
         </div>
         <Arrow style={{ fill: color, stroke: color }} />
         <div className="poke-evo-children-group">
-          {currGen.children.map((child: any) =>
-            RecursivePokeEvolution(child, color, key + 1, callback)
-          )}
+          {currGen.children.map((child: any) => (
+            <RecursivePokeEvolution
+              currGen={child}
+              color={color}
+              key={key + 1}
+              callback={callback}
+            />
+          ))}
         </div>
       </div>
     );
@@ -58,12 +70,12 @@ const PokeEvolution = (props: IPokeEvolutionProps) => {
 
   return (
     <div className="poke-evo-tree">
-      {RecursivePokeEvolution(
-        props.evolutionChain,
-        props.color,
-        0,
-        goToPokemonRoute
-      )}
+      <RecursivePokeEvolution
+        currGen={props.evolutionChain}
+        color={props.color}
+        key={0}
+        callback={goToPokemonRoute}
+      />
     </div>
   );
 };
