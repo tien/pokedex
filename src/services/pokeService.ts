@@ -116,18 +116,18 @@ class PokeService {
         imageUrl: `${this.imageUrlBase}${id}.png`,
         name: currGen.species.name
       };
-    } else {
-      const children: any[] = [];
-      for (const child of currGen.evolves_to) {
-        children.push(this.recursiveBuildChain(child));
-      }
-      return {
-        children,
-        id,
-        imageUrl: `${this.imageUrlBase}${id}.png`,
-        name: currGen.species.name
-      };
     }
+
+    const children: any[] = currGen.evolves_to.map((child: any) =>
+      this.recursiveBuildChain(child)
+    );
+
+    return {
+      children,
+      id,
+      imageUrl: `${this.imageUrlBase}${id}.png`,
+      name: currGen.species.name
+    };
   }
 
   private static buildChain(data: any) {

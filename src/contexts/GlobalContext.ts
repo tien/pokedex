@@ -10,16 +10,13 @@ export interface IGlobalContext {
   toggleLoading: () => void;
 }
 
-// tslint:disable-next-line:no-empty
 const closeModal: () => void = () => {};
-// tslint:disable-next-line:no-empty
 const toggleLoading: () => void = () => {};
 const openModalWithReactNode: (
   ReactNode: React.ReactNode,
   color?: string,
   callback?: () => void
-) => // tslint:disable-next-line:no-empty
-void = () => {};
+) => void = () => {};
 
 const defaultValue = {
   closeModal,

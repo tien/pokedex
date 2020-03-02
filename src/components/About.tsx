@@ -1,6 +1,6 @@
 import React from "react";
 
-const About = (props: any) => (
+const About = () => (
   <div
     id="page-container"
     style={{
