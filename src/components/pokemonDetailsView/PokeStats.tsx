@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import "../../styles/PokeStats.css";
 
 interface IPokeStatsProps {
@@ -15,8 +15,8 @@ const PokeStats = (props: IPokeStatsProps) => (
             {stat.stat.name === "special-defense"
               ? "sd"
               : stat.stat.name === "special-attack"
-                ? "sa"
-                : stat.stat.name}
+              ? "sa"
+              : stat.stat.name}
           </div>
           <div className="stat-bar-bg">
             <div

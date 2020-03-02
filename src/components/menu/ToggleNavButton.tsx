@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 interface IToggleNavButtonProps {
   active: boolean;
@@ -9,7 +9,8 @@ const ToggleNavButton = (props: IToggleNavButtonProps) => (
   <div
     id="toggle-nav-button"
     className={props.active ? "active" : ""}
-    onClick={props.onClick}>
+    onClick={props.onClick}
+  >
     <div className="nav-button-bar" />
     <div className="nav-button-bar" />
     <div className="nav-button-bar" />

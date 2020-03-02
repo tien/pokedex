@@ -1,6 +1,6 @@
 import "../../styles/PokeEvolution.css";
 
-import * as React from "react";
+import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface IPokeEvolutionProps extends RouteComponentProps {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import PokemonMoveCategoryColor from "../../assets/PokemonMoveCategoryColor";
 import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import "../../styles/PokeTypeCard.css";
@@ -34,7 +34,8 @@ const PokeTypeCard = (
       style={{
         backgroundColor: color,
         ...props.style
-      }}>
+      }}
+    >
       {name}
     </div>
   );

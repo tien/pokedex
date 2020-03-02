@@ -1,4 +1,4 @@
-import * as regrest from "regrest";
+import regrest from "regrest";
 import pokemonsList from "../assets/pokemons.json";
 
 class PokeService {

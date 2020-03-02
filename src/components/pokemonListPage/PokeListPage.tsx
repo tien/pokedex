@@ -1,7 +1,7 @@
 import "../../styles/PokeListPage.css";
 
-import * as React from "react";
-import * as InfiniteScroll from "react-infinite-scroller";
+import React from "react";
+import InfiniteScroll from "react-infinite-scroller";
 
 import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
@@ -176,9 +176,7 @@ class PokeListPage extends React.Component<
     if (this.prevScrollPos > currScrollPos && this.searchBarRef.current) {
       this.searchBarRef.current.style.transform = "";
     } else if (this.searchBarRef.current) {
-      this.searchBarRef.current.style.transform = `translate(0, -${
-        this.searchBarRef.current.clientHeight
-      }px)`;
+      this.searchBarRef.current.style.transform = `translate(0, -${this.searchBarRef.current.clientHeight}px)`;
     }
     if (currScrollPos >= 0) {
       this.prevScrollPos = currScrollPos;
