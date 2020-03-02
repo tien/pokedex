@@ -18,8 +18,9 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint"],
   rules: {
+    "no-nested-ternary": "off",
+    "import/prefer-default-export": "off",
     "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }],
-    "react/jsx-one-expression-per-line": "off",
-    "no-nested-ternary": "off"
+    "react/jsx-one-expression-per-line": "off"
   }
 };
