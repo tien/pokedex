@@ -24,6 +24,6 @@
 
 @media all and (min-width: 576px) {
   #page-container.pokemons-list {
-    align-items: start;
+    align-items: flex-start;
   }
 }
