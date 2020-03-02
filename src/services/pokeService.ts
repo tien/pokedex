@@ -132,19 +132,16 @@ class PokeService {
 
   private static buildChain(data: any) {
     const id = data.species.url.split("/").slice(-2, -1)[0];
-    const thisGen: any = {
-      children: [],
+
+    return {
+      children:
+        data.evolves_to.length === 0
+          ? []
+          : data.evolves_to.map((e: any) => this.recursiveBuildChain(e)),
       id,
       imageUrl: `${this.imageUrlBase}${id}.png`,
       name: data.species.name
     };
-    const nextChain = data.evolves_to;
-    if (nextChain.length !== 0) {
-      nextChain.forEach((e: any) =>
-        thisGen.children.push(this.recursiveBuildChain(e))
-      );
-    }
-    return thisGen;
   }
 }
 
