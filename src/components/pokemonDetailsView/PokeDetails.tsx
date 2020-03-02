@@ -54,7 +54,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
       </div>
       <div className="details-modal-content">
         <div className="details-1st-child">
-          <img src={props.sprites.front_default} />
+          <img src={props.sprites.front_default} alt="pokemon avatar" />
           <div className="poke-number-details">Number: #{props.id}</div>
           <div className="poke-types-details">
             {props.types.map((type: any, index: number) => (

@@ -20,7 +20,7 @@ const PokeCard = (props: IPokeCardProps) => {
         <h6>{props.idNum}</h6>
       </div>
       <div className="ava-wrapper">
-        <img className="poke-ava" src={props.imageUrl} />
+        <img className="poke-ava" src={props.imageUrl} alt="pokemon avatar" />
       </div>
       <div className="poke-ball-bottom" />
     </div>
