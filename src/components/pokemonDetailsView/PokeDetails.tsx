@@ -1,8 +1,10 @@
-import * as Color from "color";
-import * as React from "react";
-import * as MovesList from "../../assets/moves.json";
-import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import "../../styles/PokeDetails.css";
+
+import Color from "color";
+import React from "react";
+
+import MovesList from "../../assets/moves.json";
+import PokemonTypeColors from "../../assets/PokemonTypeColors";
 import PokeEvolution from "./PokeEvolution";
 import PokeStats from "./PokeStats";
 import PokeTypeCard from "./PokeTypeCard";
@@ -46,7 +48,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         className="details-modal-header"
         style={{
           backgroundColor: darkColor
-        }}>
+        }}
+      >
         <h2>{props.name}</h2>
       </div>
       <div className="details-modal-content">
@@ -58,7 +61,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
               <div
                 key={index}
                 style={{ color: PokemonTypeColors[type.type.name] }}
-                className="poke-type">
+                className="poke-type"
+              >
                 {type.type.name}
               </div>
             ))}
@@ -70,7 +74,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <div className="details-3rd-child">
           <div
             className="details-section-header"
-            style={{ backgroundColor: darkColor }}>
+            style={{ backgroundColor: darkColor }}
+          >
             Profile
           </div>
           <div className="details-profile">
@@ -98,7 +103,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
           </div>
           <div
             className="details-section-header"
-            style={{ backgroundColor: darkColor }}>
+            style={{ backgroundColor: darkColor }}
+          >
             Evolution
           </div>
           <PokeEvolution
@@ -107,7 +113,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
           />
           <div
             className="details-section-header"
-            style={{ backgroundColor: darkColor }}>
+            style={{ backgroundColor: darkColor }}
+          >
             Moves
           </div>
           <div className="poke-moves-detail-list">

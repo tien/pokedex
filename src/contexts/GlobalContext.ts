@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 
-interface IGlobalContext {
+export interface IGlobalContext {
   closeModal: () => void;
   openModalWithReactNode: (
     ReactNode: React.ReactNode,
@@ -27,16 +27,9 @@ const defaultValue = {
   toggleLoading
 };
 
-const GlobalContext = React.createContext<IGlobalContext>(defaultValue);
+export const GlobalContext = React.createContext<IGlobalContext>(defaultValue);
 
-const {
+export const {
   Provider: GlobalContextProvider,
   Consumer: GlobalContextConsumer
 } = GlobalContext;
-
-export {
-  GlobalContext,
-  GlobalContextProvider,
-  GlobalContextConsumer,
-  IGlobalContext
-};

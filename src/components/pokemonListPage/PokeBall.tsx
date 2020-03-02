@@ -1,7 +1,6 @@
-// import * as Color from "color";
 import "../../styles/PokeBall.css";
 
-import * as React from "react";
+import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 
 interface IPokeCardProps extends RouteComponentProps {
