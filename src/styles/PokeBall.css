@@ -3,7 +3,7 @@
     transform: scale(1.05) translateY(0px);
   }
   to {
-    transform: scale(1.10) translateY(-15px);
+    transform: scale(1.1) translateY(-15px);
   }
 }
 
@@ -17,7 +17,7 @@
     0 1px 3px 1px rgba(60, 64, 67, 0.16);
   overflow: hidden;
   border-radius: 50%;
-  cursor:pointer;
+  cursor: pointer;
   margin-bottom: 30px;
 }
 
@@ -28,7 +28,7 @@
 .poke-ball-top {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   padding-top: 25px;
   align-items: center;
   color: white;
