@@ -37,7 +37,7 @@ const RecursivePokeEvolution = ({
   if (currGen.children.length === 0) {
     return (
       <div key={key} className="poke-evo-parent" onClick={onClick}>
-        <img src={currGen.imageUrl} />
+        <img src={currGen.imageUrl} alt="pokemon evolution" />
         {currGen.name}
       </div>
     );
@@ -45,7 +45,7 @@ const RecursivePokeEvolution = ({
     return (
       <div key={key} className="poke-evo-wrapper">
         <div className="poke-evo-parent" onClick={onClick}>
-          <img src={currGen.imageUrl} />
+          <img src={currGen.imageUrl} alt="pokemon evolution" />
           {currGen.name}
         </div>
         <Arrow style={{ fill: color, stroke: color }} />
