@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 
 const About = () => (
   <div
@@ -11,6 +12,9 @@ const About = () => (
       textAlign: "center"
     }}
   >
+    <Helmet>
+      <title>About</title>
+    </Helmet>
     <h1>Author: Tien Nguyen Khac</h1>
     <h2>Find more cool stuffs that I do here</h2>
     <h3>

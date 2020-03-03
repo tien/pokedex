@@ -1,6 +1,7 @@
 import "../styles/App.css";
 
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
@@ -104,6 +105,7 @@ class App extends React.Component<{}, IAppState> {
           toggleLoading: this.toggleLoading
         }}
       >
+        <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex" />
         <div ref={this.menuRef}>
           <NavMenu
             links={this.state.menuCategory}
