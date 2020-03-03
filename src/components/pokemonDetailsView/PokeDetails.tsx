@@ -35,7 +35,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
 
   const darkColor = Color(lightColor)
     .darken(0.35)
-    .string();
+    .hex();
 
   let genderRate;
   switch (props.genderRate) {
@@ -57,7 +57,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <title>
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
         </title>
-        <meta name="theme-color" content={darkColor} />
+        <meta name="theme-color" content={lightColor} />
       </Helmet>
       <div
         className="details-modal-header"
