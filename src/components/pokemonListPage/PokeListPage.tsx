@@ -8,7 +8,7 @@ import PokemonTypeColors, {
   PokemonTypeColorAlias
 } from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
-import PokeService from "../../services/pokeService";
+import * as PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
 

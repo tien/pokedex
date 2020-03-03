@@ -1,15 +1,8 @@
 import React, { useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
-import PokemonTypeColor, {
-  PokemonTypeColorAlias
-} from "../../assets/PokemonTypeColors";
-import {
-  GlobalContextConsumer,
-  GlobalContext
-} from "../../contexts/GlobalContext";
-import PokeService from "../../services/pokeService";
-import PokeDetails from "../pokemonDetailsView/PokeDetails";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import * as PokeService from "../../services/pokeService";
 import ToggleNavButton from "./ToggleNavButton";
 
 interface INavMenuProps {
