@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export async function gitHubPagePreDeploy() {
+export const gitHubPagePreDeploy = async () => {
   const packageJsonString = await fs.promises.readFile("package.json", "utf8");
   const packageJson = JSON.parse(packageJsonString);
 
@@ -10,4 +10,4 @@ export async function gitHubPagePreDeploy() {
   };
 
   await fs.promises.writeFile("package.json", JSON.stringify(updatedPackage));
-}
+};
