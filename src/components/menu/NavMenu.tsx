@@ -1,10 +1,13 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 
 import PokemonTypeColor, {
   PokemonTypeColorAlias
 } from "../../assets/PokemonTypeColors";
-import { GlobalContextConsumer } from "../../contexts/GlobalContext";
+import {
+  GlobalContextConsumer,
+  GlobalContext
+} from "../../contexts/GlobalContext";
 import PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import ToggleNavButton from "./ToggleNavButton";
@@ -16,66 +19,59 @@ interface INavMenuProps {
   toggleNav: () => void;
 }
 
-const NavMenu = (props: INavMenuProps) => (
-  <GlobalContextConsumer>
-    {value => {
-      const openModalWithPokemonInfo = (e: any) => {
-        if (e.key === "Enter" && e.target) {
-          e.target.blur();
-          value.toggleLoading();
-          PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-            e.target.value.toLowerCase()
-          )
-            .then((details: any) => {
-              value.toggleLoading();
-              value.openModalWithReactNode(
-                <PokeDetails {...details} />,
-                PokemonTypeColor[
-                  details.types[0].type.name as PokemonTypeColorAlias
-                ]
-              );
-            })
-            .catch((error: Error) => {
-              value.openModalWithReactNode(<h1>No Pokemon found</h1>);
-              value.toggleLoading();
-            });
-        }
-      };
-      return (
-        <div>
-          <nav id="main-nav" className={props.active ? "active" : ""}>
-            <input
-              placeholder="Enter Pokemon number or name"
-              type="text"
-              id="search-box"
-              onKeyPress={openModalWithPokemonInfo}
-            />
-            {props.links.map(
-              (
-                link: string | { name: string; link: string },
-                index: number
-              ) => {
-                const name = typeof link === "string" ? link : link.name;
-                const linkTo = typeof link === "string" ? link : link.link;
-                return (
-                  <NavLink
-                    exact={true}
-                    onClick={props.toggleNav}
-                    className="nav-item"
-                    key={index}
-                    to={`/${linkTo.trim().replace(/\s+/g, "-")}`}
-                  >
-                    {name}
-                  </NavLink>
-                );
-              }
-            )}
-          </nav>
-          <ToggleNavButton active={props.active} onClick={props.toggleNav} />
-        </div>
-      );
-    }}
-  </GlobalContextConsumer>
-);
+const NavMenu = (props: INavMenuProps) => {
+  const history = useHistory();
+  const globalContext = useContext(GlobalContext);
+
+  const openModalWithPokemonInfo = async (e: any) => {
+    if (e.key === "Enter" && e.target) {
+      e.target.blur();
+      globalContext.toggleLoading();
+
+      try {
+        const pokemon = await PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
+          e.target.value.toLowerCase()
+        );
+
+        globalContext.toggleLoading();
+        history.push(`browse/${pokemon.name}`);
+      } catch {
+        globalContext.openModalWithReactNode(<h1>No Pokemon found</h1>);
+        globalContext.toggleLoading();
+      }
+    }
+  };
+
+  return (
+    <div>
+      <nav id="main-nav" className={props.active ? "active" : ""}>
+        <input
+          placeholder="Enter Pokemon number or name"
+          type="text"
+          id="search-box"
+          onKeyPress={openModalWithPokemonInfo}
+        />
+        {props.links.map(
+          (link: string | { name: string; link: string }, index: number) => {
+            const name = typeof link === "string" ? link : link.name;
+            const linkTo = typeof link === "string" ? link : link.link;
+            return (
+              <NavLink
+                exact={true}
+                onClick={props.toggleNav}
+                className="nav-item"
+                key={index}
+                to={`/${linkTo.trim().replace(/\s+/g, "-")}`}
+              >
+                {name}
+              </NavLink>
+            );
+          }
+        )}
+      </nav>
+      <ToggleNavButton active={props.active} onClick={props.toggleNav} />
+    </div>
+  );
+};
 
 export default NavMenu;
