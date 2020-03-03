@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 enum PokemonTypeColors {
   normal = "#A8A878",
   fire = "#F08030",
