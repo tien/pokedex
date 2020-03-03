@@ -105,7 +105,9 @@ class App extends React.Component<{}, IAppState> {
           toggleLoading: this.toggleLoading
         }}
       >
-        <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex" />
+        <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex">
+          <meta name="theme-color" content="#dd1414" />
+        </Helmet>
         <div ref={this.menuRef}>
           <NavMenu
             links={this.state.menuCategory}
