@@ -1,15 +1,19 @@
 import React from "react";
-import PokemonMoveCategoryColor from "../../assets/PokemonMoveCategoryColor";
-import PokemonTypeColors from "../../assets/PokemonTypeColors";
+import PokemonMoveCategoryColor, {
+  PokemonMoveCategoryColorAlias
+} from "../../assets/PokemonMoveCategoryColor";
+import PokemonTypeColors, {
+  PokemonTypeColorAlias
+} from "../../assets/PokemonTypeColors";
 import "../../styles/PokeTypeCard.css";
 
 interface IPokeTypeCardPropsWithType {
-  type: string;
+  type: PokemonTypeColorAlias;
   style?: any;
 }
 
 interface IPokeTypeCardPropsWithCategory {
-  category: string;
+  category: PokemonMoveCategoryColorAlias;
   style?: any;
 }
 

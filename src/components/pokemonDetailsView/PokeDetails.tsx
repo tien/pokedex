@@ -4,7 +4,9 @@ import Color from "color";
 import React from "react";
 
 import MovesList from "../../assets/moves.json";
-import PokemonTypeColors from "../../assets/PokemonTypeColors";
+import PokemonTypeColors, {
+  PokemonTypeColorAlias
+} from "../../assets/PokemonTypeColors";
 import PokeEvolution from "./PokeEvolution";
 import PokeStats from "./PokeStats";
 import PokeTypeCard from "./PokeTypeCard";
@@ -25,7 +27,10 @@ interface IPokeDetailsProps {
 }
 
 const PokeDetails = (props: IPokeDetailsProps) => {
-  const lightColor = PokemonTypeColors[props.types[0].type.name];
+  const lightColor =
+    PokemonTypeColors[
+      props.types[0].type.name as keyof typeof PokemonTypeColors
+    ];
   const darkColor = Color(lightColor)
     .darken(0.35)
     .string();
@@ -60,7 +65,10 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             {props.types.map((type: any, index: number) => (
               <div
                 key={index}
-                style={{ color: PokemonTypeColors[type.type.name] }}
+                style={{
+                  color:
+                    PokemonTypeColors[type.type.name as PokemonTypeColorAlias]
+                }}
                 className="poke-type"
               >
                 {type.type.name}
@@ -122,10 +130,12 @@ const PokeDetails = (props: IPokeDetailsProps) => {
               <div key={index} className="poke-move-detail">
                 <div className="poke-move-name">{move.move.name}</div>
                 <PokeTypeCard
+                  //@ts-ignore
                   type={MovesList[move.move.name].type}
                   style={{ flexBasis: "25%", marginRight: "2px" }}
                 />
                 <PokeTypeCard
+                  //@ts-ignore
                   category={MovesList[move.move.name].category}
                   style={{ flexBasis: "25%" }}
                 />

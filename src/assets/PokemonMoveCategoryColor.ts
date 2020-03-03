@@ -4,4 +4,6 @@ enum PokemonMoveCategoryColor {
   status = "#8c888c"
 }
 
+export type PokemonMoveCategoryColorAlias = keyof typeof PokemonMoveCategoryColor;
+
 export default PokemonMoveCategoryColor;

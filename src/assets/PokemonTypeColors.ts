@@ -19,4 +19,6 @@ enum PokemonTypeColors {
   flying = "#A890F0"
 }
 
+export type PokemonTypeColorAlias = keyof typeof PokemonTypeColors;
+
 export default PokemonTypeColors;
