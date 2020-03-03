@@ -2,6 +2,7 @@ import "../../styles/PokeDetails.css";
 
 import Color from "color";
 import React from "react";
+import { Helmet } from "react-helmet";
 
 import MovesList from "../../assets/moves.json";
 import PokemonTypeColors, {
@@ -47,8 +48,14 @@ const PokeDetails = (props: IPokeDetailsProps) => {
       const male = 100 - female;
       genderRate = `${female}%\u2640 ${male}%\u2642`;
   }
+
   return (
     <div className="poke-details-container" style={{ borderColor: darkColor }}>
+      <Helmet>
+        <title>
+          {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
+        </title>
+      </Helmet>
       <div
         className="details-modal-header"
         style={{
