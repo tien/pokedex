@@ -2,14 +2,15 @@ import "../../styles/PokeListPage.css";
 
 import React from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import { RouteComponentProps } from "react-router-dom";
 
-import PokemonTypeColors from "../../assets/PokemonTypeColors";
+import PokemonTypeColors, {
+  PokemonTypeColorAlias
+} from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
 import PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
-
-import { RouteComponentProps } from "react-router-dom";
 
 interface IPokeListRouterProps {
   id?: string;
@@ -162,7 +163,9 @@ class PokeListPage extends React.Component<
         value.toggleLoading();
         value.openModalWithReactNode(
           <PokeDetails {...details} />,
-          PokemonTypeColors[details.types[0].type.name],
+          PokemonTypeColors[
+            details.types[0].type.name as PokemonTypeColorAlias
+          ],
           () => this.props.history.push("/browse")
         );
       })

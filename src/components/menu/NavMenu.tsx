@@ -1,6 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import PokemonTypeColor from "../../assets/PokemonTypeColors";
+
+import PokemonTypeColor, {
+  PokemonTypeColorAlias
+} from "../../assets/PokemonTypeColors";
 import { GlobalContextConsumer } from "../../contexts/GlobalContext";
 import PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
@@ -27,7 +30,9 @@ const NavMenu = (props: INavMenuProps) => (
               value.toggleLoading();
               value.openModalWithReactNode(
                 <PokeDetails {...details} />,
-                PokemonTypeColor[details.types[0].type.name]
+                PokemonTypeColor[
+                  details.types[0].type.name as PokemonTypeColorAlias
+                ]
               );
             })
             .catch((error: Error) => {
