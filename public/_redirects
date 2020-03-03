@@ -1,0 +1,5 @@
+# Redirect default Netlify subdomain to primary domain
+https://sleepy-jennings-04e0c6.netlify.com/* https://pokedex.digital/:splat 301!
+
+# Redirect all remaining routes to index.html
+/* /index.html 200
