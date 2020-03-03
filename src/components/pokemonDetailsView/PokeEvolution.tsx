@@ -1,9 +1,9 @@
 import "../../styles/PokeEvolution.css";
 
 import React from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-interface IPokeEvolutionProps extends RouteComponentProps {
+interface IPokeEvolutionProps {
   evolutionChain: any;
   color: string;
 }
@@ -36,7 +36,12 @@ const RecursivePokeEvolution = ({
   const onClick = () => callback(currGen.name);
   if (currGen.children.length === 0) {
     return (
-      <div key={key} className="poke-evo-parent" onClick={onClick}>
+      <div
+        key={key}
+        className="poke-evo-parent"
+        onClick={onClick}
+        role="button"
+      >
         <img src={currGen.imageUrl} alt="pokemon evolution" />
         {currGen.name}
       </div>
@@ -44,7 +49,7 @@ const RecursivePokeEvolution = ({
   } else {
     return (
       <div key={key} className="poke-evo-wrapper">
-        <div className="poke-evo-parent" onClick={onClick}>
+        <div className="poke-evo-parent" onClick={onClick} role="button">
           <img src={currGen.imageUrl} alt="pokemon evolution" />
           {currGen.name}
         </div>
@@ -65,8 +70,10 @@ const RecursivePokeEvolution = ({
 };
 
 const PokeEvolution = (props: IPokeEvolutionProps) => {
+  const history = useHistory();
+
   const goToPokemonRoute = (id: number | string) =>
-    props.history.replace(`/browse/${String(id)}`);
+    history.replace(`/browse/${String(id)}`);
 
   return (
     <div className="poke-evo-tree">
@@ -80,4 +87,4 @@ const PokeEvolution = (props: IPokeEvolutionProps) => {
   );
 };
 
-export default withRouter(PokeEvolution);
+export default PokeEvolution;
