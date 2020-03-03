@@ -66,7 +66,7 @@ const RecursivePokeEvolution = ({
 
 const PokeEvolution = (props: IPokeEvolutionProps) => {
   const goToPokemonRoute = (id: number | string) =>
-    props.history.replace(String(id));
+    props.history.replace(`/browse/${String(id)}`);
 
   return (
     <div className="poke-evo-tree">
