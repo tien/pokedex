@@ -145,6 +145,20 @@ class PokeListPage extends React.Component<
         ) : (
           Pokemons
         )}
+        <div
+          id="172776212"
+          dangerouslySetInnerHTML={{
+            __html: `
+            <script type="text/javascript">
+              try {
+                  window._mNHandle.queue.push(function (){
+                      window._mNDetails.loadTag("172776212", "728x90", "172776212");
+                  });
+              }
+              catch (error) {}
+            </script>`
+          }}
+        ></div>
       </React.Fragment>
     );
   }
