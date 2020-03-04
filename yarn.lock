@@ -9437,7 +9437,7 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
-regrest@^3.6.8:
+regrest@^3.6.9:
   version "3.6.9"
   resolved "https://registry.yarnpkg.com/regrest/-/regrest-3.6.9.tgz#d284d944494add1e29447207810f0c3dbd13a2d7"
   integrity sha512-4wrcyi7CDWo33iysYoHMvHfMNcp7D6z39XxGA5QPmuKxcmjzKFuJ0XHuTq97PJl23BLwlht+rAQjLMjTUECZPw==
