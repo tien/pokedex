@@ -9,6 +9,7 @@ import PokemonTypeColors, {
 } from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
 import * as PokeService from "../../services/pokeService";
+import MediaDotNetAd from "../ads/MediaDotNet";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
 
@@ -145,20 +146,7 @@ class PokeListPage extends React.Component<
         ) : (
           Pokemons
         )}
-        <div
-          id="172776212"
-          dangerouslySetInnerHTML={{
-            __html: `
-            <script type="text/javascript">
-              try {
-                  window._mNHandle.queue.push(function (){
-                      window._mNDetails.loadTag("172776212", "728x90", "172776212");
-                  });
-              }
-              catch (error) {}
-            </script>`
-          }}
-        ></div>
+        <MediaDotNetAd />
       </React.Fragment>
     );
   }
