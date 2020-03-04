@@ -2,10 +2,10 @@
   "name": "poke-dex",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "react-snap",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "gulp gitHubPagePreDeploy && npm run build",
@@ -41,6 +41,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
+    "react-snap": "^1.23.0",
     "regenerator-runtime": "^0.13.3",
     "typescript": "^3.8.3"
   },
