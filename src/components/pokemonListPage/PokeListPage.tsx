@@ -9,7 +9,6 @@ import PokemonTypeColors, {
 } from "../../assets/PokemonTypeColors";
 import { GlobalContext, IGlobalContext } from "../../contexts/GlobalContext";
 import * as PokeService from "../../services/pokeService";
-import MediaDotNetAd from "../ads/MediaDotNet";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
 
@@ -146,7 +145,6 @@ class PokeListPage extends React.Component<
         ) : (
           Pokemons
         )}
-        <MediaDotNetAd />
       </React.Fragment>
     );
   }
