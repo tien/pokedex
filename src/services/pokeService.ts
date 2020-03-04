@@ -1,4 +1,5 @@
 import regrest from "regrest";
+
 import pokemonsList from "../assets/pokemons.json";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
@@ -6,68 +7,48 @@ const baseUrl = "https://pokeapi.co/api/v2/";
 const imageUrlBase: string =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
-export const getPokemonEvolutionChainBySpeciesNameOrId = (
+export const getPokemonEvolutionChainBySpeciesNameOrId = async (
   id: number | string
 ) => {
-  return regrest
+  const pokemonSpecies = await regrest
     .get(`${baseUrl}pokemon-species/${id}/`)
-    .then((res: any) => res.json)
-    .then((res: any) =>
-      regrest.get(res.evolution_chain.url).then((evoRes: any) => ({
-        captureRate: res.capture_rate,
-        evolutionChain: evoRes.json.chain,
-        genderRate: res.gender_rate
-      }))
-    )
-    .then((data: any) => ({
-      captureRate: data.captureRate,
-      evolutionChain: buildChain(data.evolutionChain),
-      genderRate: data.genderRate
-    }));
+    .then(res => res.json);
+
+  const pokemonEvoChain = await regrest
+    .get(pokemonSpecies.evolution_chain.url)
+    .then(res => res.json);
+
+  return {
+    captureRate: pokemonSpecies.capture_rate,
+    evolutionChain: buildChain(pokemonEvoChain.chain),
+    genderRate: pokemonSpecies.gender_rate
+  };
 };
 
-export const getPokemonByNameOrId = (id: number | string) => {
-  return regrest
+export const getPokemonByNameOrId = async (id: number | string) => {
+  const pokemonDetails = await regrest
     .get(`${baseUrl}pokemon/${id}/`)
-    .then((res: any) => res.json)
-    .then((data: any) => data)
-    .then((details: any) => ({
-      abilities: details.abilities,
-      evolutionChain: details.evolutionChain,
-      height: details.height,
-      id: details.id,
-      moves: details.moves,
-      name: details.name,
-      species: details.species.name,
-      sprites: details.sprites,
-      stats: details.stats,
-      types: details.types.sort((x: any) => x.slot),
-      weight: details.weight
-    }));
+    .then((res: any) => res.json);
+
+  return {
+    ...pokemonDetails,
+    types: pokemonDetails.types.sort((x: any) => x.slot)
+  };
 };
 
-export const getPokemonDetailsAndEvolutionChainByNameOrId = (
+export const getPokemonDetailsAndEvolutionChainByNameOrId = async (
   id: number | string
-) =>
-  getPokemonByNameOrId(id).then(details =>
-    getPokemonEvolutionChainBySpeciesNameOrId(details.species).then(
-      evolutionChain => ({
-        ...{
-          abilities: details.abilities,
-          evolutionChain: details.evolutionChain,
-          height: details.height,
-          id: details.id,
-          moves: details.moves,
-          name: details.name,
-          sprites: details.sprites,
-          stats: details.stats,
-          types: details.types,
-          weight: details.weight
-        },
-        ...evolutionChain
-      })
-    )
+) => {
+  const pokemonDetails = await getPokemonByNameOrId(id);
+  const evolutionChainAndExtraDetails = await getPokemonEvolutionChainBySpeciesNameOrId(
+    pokemonDetails.species.name
   );
+
+  return {
+    ...pokemonDetails,
+    ...evolutionChainAndExtraDetails
+  };
+};
 
 export const searchPokemonByNameOrId = (query: string) =>
   pokemonsList.pokemons
