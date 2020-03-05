@@ -11,7 +11,7 @@ const rootElement = document.getElementById("root");
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App />
   </BrowserRouter>,
-  document.getElementById("root") as HTMLElement
+  rootElement
 );
 
 registerServiceWorker();
