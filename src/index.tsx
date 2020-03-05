@@ -1,17 +1,17 @@
 import "./styles/index.css";
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(
+render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App />
   </BrowserRouter>,
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root")
 );
 
 serviceWorker.unregister();

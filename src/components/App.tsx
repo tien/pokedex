@@ -43,7 +43,6 @@ class App extends React.Component<{}, IAppState> {
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
     this.closeMenuOnOutsideClick = this.closeMenuOnOutsideClick.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
-    this.pokesListPage = this.pokesListPage.bind(this);
     this.menuRef = React.createRef();
     this.modalRef = React.createRef();
   }
@@ -118,7 +117,7 @@ class App extends React.Component<{}, IAppState> {
         </div>
         <Switch>
           <Redirect exact={true} from="/" to="/browse" />
-          <Route exact={true} path="/browse/:id?" render={this.pokesListPage} />
+          <Route exact={true} path="/browse/:id?" component={PokeListPage} />
           <Route exact={true} path="/about" component={About} />
         </Switch>
         <div
@@ -179,10 +178,6 @@ class App extends React.Component<{}, IAppState> {
     ) {
       this.closeNavMenu();
     }
-  }
-
-  private pokesListPage(props: any) {
-    return <PokeListPage {...props} toggleLoading={this.toggleLoading} />;
   }
 }
 
