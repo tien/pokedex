@@ -1,17 +1,21 @@
 import "../../styles/PokeBall.css";
 
-import React from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 
-interface IPokeCardProps extends RouteComponentProps {
+interface IPokeCardProps {
   idNum: number;
   name: string;
   imageUrl: string;
 }
 
 const PokeCard = (props: IPokeCardProps) => {
-  const goToPokemonRoute = () =>
-    props.history.push(`${props.match.url}/${props.name}`);
+  const history = useHistory();
+
+  const goToPokemonRoute = useCallback(
+    () => history.push(`/browse/${props.name}`),
+    [history, props.name]
+  );
 
   return (
     <div className="poke-ball" onClick={goToPokemonRoute}>
@@ -27,4 +31,4 @@ const PokeCard = (props: IPokeCardProps) => {
   );
 };
 
-export default withRouter(PokeCard);
+export default PokeCard;
