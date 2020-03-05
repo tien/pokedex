@@ -107,14 +107,13 @@ class App extends React.Component<{}, IAppState> {
         <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex">
           <meta name="theme-color" content="#dd1414" />
         </Helmet>
-        <div ref={this.menuRef}>
-          <NavMenu
-            links={this.state.menuCategory}
-            root="pokedex"
-            active={this.state.navMenuIsOpen}
-            toggleNav={this.toggleNavMenuActiveState}
-          />
-        </div>
+        <NavMenu
+          ref={this.menuRef}
+          links={this.state.menuCategory}
+          root="pokedex"
+          active={this.state.navMenuIsOpen}
+          toggleNav={this.toggleNavMenuActiveState}
+        />
         <Switch>
           <Redirect exact={true} from="/" to="/browse" />
           <Route exact={true} path="/browse/:id?" component={PokeListPage} />
@@ -126,19 +125,18 @@ class App extends React.Component<{}, IAppState> {
         >
           <div id="spinner" />
         </div>
-        <div ref={this.modalRef}>
-          <Modal
-            style={{
-              backgroundColor: this.state.modalColor
-                ? this.state.modalColor
-                : "white"
-            }}
-            active={this.state.modalIsOpen}
-            closeModal={this.closeModal}
-          >
-            {this.state.modalContent}
-          </Modal>
-        </div>
+        <Modal
+          ref={this.modalRef}
+          style={{
+            backgroundColor: this.state.modalColor
+              ? this.state.modalColor
+              : "white"
+          }}
+          active={this.state.modalIsOpen}
+          closeModal={this.closeModal}
+        >
+          {this.state.modalContent}
+        </Modal>
       </GlobalContextProvider>
     );
   }
