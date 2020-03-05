@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, forwardRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
@@ -12,7 +12,7 @@ interface INavMenuProps {
   toggleNav: () => void;
 }
 
-const NavMenu = (props: INavMenuProps) => {
+const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>((props, ref) => {
   const history = useHistory();
   const globalContext = useContext(GlobalContext);
 
@@ -36,7 +36,7 @@ const NavMenu = (props: INavMenuProps) => {
   };
 
   return (
-    <div>
+    <div ref={ref}>
       <nav id="main-nav" className={props.active ? "active" : ""}>
         <input
           placeholder="Enter Pokemon number or name"
@@ -65,6 +65,6 @@ const NavMenu = (props: INavMenuProps) => {
       <ToggleNavButton active={props.active} onClick={props.toggleNav} />
     </div>
   );
-};
+});
 
 export default NavMenu;
