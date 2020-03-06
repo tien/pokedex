@@ -1,4 +1,5 @@
 import "./styles/index.css";
+import "focus-visible/dist/focus-visible.js";
 
 import React from "react";
 import { render } from "react-dom";
