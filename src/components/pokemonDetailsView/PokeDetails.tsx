@@ -52,109 +52,130 @@ const PokeDetails = (props: IPokeDetailsProps) => {
   }
 
   return (
-    <div className="poke-details-container" style={{ borderColor: darkColor }}>
+    <>
       <Helmet>
         <title>
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
         </title>
         <meta name="theme-color" content={lightColor} />
       </Helmet>
-      <div
-        className="details-modal-header"
-        style={{
-          backgroundColor: darkColor
-        }}
+      <article
+        className="poke-details-container"
+        style={{ borderColor: darkColor }}
       >
-        <h2>{props.name}</h2>
-      </div>
-      <div className="details-modal-content">
-        <div className="details-1st-child">
-          <img src={props.sprites.front_default} alt="pokemon avatar" />
-          <div className="poke-number-details">Number: #{props.id}</div>
-          <div className="poke-types-details">
-            {props.types.map((type: any, index: number) => (
-              <div
-                key={index}
-                style={{
-                  color:
-                    PokemonTypeColors[type.type.name as PokemonTypeColorAlias]
-                }}
-                className="poke-type"
-              >
-                {type.type.name}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="details-2nd-child">
-          <PokeStats stats={props.stats} color={lightColor} />
-        </div>
-        <div className="details-3rd-child">
-          <div
-            className="details-section-header"
-            style={{ backgroundColor: darkColor }}
-          >
-            Profile
-          </div>
-          <div className="details-profile">
-            <div>
-              <div>Height: {Math.round(props.height * 10) / 100}m</div>
+        <header
+          className="details-modal-header"
+          style={{
+            backgroundColor: darkColor
+          }}
+        >
+          <h2>{props.name}</h2>
+        </header>
+        <section className="details-modal-content">
+          <section className="details-overview-and-stats">
+            <figure className="details-profile-overview">
+              <img src={props.sprites.front_default} alt="pokemon avatar" />
+              <figcaption className="poke-number-details">
+                Number: #{props.id}
+              </figcaption>
+              <figcaption className="poke-types-details">
+                {props.types.map((type: any, index: number) => (
+                  <span
+                    key={index}
+                    style={{
+                      color:
+                        PokemonTypeColors[
+                          type.type.name as PokemonTypeColorAlias
+                        ]
+                    }}
+                    className="poke-type"
+                  >
+                    {type.type.name}
+                  </span>
+                ))}
+              </figcaption>
+            </figure>
+            <PokeStats
+              className="details-stats"
+              stats={props.stats}
+              color={lightColor}
+            />
+          </section>
+          <section>
+            <header
+              className="details-section-header"
+              style={{ backgroundColor: darkColor }}
+            >
+              Profile
+            </header>
+            <section className="details-profile">
               <div>
-                Weight: {Math.round(props.weight * 10) / 100}
-                kg
+                <div>Height: {Math.round(props.height * 10) / 100}m</div>
+                <div>
+                  Weight: {Math.round(props.weight * 10) / 100}
+                  kg
+                </div>
+                <div>
+                  Abilities:{" "}
+                  {props.abilities
+                    .map((ability: any) => ability.ability.name)
+                    .join(", ")}
+                </div>
               </div>
               <div>
-                Abilities:{" "}
-                {props.abilities
-                  .map((ability: any) => ability.ability.name)
-                  .join(", ")}
+                <div>
+                  Capture rate: {Math.round(props.captureRate * 100) / 100}%
+                </div>
+                <div>
+                  Gender rate: <span className="one-liner">{genderRate}</span>
+                </div>
               </div>
-            </div>
-            <div>
-              <div>
-                Capture rate: {Math.round(props.captureRate * 100) / 100}%
-              </div>
-              <div>
-                Gender rate: <span className="one-liner">{genderRate}</span>
-              </div>
-            </div>
-          </div>
-          <div
-            className="details-section-header"
-            style={{ backgroundColor: darkColor }}
-          >
-            Evolution
-          </div>
-          <PokeEvolution
-            evolutionChain={props.evolutionChain}
-            color={darkColor}
-          />
-          <div
-            className="details-section-header"
-            style={{ backgroundColor: darkColor }}
-          >
-            Moves
-          </div>
-          <div className="poke-moves-detail-list">
-            {props.moves.map((move: any, index: number) => (
-              <div key={index} className="poke-move-detail">
-                <div className="poke-move-name">{move.move.name}</div>
-                <PokeTypeCard
-                  //@ts-ignore
-                  type={MovesList[move.move.name].type}
-                  style={{ flexBasis: "25%", marginRight: "2px" }}
-                />
-                <PokeTypeCard
-                  //@ts-ignore
-                  category={MovesList[move.move.name].category}
-                  style={{ flexBasis: "25%" }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+            </section>
+          </section>
+          <section>
+            <header
+              className="details-section-header"
+              style={{ backgroundColor: darkColor }}
+            >
+              Evolution
+            </header>
+            <PokeEvolution
+              evolutionChain={props.evolutionChain}
+              color={darkColor}
+            />
+          </section>
+          <section>
+            <header
+              className="details-section-header"
+              style={{ backgroundColor: darkColor }}
+            >
+              Moves
+            </header>
+            <ul className="poke-moves-detail-list">
+              {props.moves.map((move: any, index: number) => (
+                <li key={index} className="poke-move-detail">
+                  <div className="poke-move-name">{move.move.name}</div>
+                  <PokeTypeCard
+                    //@ts-ignore
+                    type={
+                      MovesList[move.move.name as keyof typeof MovesList].type
+                    }
+                    style={{ flexBasis: "25%", marginRight: "2px" }}
+                  />
+                  <PokeTypeCard
+                    category={
+                      MovesList[move.move.name as keyof typeof MovesList]
+                        .category as "physical" | "special" | "status"
+                    }
+                    style={{ flexBasis: "25%" }}
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+        </section>
+      </article>
+    </>
   );
 };
 
