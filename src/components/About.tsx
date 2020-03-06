@@ -1,17 +1,10 @@
+import "../styles/About.css";
+
 import React from "react";
 import Helmet from "react-helmet";
 
 const About = () => (
-  <div
-    id="page-container"
-    style={{
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      textAlign: "center"
-    }}
-  >
+  <section id="page-container" className="about-page-container">
     <Helmet>
       <title>About</title>
     </Helmet>
@@ -54,13 +47,7 @@ const About = () => (
         />
       </svg>
     </a>
-    <style
-      dangerouslySetInnerHTML={{
-        __html:
-          ".github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}"
-      }}
-    />
-  </div>
+  </section>
 );
 
 export default About;
