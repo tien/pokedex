@@ -52,7 +52,6 @@ button {
   padding: 0.35rem;
   text-align: center;
   cursor: pointer;
-  outline: none;
 }
 
 button:active {
