@@ -23,10 +23,9 @@ export const gitHubPagePreDeploy = async () => {
 
 export const compile = () =>
   new Promise((resolve, reject) => {
-    const task = spawn("node_modules/.bin/react-scripts", ["build"]);
-
-    task.stdout.pipe(process.stdout);
-    task.stderr.pipe(process.stderr);
+    const task = spawn("node_modules/.bin/react-scripts", ["build"], {
+      stdio: "inherit"
+    });
 
     task.on("close", () => resolve());
     task.on("error", reject);
