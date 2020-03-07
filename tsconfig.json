@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "gulpfile.ts"],
   "exclude": [
     "node_modules",
     "build",
