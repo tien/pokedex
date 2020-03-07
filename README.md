@@ -4,13 +4,6 @@ An interactive Pokedex built with React js using the [Pokéapi](https://pokeapi.
 
 - [Demo](https://tien.github.io/pokedex/)
 
-## 📚 Libraries used
-
-- [Regrest](https://github.com/tien/regrest)
-- [React Router](https://github.com/ReactTraining/react-router)
-- [React Infinite Scroller](https://github.com/CassetteRocks/react-infinite-scroller#readme)
-- [Color](https://github.com/Qix-/color)
-
 ## 🚧 Development server
 
 First, be sure to install the dependencies
