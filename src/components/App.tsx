@@ -9,6 +9,7 @@ import About from "./About";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import PokeListPage from "./pokemonListPage/PokeListPage";
+import Router from "../router";
 
 interface IAppState {
   loading: boolean;
@@ -114,11 +115,7 @@ class App extends React.Component<{}, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Switch>
-          <Redirect exact={true} from="/" to="/browse" />
-          <Route exact={true} path="/browse/:id?" component={PokeListPage} />
-          <Route exact={true} path="/about" component={About} />
-        </Switch>
+        <Router />
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}
