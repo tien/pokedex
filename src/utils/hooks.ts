@@ -4,7 +4,8 @@ import {
   Ref,
   useCallback,
   useEffect,
-  useState
+  useState,
+  useRef
 } from "react";
 
 export const useFocus = (initialState = false) => {
@@ -97,3 +98,52 @@ export const useDocumentKeyBoardEffect = (
       document.removeEventListener(type, onKeyboardEvent);
     };
   }, deps);
+
+export const useFocusTrap = <T extends HTMLElement>(shouldTrap: boolean) => {
+  const ref = useRef<T>(null);
+
+  const [pressedKeys] = usePressedKey();
+
+  useDocumentKeyBoardEffect(
+    "keydown",
+    "Tab",
+    e => {
+      if (!shouldTrap) {
+        return;
+      }
+
+      const focusables: NodeListOf<HTMLElement> =
+        ref.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        ) ?? (new NodeList() as NodeListOf<HTMLElement>);
+
+      if (focusables.length === 0) {
+        return;
+      }
+
+      const firstFocusableElement = focusables[0];
+      const lastFocusableElement = focusables[focusables.length - 1];
+
+      const hasFocusedElement = Array.from(focusables).some(
+        element => element === document.activeElement
+      );
+
+      if (
+        !hasFocusedElement ||
+        lastFocusableElement === document.activeElement
+      ) {
+        e.preventDefault();
+        firstFocusableElement.focus();
+      } else if (
+        pressedKeys.includes("Shift") &&
+        firstFocusableElement === document.activeElement
+      ) {
+        e.preventDefault();
+        lastFocusableElement.focus();
+      }
+    },
+    [shouldTrap]
+  );
+
+  return ref;
+};
