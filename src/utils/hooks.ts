@@ -50,16 +50,25 @@ export const usePressedKey = (): [string[], number[]] => {
   const [pressedKeyCodes, setPressedKeyCodes] = useState<number[]>([]);
 
   const onKeyDown = useCallback((e: KeyboardEvent) => {
-    setPressedKeys(pressedKeys => [...pressedKeys, e.key]);
-    setPressedKeyCodes(pressedKeyCodes => [...pressedKeyCodes, e.keyCode]);
+    setPressedKeys(pressedKeys => [
+      ...pressedKeys.filter(k => k !== e.key),
+      e.key
+    ]);
+    setPressedKeyCodes(pressedKeyCodes => [
+      ...pressedKeyCodes.filter(k => k !== e.keyCode),
+      e.keyCode
+    ]);
   }, []);
 
-  const onKeyUp = useCallback((e: KeyboardEvent) => {
-    setPressedKeys(pressedKeys => pressedKeys.filter(key => key !== e.key));
-    setPressedKeyCodes(pressedKeyCodes =>
-      pressedKeyCodes.filter(key => key !== e.keyCode)
-    );
-  }, []);
+  const onKeyUp = useCallback(
+    (e: KeyboardEvent) => {
+      setPressedKeys(pressedKeys => pressedKeys.filter(key => key !== e.key));
+      setPressedKeyCodes(pressedKeyCodes =>
+        pressedKeyCodes.filter(key => key !== e.keyCode)
+      );
+    },
+    [setPressedKeys, setPressedKeyCodes]
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyDown);
@@ -130,7 +139,8 @@ export const useFocusTrap = <T extends HTMLElement>(shouldTrap: boolean) => {
 
       if (
         !hasFocusedElement ||
-        lastFocusableElement === document.activeElement
+        (lastFocusableElement === document.activeElement &&
+          !pressedKeys.includes("Shift"))
       ) {
         e.preventDefault();
         firstFocusableElement.focus();
@@ -142,7 +152,7 @@ export const useFocusTrap = <T extends HTMLElement>(shouldTrap: boolean) => {
         lastFocusableElement.focus();
       }
     },
-    [shouldTrap]
+    [shouldTrap, pressedKeys]
   );
 
   return ref;
