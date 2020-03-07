@@ -3,6 +3,7 @@ import "../../styles/PokeEvolution.css";
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useEnterKeyCallback } from "../../utils/hooks";
+import { getPokemonDetailsRoute } from "../../routes";
 
 interface IPokeEvolutionProps {
   evolutionChain: any;
@@ -76,7 +77,7 @@ const PokeEvolution = (props: IPokeEvolutionProps) => {
   const history = useHistory();
 
   const goToPokemonRoute = (id: number | string) =>
-    history.replace(`/browse/${String(id)}`);
+    history.push(getPokemonDetailsRoute(String(id)));
 
   return (
     <section className="poke-evo-tree">

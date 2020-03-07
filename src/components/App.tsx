@@ -7,6 +7,8 @@ import { GlobalContextProvider } from "../contexts/GlobalContext";
 import Router from "../router";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { routes } from "../routes";
 
 interface IAppState {
   loading: boolean;
@@ -19,11 +21,11 @@ interface IAppState {
   scrollPos: number;
 }
 
-class App extends React.Component<{}, IAppState> {
+class App extends React.Component<RouteComponentProps, IAppState> {
   private menuRef: React.RefObject<HTMLDivElement>;
   private modalRef: React.RefObject<HTMLDivElement>;
 
-  constructor(props: {}) {
+  constructor(props: RouteComponentProps) {
     super(props);
     this.state = {
       loading: false,
@@ -50,10 +52,12 @@ class App extends React.Component<{}, IAppState> {
     color?: string,
     callBack?: () => void
   ) {
+    const goBack = () => this.props.history.push(routes.browsePokemons);
+
     this.setState(
       prevState => ({
-        modalCloseCallback: callBack || null,
-        modalColor: color || "grey",
+        modalCloseCallback: callBack ?? goBack,
+        modalColor: color ?? "grey",
         modalContent: ReactNode,
         modalIsOpen: true,
         scrollPos: prevState.modalIsOpen
@@ -79,9 +83,7 @@ class App extends React.Component<{}, IAppState> {
     document.documentElement!.classList.remove("freeze-page");
     document.documentElement!.scrollTop = this.state.scrollPos;
     document.body.scrollTop = this.state.scrollPos;
-    if (this.state.modalCloseCallback) {
-      this.state.modalCloseCallback();
-    }
+    this.state.modalCloseCallback?.();
     this.setState({
       modalCloseCallback: null,
       modalContent: null,
@@ -108,7 +110,6 @@ class App extends React.Component<{}, IAppState> {
         <NavMenu
           ref={this.menuRef}
           links={this.state.menuCategory}
-          root="pokedex"
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
@@ -173,4 +174,4 @@ class App extends React.Component<{}, IAppState> {
   }
 }
 
-export default App;
+export default withRouter(App);
