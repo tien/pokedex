@@ -64,6 +64,7 @@ const PokeListPage = () => {
           () => history.push("/browse")
         );
       } catch {
+        globalContext.openModalWithReactNode(<h1>No pokemon found :{"("}</h1>);
         globalContext.toggleLoading();
       }
     },
