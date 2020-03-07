@@ -50,7 +50,7 @@ export const getPokemonDetailsAndEvolutionChainByNameOrId = async (
   };
 };
 
-export const searchPokemonByNameOrId = (query: string) =>
+export const searchPokemonByNameOrId = async (query: string) =>
   pokemonsList.pokemons
     .filter((pokemon: any) =>
       query.match(/^\d+$/g)
@@ -64,7 +64,7 @@ export const getAllPokemonWithLimitAndOffset = (
   offset: number
 ): any =>
   Promise.resolve({
-    next: offset + limit < pokemonsList.count,
+    hasNext: offset + limit < pokemonsList.count,
     pokemons: pokemonsList.pokemons.slice(offset, offset + limit)
   });
 

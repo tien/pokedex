@@ -1,4 +1,5 @@
 import React from "react";
+import { useEnterKeyCallback } from "../../utils/hooks";
 
 interface IToggleNavButtonProps {
   active: boolean;
@@ -6,12 +7,13 @@ interface IToggleNavButtonProps {
 }
 
 const ToggleNavButton = ({ active, onClick }: IToggleNavButtonProps) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
   <div
     id="toggle-nav-button"
     role="button"
+    tabIndex={0}
     className={active ? "active" : ""}
     onClick={onClick}
+    onKeyPress={useEnterKeyCallback(onClick, [onClick])}
   >
     <div className="nav-button-bar" />
     <div className="nav-button-bar" />

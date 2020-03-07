@@ -2,13 +2,11 @@ import "../styles/App.css";
 
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Redirect, Route, Switch } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
-import About from "./About";
+import Router from "../router";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
-import PokeListPage from "./pokemonListPage/PokeListPage";
 
 interface IAppState {
   loading: boolean;
@@ -43,7 +41,6 @@ class App extends React.Component<{}, IAppState> {
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
     this.closeMenuOnOutsideClick = this.closeMenuOnOutsideClick.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
-    this.pokesListPage = this.pokesListPage.bind(this);
     this.menuRef = React.createRef();
     this.modalRef = React.createRef();
   }
@@ -108,38 +105,32 @@ class App extends React.Component<{}, IAppState> {
         <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex">
           <meta name="theme-color" content="#dd1414" />
         </Helmet>
-        <div ref={this.menuRef}>
-          <NavMenu
-            links={this.state.menuCategory}
-            root="pokedex"
-            active={this.state.navMenuIsOpen}
-            toggleNav={this.toggleNavMenuActiveState}
-          />
-        </div>
-        <Switch>
-          <Redirect exact={true} from="/" to="/browse" />
-          <Route exact={true} path="/browse/:id?" render={this.pokesListPage} />
-          <Route exact={true} path="/about" component={About} />
-        </Switch>
+        <NavMenu
+          ref={this.menuRef}
+          links={this.state.menuCategory}
+          root="pokedex"
+          active={this.state.navMenuIsOpen}
+          toggleNav={this.toggleNavMenuActiveState}
+        />
+        <Router />
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}
         >
           <div id="spinner" />
         </div>
-        <div ref={this.modalRef}>
-          <Modal
-            style={{
-              backgroundColor: this.state.modalColor
-                ? this.state.modalColor
-                : "white"
-            }}
-            active={this.state.modalIsOpen}
-            closeModal={this.closeModal}
-          >
-            {this.state.modalContent}
-          </Modal>
-        </div>
+        <Modal
+          ref={this.modalRef}
+          style={{
+            backgroundColor: this.state.modalColor
+              ? this.state.modalColor
+              : "white"
+          }}
+          active={this.state.modalIsOpen}
+          closeModal={this.closeModal}
+        >
+          {this.state.modalContent}
+        </Modal>
       </GlobalContextProvider>
     );
   }
@@ -179,10 +170,6 @@ class App extends React.Component<{}, IAppState> {
     ) {
       this.closeNavMenu();
     }
-  }
-
-  private pokesListPage(props: any) {
-    return <PokeListPage {...props} toggleLoading={this.toggleLoading} />;
   }
 }
 

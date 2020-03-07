@@ -1,13 +1,13 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import "../../styles/PokeStats.css";
 
-interface IPokeStatsProps {
+interface IPokeStatsProps extends HTMLAttributes<HTMLElement> {
   stats: any[] | null;
   color: string;
 }
 
-const PokeStats = ({ stats, color }: IPokeStatsProps) => (
-  <div className="stats">
+const PokeStats = ({ stats, color, className, ...rest }: IPokeStatsProps) => (
+  <section className={`stats ${className}`} {...rest}>
     {stats?.map((stat: any, index: number) => (
       // eslint-disable-next-line react/no-array-index-key
       <div key={index} className="stat">
@@ -30,7 +30,7 @@ const PokeStats = ({ stats, color }: IPokeStatsProps) => (
         </div>
       </div>
     ))}
-  </div>
+  </section>
 );
 
 export default PokeStats;
