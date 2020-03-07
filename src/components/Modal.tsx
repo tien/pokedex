@@ -1,12 +1,11 @@
 import "../styles/Modal.css";
 
-import React, { forwardRef, useCallback, useRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 
 import {
   useCombinedRefs,
-  useDocumentKeyBoardEffect,
   useEnterKeyCallback,
-  usePressedKey
+  useFocusTrap
 } from "../utils/hooks";
 
 interface IModalProps {
@@ -18,9 +17,7 @@ interface IModalProps {
 
 const Modal = forwardRef<HTMLElement, IModalProps>(
   ({ active, closeModal, style, children }, ref) => {
-    const modalRef = useRef<HTMLElement>(null);
-
-    const [pressedKeys] = usePressedKey();
+    const modalRef = useFocusTrap(active);
 
     const onModalCloseButtonPress = useCallback(
       (e: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -28,47 +25,6 @@ const Modal = forwardRef<HTMLElement, IModalProps>(
         closeModal();
       },
       [closeModal]
-    );
-
-    useDocumentKeyBoardEffect(
-      "keydown",
-      "Tab",
-      e => {
-        if (!active) {
-          return;
-        }
-
-        const focusables: NodeListOf<HTMLElement> =
-          modalRef.current?.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          ) ?? (new NodeList() as NodeListOf<HTMLElement>);
-
-        if (focusables.length === 0) {
-          return;
-        }
-
-        const firstFocusableElement = focusables[0];
-        const lastFocusableElement = focusables[focusables.length - 1];
-
-        const hasFocusedElement = Array.from(focusables).some(
-          element => element === document.activeElement
-        );
-
-        if (
-          !hasFocusedElement ||
-          lastFocusableElement === document.activeElement
-        ) {
-          e.preventDefault();
-          firstFocusableElement.focus();
-        } else if (
-          pressedKeys.includes("Shift") &&
-          firstFocusableElement === document.activeElement
-        ) {
-          e.preventDefault();
-          lastFocusableElement.focus();
-        }
-      },
-      [active]
     );
 
     return (
