@@ -8,6 +8,11 @@
   --secondary-color-yellow: #b3a125;
 }
 
+/* Remove outline for non-keyboard :focus */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
 html {
   line-height: 1.2;
 }
@@ -47,7 +52,6 @@ button {
   padding: 0.35rem;
   text-align: center;
   cursor: pointer;
-  outline: none;
 }
 
 button:active {

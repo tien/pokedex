@@ -8,7 +8,7 @@ import React, {
   useState
 } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { useHistory, useRouteMatch, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import PokemonTypeColors, {
   PokemonTypeColorAlias
@@ -43,9 +43,9 @@ const PokeListPage = () => {
     } = await PokeService.getAllPokemonWithLimitAndOffset(40, offSet);
 
     setHasNext(hasNext);
-    setOffset(offSet + 40);
-    setPokemons([...pokemons, ...pokemonsResult]);
-  }, [offSet, pokemons]);
+    setOffset(offSet => offSet + 40);
+    setPokemons(pokemons => [...pokemons, ...pokemonsResult]);
+  }, [offSet]);
 
   const goToPokemonDetails = useCallback(
     async (pokemonId: string) => {
