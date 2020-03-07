@@ -27,7 +27,7 @@ export const compile = () =>
       stdio: "inherit"
     });
 
-    task.on("close", () => resolve());
+    task.on("close", resolve);
     task.on("error", reject);
   });
 
@@ -63,4 +63,14 @@ export const buildSiteMap = async () => {
   return fs.promises.writeFile("./build/sitemap.xml", xml);
 };
 
-export const build = series(compile, buildSiteMap);
+export const createRobotsDotTxt = async () => {
+  const baseUrl = process.env.URL;
+
+  const content = ["User-agent: *", `Sitemap: ${baseUrl}/sitemap.xml`].join(
+    "\n"
+  );
+
+  return fs.promises.writeFile("build/robots.txt", content);
+};
+
+export const build = series(compile, buildSiteMap, createRobotsDotTxt);
