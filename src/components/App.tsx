@@ -2,14 +2,11 @@ import "../styles/App.css";
 
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Redirect, Route, Switch } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
-import About from "./About";
+import Router from "../router";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
-import PokeListPage from "./pokemonListPage/PokeListPage";
-import Router from "../router";
 
 interface IAppState {
   loading: boolean;
