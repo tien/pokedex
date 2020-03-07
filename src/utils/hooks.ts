@@ -4,9 +4,22 @@ import {
   Ref,
   useCallback,
   useEffect,
-  useState,
-  useRef
+  useRef,
+  useState
 } from "react";
+
+export const useInput = (
+  initialValue: string
+): [string, (event: React.ChangeEvent<HTMLInputElement>) => void] => {
+  const [value, setValue] = useState(initialValue);
+
+  const changeHandler = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
+    e => setValue(e.target.value),
+    []
+  );
+
+  return [value, changeHandler];
+};
 
 export const useFocus = (initialState = false) => {
   const [isFocused, setIsFocused] = useState(initialState);

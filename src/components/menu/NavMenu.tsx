@@ -1,51 +1,44 @@
-import React, { useContext, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
-import { GlobalContext } from "../../contexts/GlobalContext";
-import * as PokeService from "../../services/pokeService";
+import { getPokemonDetailsRoute } from "../../routes";
+import {
+  useCombinedRefs,
+  useEnterKeyCallback,
+  useFocusTrap,
+  useInput
+} from "../../utils/hooks";
 import ToggleNavButton from "./ToggleNavButton";
-import { useFocusTrap, useCombinedRefs } from "../../utils/hooks";
 
 interface INavMenuProps {
   links: Array<string | { name: string; link: string }>;
   active: boolean;
-  root?: string;
   toggleNav: () => void;
 }
 
 const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
-  ({ links, active, root, toggleNav }, ref) => {
+  ({ links, active, toggleNav }, ref) => {
     const history = useHistory();
-    const globalContext = useContext(GlobalContext);
 
     const containerRef = useFocusTrap<HTMLDivElement>(active);
 
-    const openModalWithPokemonInfo = async (e: any) => {
-      if (e.key === "Enter" && e.target) {
-        e.target.blur();
-        globalContext.toggleLoading();
+    const [searchQuery, searchQueryChangeHander] = useInput("");
 
-        try {
-          const pokemon = await PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-            e.target.value.toLowerCase()
-          );
-
-          globalContext.toggleLoading();
-          history.push(`browse/${pokemon.name}`);
-        } catch {
-          globalContext.openModalWithReactNode(<h1>No Pokemon found</h1>);
-          globalContext.toggleLoading();
-        }
+    const openModalWithPokemonInfo = useEnterKeyCallback(() => {
+      if (searchQuery !== "") {
+        history.push(getPokemonDetailsRoute(searchQuery));
       }
-    };
+    }, [searchQuery]);
 
     return (
       <div ref={useCombinedRefs(ref, containerRef)}>
         <nav id="main-nav" className={active ? "active" : ""}>
           <input
-            placeholder="Enter Pokemon number or name"
-            type="text"
             id="search-box"
+            type="text"
+            placeholder="Enter Pokemon number or name"
+            value={searchQuery}
+            onChange={searchQueryChangeHander}
             onKeyPress={openModalWithPokemonInfo}
           />
           {links.map(

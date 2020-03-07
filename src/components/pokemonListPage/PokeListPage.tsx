@@ -8,7 +8,7 @@ import React, {
   useState
 } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import PokemonTypeColors, {
   PokemonTypeColorAlias
@@ -17,6 +17,7 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 import * as PokeService from "../../services/pokeService";
 import PokeDetails from "../pokemonDetailsView/PokeDetails";
 import PokeBall from "./PokeBall";
+import { routes } from "../../routes";
 
 interface IPokeListRouteParams {
   id?: string;
@@ -24,6 +25,7 @@ interface IPokeListRouteParams {
 
 const PokeListPage = () => {
   const { id: pokemonId } = useParams<IPokeListRouteParams>();
+
   const history = useHistory();
 
   const globalContext = useContext(GlobalContext);
@@ -61,9 +63,12 @@ const PokeListPage = () => {
           PokemonTypeColors[
             pokemonDetails.types[0].type.name as PokemonTypeColorAlias
           ],
-          () => history.push("/browse")
+          // TODO: This is dumb, need to refactor how modal work
+          // BLAME: past self
+          () => history.push(routes.browsePokemons)
         );
       } catch {
+        globalContext.openModalWithReactNode(<h1>No pokemon found :{"("}</h1>);
         globalContext.toggleLoading();
       }
     },
@@ -109,7 +114,9 @@ const PokeListPage = () => {
   }, [prevScrollPos]);
 
   useEffect(() => {
-    if (pokemonId !== undefined) {
+    if (pokemonId === undefined) {
+      globalContext.closeModal(true);
+    } else {
       goToPokemonDetails(pokemonId);
     }
   }, [pokemonId]);

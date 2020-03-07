@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface IGlobalContext {
-  closeModal: () => void;
+  closeModal: (ignoreCallback: boolean) => void;
   openModalWithReactNode: (
     ReactNode: React.ReactNode,
     color?: string,
