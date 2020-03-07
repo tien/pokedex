@@ -8,7 +8,7 @@ import React, {
   useState
 } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { useHistory, useRouteMatch, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import PokemonTypeColors, {
   PokemonTypeColorAlias
