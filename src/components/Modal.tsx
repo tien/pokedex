@@ -1,8 +1,13 @@
 import "../styles/Modal.css";
 
-import React, { forwardRef, useCallback, useLayoutEffect, useRef } from "react";
+import React, { forwardRef, useCallback, useRef } from "react";
 
-import { useEnterKeyCallback } from "../utils/hooks";
+import {
+  useCombinedRefs,
+  useDocumentKeyBoardEffect,
+  useEnterKeyCallback,
+  usePressedKey
+} from "../utils/hooks";
 
 interface IModalProps {
   active: boolean;
@@ -13,7 +18,9 @@ interface IModalProps {
 
 const Modal = forwardRef<HTMLElement, IModalProps>(
   ({ active, closeModal, style, children }, ref) => {
-    const firstElementRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLElement>(null);
+
+    const [pressedKeys] = usePressedKey();
 
     const onModalCloseButtonPress = useCallback(
       (e: React.SyntheticEvent<HTMLButtonElement>) => {
@@ -23,33 +30,54 @@ const Modal = forwardRef<HTMLElement, IModalProps>(
       [closeModal]
     );
 
-    const onFirstElementFocus = useCallback<
-      React.FocusEventHandler<HTMLDivElement>
-    >(e => e.target.blur(), []);
+    useDocumentKeyBoardEffect(
+      "keydown",
+      "Tab",
+      e => {
+        if (!active) {
+          return;
+        }
 
-    const onLastElementFocus = useCallback(
-      _ => firstElementRef.current?.focus(),
-      []
+        const focusables: NodeListOf<HTMLElement> =
+          modalRef.current?.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          ) ?? (new NodeList() as NodeListOf<HTMLElement>);
+
+        if (focusables.length === 0) {
+          return;
+        }
+
+        const firstFocusableElement = focusables[0];
+        const lastFocusableElement = focusables[focusables.length - 1];
+
+        const hasFocusedElement = Array.from(focusables).some(
+          element => element === document.activeElement
+        );
+
+        if (
+          !hasFocusedElement ||
+          lastFocusableElement === document.activeElement
+        ) {
+          e.preventDefault();
+          firstFocusableElement.focus();
+        } else if (
+          pressedKeys.includes("Shift") &&
+          firstFocusableElement === document.activeElement
+        ) {
+          e.preventDefault();
+          lastFocusableElement.focus();
+        }
+      },
+      [active]
     );
-
-    useLayoutEffect(() => {
-      firstElementRef.current?.focus();
-    }, [active]);
 
     return (
       <section
-        ref={ref}
+        ref={useCombinedRefs(modalRef, ref)}
         style={style}
         id="modal"
         className={active ? "active" : ""}
       >
-        {/* Focus trap start */}
-        <div
-          ref={firstElementRef}
-          tabIndex={-1}
-          onFocus={onFirstElementFocus}
-        />
-
         <button
           id="modal-close-button"
           onClick={onModalCloseButtonPress}
@@ -74,9 +102,6 @@ const Modal = forwardRef<HTMLElement, IModalProps>(
           close
         </button>
         <section id="modal-content">{children}</section>
-
-        {/* Focus trap end */}
-        <div tabIndex={active ? 0 : -1} onFocus={onLastElementFocus} />
       </section>
     );
   }
