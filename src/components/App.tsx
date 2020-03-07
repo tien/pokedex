@@ -120,7 +120,9 @@ class App extends React.Component<RouteComponentProps, IAppState> {
           active={this.state.navMenuIsOpen}
           toggleNav={this.toggleNavMenuActiveState}
         />
-        <Router />
+        <main>
+          <Router />
+        </main>
         <div
           id="spinner-container"
           style={{ display: this.state.loading ? "block" : "none" }}
