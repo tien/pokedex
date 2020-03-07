@@ -1,7 +1,8 @@
 import "../../styles/PokeEvolution.css";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useEnterKeyCallback } from "../../utils/hooks";
 
 interface IPokeEvolutionProps {
   evolutionChain: any;
@@ -30,43 +31,45 @@ const Arrow = (props: any) => (
 const RecursivePokeEvolution = ({
   currGen,
   color,
-  key,
   callback
 }: IRecursivePokeEvolution) => {
   const onClick = () => callback(currGen.name);
-  if (currGen.children.length === 0) {
-    return (
-      <div
-        key={key}
+  const onEnterPress = useEnterKeyCallback(onClick, [onClick]);
+
+  const EvolutionStep = useCallback(
+    () => (
+      <figure
         className="poke-evo-parent"
-        onClick={onClick}
         role="button"
+        tabIndex={0}
+        onClick={onClick}
+        onKeyPress={onEnterPress}
       >
         <img src={currGen.imageUrl} alt="pokemon evolution" />
-        {currGen.name}
+        <figcaption>{currGen.name}</figcaption>
+      </figure>
+    ),
+    [currGen.imageUrl, currGen.name, onClick, onEnterPress]
+  );
+
+  return currGen.children.length === 0 ? (
+    <EvolutionStep />
+  ) : (
+    <div className="poke-evo-wrapper">
+      <EvolutionStep />
+      <Arrow style={{ fill: color, stroke: color }} />
+      <div className="poke-evo-children-group">
+        {currGen.children.map((child: any) => (
+          <RecursivePokeEvolution
+            currGen={child}
+            color={color}
+            key={child.name}
+            callback={callback}
+          />
+        ))}
       </div>
-    );
-  } else {
-    return (
-      <div key={key} className="poke-evo-wrapper">
-        <div className="poke-evo-parent" onClick={onClick} role="button">
-          <img src={currGen.imageUrl} alt="pokemon evolution" />
-          {currGen.name}
-        </div>
-        <Arrow style={{ fill: color, stroke: color }} />
-        <div className="poke-evo-children-group">
-          {currGen.children.map((child: any) => (
-            <RecursivePokeEvolution
-              currGen={child}
-              color={color}
-              key={key + 1}
-              callback={callback}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 };
 
 const PokeEvolution = (props: IPokeEvolutionProps) => {
@@ -76,14 +79,14 @@ const PokeEvolution = (props: IPokeEvolutionProps) => {
     history.replace(`/browse/${String(id)}`);
 
   return (
-    <div className="poke-evo-tree">
+    <section className="poke-evo-tree">
       <RecursivePokeEvolution
         currGen={props.evolutionChain}
         color={props.color}
         key={0}
         callback={goToPokemonRoute}
       />
-    </div>
+    </section>
   );
 };
 
