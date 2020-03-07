@@ -10,10 +10,11 @@ import Modal from "./Modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { routes } from "../routes";
 
+// TODO: This whole root component need to be nuked & purged
 interface IAppState {
   loading: boolean;
   menuCategory: Array<string | { name: string; link: string }>;
-  modalCloseCallback: (() => void) | null;
+  modalCloseCallback?: (() => void) | null;
   modalColor?: string;
   modalContent: React.ReactNode | null;
   modalIsOpen: boolean;
@@ -52,11 +53,11 @@ class App extends React.Component<RouteComponentProps, IAppState> {
     color?: string,
     callBack?: () => void
   ) {
-    const goBack = () => this.props.history.push(routes.browsePokemons);
-
     this.setState(
       prevState => ({
-        modalCloseCallback: callBack ?? goBack,
+        // TODO: This callback hack is dumb, need to refactor how modal work
+        // BLAME: past self
+        modalCloseCallback: callBack,
         modalColor: color ?? "grey",
         modalContent: ReactNode,
         modalIsOpen: true,
@@ -78,12 +79,18 @@ class App extends React.Component<RouteComponentProps, IAppState> {
     this.setState((prevState: any) => ({ loading: !prevState.loading }));
   }
 
-  public closeModal() {
+  public closeModal(
+    // TODO: This hack is dumb, need to refactor how modal work
+    // BLAME: past self
+    ignoreCallback: boolean = false
+  ) {
     document.body.classList.remove("freeze-page");
     document.documentElement!.classList.remove("freeze-page");
     document.documentElement!.scrollTop = this.state.scrollPos;
     document.body.scrollTop = this.state.scrollPos;
-    this.state.modalCloseCallback?.();
+    if (!ignoreCallback) {
+      this.state.modalCloseCallback?.();
+    }
     this.setState({
       modalCloseCallback: null,
       modalContent: null,
