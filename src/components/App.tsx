@@ -8,7 +8,6 @@ import Router from "../router";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { routes } from "../routes";
 
 // TODO: This whole root component need to be nuked & purged
 interface IAppState {
@@ -25,6 +24,8 @@ interface IAppState {
 class App extends React.Component<RouteComponentProps, IAppState> {
   private menuRef: React.RefObject<HTMLDivElement>;
   private modalRef: React.RefObject<HTMLDivElement>;
+  private defaultPageDescription =
+    "An online interactive Pokédex where you can explore, search and see your favourite Pokémon stats, moves and evolutions.";
 
   constructor(props: RouteComponentProps) {
     super(props);
@@ -115,12 +116,9 @@ class App extends React.Component<RouteComponentProps, IAppState> {
           <meta name="theme-color" content="#dd1414" />
           <meta
             property="og:description"
-            content="An online interactive Pokédex powered by React.js"
+            content={this.defaultPageDescription}
           />
-          <meta
-            name="description"
-            content="An online interactive Pokédex powered by React.js"
-          />
+          <meta name="description" content={this.defaultPageDescription} />
         </Helmet>
         <NavMenu
           ref={this.menuRef}
