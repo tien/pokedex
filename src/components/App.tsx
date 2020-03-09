@@ -112,7 +112,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
           toggleLoading: this.toggleLoading
         }}
       >
-        <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex">
+        <Helmet titleTemplate="%s | Pokédex" defaultTitle="Pokédex">
           <meta name="theme-color" content="#dd1414" />
           <meta
             property="og:description"
