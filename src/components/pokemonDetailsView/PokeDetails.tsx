@@ -21,6 +21,7 @@ interface IPokeDetailsProps {
   id: number;
   moves: [];
   name: string;
+  flavourText: string;
   types: any[];
   sprites: any;
   stats: [];
@@ -57,6 +58,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <title>
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
         </title>
+        <meta property="og:description" content={props.flavourText} />
+        <meta name="description" content={props.flavourText} />
         <meta name="theme-color" content={lightColor} />
       </Helmet>
       <article
@@ -100,6 +103,16 @@ const PokeDetails = (props: IPokeDetailsProps) => {
               stats={props.stats}
               color={lightColor}
             />
+          </section>
+          <section
+            className="poke-bio"
+            style={{
+              fontFamily: "Montserrat",
+              textAlign: "justify",
+              padding: "0 10px"
+            }}
+          >
+            <p>{props.flavourText}</p>
           </section>
           <section>
             <header
