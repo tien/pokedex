@@ -113,6 +113,14 @@ class App extends React.Component<RouteComponentProps, IAppState> {
       >
         <Helmet titleTemplate="Pokédex | %s" defaultTitle="Pokédex">
           <meta name="theme-color" content="#dd1414" />
+          <meta
+            property="og:description"
+            content="An online interactive Pokédex powered by React.js"
+          />
+          <meta
+            name="description"
+            content="An online interactive Pokédex powered by React.js"
+          />
         </Helmet>
         <NavMenu
           ref={this.menuRef}

@@ -58,6 +58,8 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <title>
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
         </title>
+        <meta property="og:description" content={props.flavourText} />
+        <meta name="description" content={props.flavourText} />
         <meta name="theme-color" content={lightColor} />
       </Helmet>
       <article
