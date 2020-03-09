@@ -21,6 +21,7 @@ interface IPokeDetailsProps {
   id: number;
   moves: [];
   name: string;
+  flavourText: string;
   types: any[];
   sprites: any;
   stats: [];
@@ -100,6 +101,16 @@ const PokeDetails = (props: IPokeDetailsProps) => {
               stats={props.stats}
               color={lightColor}
             />
+          </section>
+          <section
+            className="poke-bio"
+            style={{
+              fontFamily: "Montserrat",
+              textAlign: "justify",
+              padding: "0 10px"
+            }}
+          >
+            <p>{props.flavourText}</p>
           </section>
           <section>
             <header

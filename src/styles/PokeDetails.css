@@ -31,6 +31,13 @@
   margin: 0;
 }
 
+.poke-bio {
+  font-family: "Montserrat", sans-serif;
+  text-align: justify;
+  text-align-last: center;
+  padding: 0 10px;
+}
+
 .details-stats {
   margin: 0 auto;
 }
@@ -95,6 +102,10 @@
 @media all and (min-width: 576px) {
   .details-overview-and-stats {
     display: flex;
+  }
+
+  .poke-bio > p {
+    margin-top: 0;
   }
 
   .details-profile-overview {

@@ -18,10 +18,15 @@ export const getPokemonEvolutionChainBySpeciesNameOrId = async (
     .get(pokemonSpecies.evolution_chain.url)
     .then(res => res.json);
 
+  const flavourText = (pokemonSpecies.flavor_text_entries as any[]).find(
+    flavour => flavour.language.name === "en"
+  )?.flavor_text;
+
   return {
     captureRate: pokemonSpecies.capture_rate,
     evolutionChain: buildChain(pokemonEvoChain.chain),
-    genderRate: pokemonSpecies.gender_rate
+    genderRate: pokemonSpecies.gender_rate,
+    flavourText
   };
 };
 
