@@ -51,7 +51,10 @@ const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
                   className="nav-item"
                   exact={true}
                   onClick={toggleNav}
-                  to={`/${linkTo.trim().replace(/\s+/g, "-")}`}
+                  to={`/${linkTo
+                    .trim()
+                    .replace(/\s+/g, "-")
+                    .toLowerCase()}`}
                 >
                   {name}
                 </NavLink>
