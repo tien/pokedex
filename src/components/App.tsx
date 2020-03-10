@@ -69,9 +69,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
       () => {
         document.body.classList.add("freeze-page");
         document.documentElement!.classList.add("freeze-page");
-        if (this.modalRef.current) {
-          this.modalRef.current.children[0].scrollTop = 0;
-        }
+        this.modalRef.current?.scrollTo({ top: 0 });
       }
     );
   }
