@@ -68,7 +68,13 @@ const PokeListPage = () => {
           () => history.push(routes.browsePokemons)
         );
       } catch {
-        globalContext.openModalWithReactNode(<h1>No pokemon found :{"("}</h1>);
+        globalContext.openModalWithReactNode(
+          <h1>No pokemon found :{"("}</h1>,
+          undefined,
+          // TODO: This is dumb, need to refactor how modal work
+          // BLAME: past self
+          () => history.push(routes.browsePokemons)
+        );
         globalContext.toggleLoading();
       }
     },
