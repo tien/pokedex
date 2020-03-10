@@ -26,7 +26,14 @@ const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
 
     const openModalWithPokemonInfo = useEnterKeyCallback(() => {
       if (searchQuery !== "") {
-        history.push(getPokemonDetailsRoute(searchQuery));
+        history.push(
+          getPokemonDetailsRoute(
+            searchQuery
+              .trim()
+              .replace(/\s+/g, "-")
+              .toLowerCase()
+          )
+        );
       }
     }, [searchQuery]);
 
@@ -51,10 +58,7 @@ const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
                   className="nav-item"
                   exact={true}
                   onClick={toggleNav}
-                  to={`/${linkTo
-                    .trim()
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}`}
+                  to={`/${linkTo.trim().replace(/\s+/g, "-")}`}
                 >
                   {name}
                 </NavLink>
