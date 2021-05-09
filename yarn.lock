@@ -9508,10 +9508,10 @@ regjsparser@^0.6.0:
   dependencies:
     jsesc "~0.5.0"
 
-regrest@^3.6.9:
-  version "3.6.9"
-  resolved "https://registry.yarnpkg.com/regrest/-/regrest-3.6.9.tgz#d284d944494add1e29447207810f0c3dbd13a2d7"
-  integrity sha512-4wrcyi7CDWo33iysYoHMvHfMNcp7D6z39XxGA5QPmuKxcmjzKFuJ0XHuTq97PJl23BLwlht+rAQjLMjTUECZPw==
+regrest@^3.6.11:
+  version "3.6.11"
+  resolved "https://registry.yarnpkg.com/regrest/-/regrest-3.6.11.tgz#e1285663bc83d81e12321aee7e0f9e7b6acfc8f0"
+  integrity sha512-ddbB4Q5v1GQXPb/+QKccdrwjFSxRIgLwqltGJg7NoPFn9SxgjLGlglsMBV7QuXx/dgU/YpJwl1c20rP6a39HXA==
   dependencies:
     follow-redirects "^1.7.0"
 
