@@ -9,18 +9,6 @@ import { getPokemonDetailsRoute, routes } from "./src/routes";
 
 config();
 
-export const gitHubPagePreDeploy = async () => {
-  const packageJsonString = await fs.promises.readFile("package.json", "utf8");
-  const packageJson = JSON.parse(packageJsonString);
-
-  const updatedPackage = {
-    ...packageJson,
-    homepage: "https://tien.github.io/pokedex/",
-  };
-
-  await fs.promises.writeFile("package.json", JSON.stringify(updatedPackage));
-};
-
 export const compile = () =>
   new Promise((resolve, reject) => {
     const task = spawn("node_modules/.bin/react-scripts", ["build"], {
