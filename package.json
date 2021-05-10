@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "gulp build",
+    "build": "NODE_ENV=development && gulp build",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint --fix './src'",
     "eject": "react-scripts eject",
@@ -24,6 +24,7 @@
     "regrest": "^3.6.11"
   },
   "devDependencies": {
+    "@babel/register": "^7.13.16",
     "@types/color": "^3.0.1",
     "@types/gulp": "^4.0.8",
     "@types/jest": "^26.0.23",
@@ -33,15 +34,13 @@
     "@types/react-helmet": "^6.1.1",
     "@types/react-infinite-scroller": "^1.2.1",
     "@types/react-router-dom": "^5.1.7",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1",
     "core-js": "^3.12.1",
     "dotenv": "^9.0.1",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.23.2",
     "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
+    "prettier": "^2.3.0",
     "regenerator-runtime": "^0.13.7",
     "typescript": "^4.2.4",
     "xml-js": "^1.6.11"

@@ -23,7 +23,7 @@ export const gitHubPagePreDeploy = async () => {
 
 export const compile = () =>
   new Promise((resolve, reject) => {
-    const task = spawn("yarn run react-scripts", ["build"], {
+    const task = spawn("node_modules/.bin/react-scripts", ["build"], {
       stdio: "inherit",
     });
 
