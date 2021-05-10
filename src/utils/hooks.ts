@@ -5,7 +5,7 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 
 export const useInput = (
@@ -14,7 +14,7 @@ export const useInput = (
   const [value, setValue] = useState(initialValue);
 
   const changeHandler = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
-    e => setValue(e.target.value),
+    (e) => setValue(e.target.value),
     []
   );
 
@@ -31,6 +31,7 @@ export const useFocus = (initialState = false) => {
   return [isFocused, { onBlur, onFocus }];
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const useEnterKeyCallback = <T1, T2 extends Function>(
   callback: T2,
   deps: DependencyList
@@ -44,7 +45,7 @@ export const useEnterKeyCallback = <T1, T2 extends Function>(
 export const useCombinedRefs = <T>(...refs: Ref<T>[]) =>
   useCallback(
     (element: T) =>
-      refs.forEach(ref => {
+      refs.forEach((ref) => {
         if (!ref) {
           return;
         }
@@ -63,21 +64,23 @@ export const usePressedKey = (): [string[], number[]] => {
   const [pressedKeyCodes, setPressedKeyCodes] = useState<number[]>([]);
 
   const onKeyDown = useCallback((e: KeyboardEvent) => {
-    setPressedKeys(pressedKeys => [
-      ...pressedKeys.filter(k => k !== e.key),
-      e.key
+    setPressedKeys((pressedKeys) => [
+      ...pressedKeys.filter((k) => k !== e.key),
+      e.key,
     ]);
-    setPressedKeyCodes(pressedKeyCodes => [
-      ...pressedKeyCodes.filter(k => k !== e.keyCode),
-      e.keyCode
+    setPressedKeyCodes((pressedKeyCodes) => [
+      ...pressedKeyCodes.filter((k) => k !== e.keyCode),
+      e.keyCode,
     ]);
   }, []);
 
   const onKeyUp = useCallback(
     (e: KeyboardEvent) => {
-      setPressedKeys(pressedKeys => pressedKeys.filter(key => key !== e.key));
-      setPressedKeyCodes(pressedKeyCodes =>
-        pressedKeyCodes.filter(key => key !== e.keyCode)
+      setPressedKeys((pressedKeys) =>
+        pressedKeys.filter((key) => key !== e.key)
+      );
+      setPressedKeyCodes((pressedKeyCodes) =>
+        pressedKeyCodes.filter((key) => key !== e.keyCode)
       );
     },
     [setPressedKeys, setPressedKeyCodes]
@@ -96,6 +99,7 @@ export const usePressedKey = (): [string[], number[]] => {
   return [pressedKeys, pressedKeyCodes];
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const createKeyboardEventHandler = <T1, T2 extends Function>(
   key: string,
   callback: T2
@@ -129,7 +133,7 @@ export const useFocusTrap = <T extends HTMLElement>(shouldTrap: boolean) => {
   useDocumentKeyBoardEffect(
     "keydown",
     "Tab",
-    e => {
+    (e) => {
       if (!shouldTrap) {
         return;
       }
@@ -147,7 +151,7 @@ export const useFocusTrap = <T extends HTMLElement>(shouldTrap: boolean) => {
       const lastFocusableElement = focusables[focusables.length - 1];
 
       const hasFocusedElement = Array.from(focusables).some(
-        element => element === document.activeElement
+        (element) => element === document.activeElement
       );
 
       if (

@@ -15,8 +15,9 @@ interface IModalProps {
   children?: ReactNode;
 }
 
+// eslint-disable-next-line react/display-name
 const Modal = forwardRef<HTMLElement, IModalProps>(
-  ({ active, closeModal, style, children }, ref) => {
+  ({ active, closeModal, style, children }: IModalProps, ref) => {
     const modalRef = useFocusTrap(active);
 
     const onModalCloseButtonPress = useCallback(

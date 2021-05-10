@@ -15,7 +15,7 @@ export const gitHubPagePreDeploy = async () => {
 
   const updatedPackage = {
     ...packageJson,
-    homepage: "https://tien.github.io/pokedex/"
+    homepage: "https://tien.github.io/pokedex/",
   };
 
   await fs.promises.writeFile("package.json", JSON.stringify(updatedPackage));
@@ -23,8 +23,8 @@ export const gitHubPagePreDeploy = async () => {
 
 export const compile = () =>
   new Promise((resolve, reject) => {
-    const task = spawn("node_modules/.bin/react-scripts", ["build"], {
-      stdio: "inherit"
+    const task = spawn("yarn run react-scripts", ["build"], {
+      stdio: "inherit",
     });
 
     task.on("close", resolve);
@@ -38,12 +38,12 @@ export const buildSiteMap = async () => {
     _declaration: {
       _attributes: {
         version: "1.0",
-        encoding: "UTF-8"
-      }
+        encoding: "UTF-8",
+      },
     },
     urlset: {
       _attributes: {
-        xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
       },
       url: [
         { loc: { _text: `${baseUrl}` } },
@@ -51,11 +51,11 @@ export const buildSiteMap = async () => {
         { loc: { _text: `${baseUrl}${routes.browsePokemons}` } },
         ...pokemonsAsset.pokemons.map(({ name }) => ({
           loc: {
-            _text: `${baseUrl}${getPokemonDetailsRoute(name)}`
-          }
-        }))
-      ]
-    }
+            _text: `${baseUrl}${getPokemonDetailsRoute(name)}`,
+          },
+        })),
+      ],
+    },
   };
 
   const xml = json2xml(JSON.stringify(sitemap), { compact: true, spaces: 2 });

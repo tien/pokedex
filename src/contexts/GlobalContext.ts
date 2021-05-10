@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode } from "react";
 
 export interface IGlobalContext {

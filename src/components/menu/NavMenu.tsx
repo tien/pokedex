@@ -6,7 +6,7 @@ import {
   useCombinedRefs,
   useEnterKeyCallback,
   useFocusTrap,
-  useInput
+  useInput,
 } from "../../utils/hooks";
 import ToggleNavButton from "./ToggleNavButton";
 
@@ -16,8 +16,9 @@ interface INavMenuProps {
   toggleNav: () => void;
 }
 
+// eslint-disable-next-line react/display-name
 const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
-  ({ links, active, toggleNav }, ref) => {
+  ({ links, active, toggleNav }: INavMenuProps, ref) => {
     const history = useHistory();
 
     const containerRef = useFocusTrap<HTMLDivElement>(active);
@@ -28,10 +29,7 @@ const NavMenu = forwardRef<HTMLDivElement, INavMenuProps>(
       if (searchQuery !== "") {
         history.push(
           getPokemonDetailsRoute(
-            searchQuery
-              .trim()
-              .replace(/\s+/g, "-")
-              .toLowerCase()
+            searchQuery.trim().replace(/\s+/g, "-").toLowerCase()
           )
         );
       }

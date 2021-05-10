@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 import MovesList from "../../assets/moves.json";
 import PokemonTypeColors, {
-  PokemonTypeColorAlias
+  PokemonTypeColorAlias,
 } from "../../assets/PokemonTypeColors";
 import PokeEvolution from "./PokeEvolution";
 import PokeStats from "./PokeStats";
@@ -33,9 +33,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
       props.types[0].type.name as keyof typeof PokemonTypeColors
     ];
 
-  const darkColor = Color(lightColor)
-    .darken(0.35)
-    .hex();
+  const darkColor = Color(lightColor).darken(0.35).hex();
 
   let genderRate;
   switch (props.genderRate) {
@@ -45,10 +43,11 @@ const PokeDetails = (props: IPokeDetailsProps) => {
     case 0:
       genderRate = "0%\u2640 100%\u2642";
       break;
-    default:
+    default: {
       const female = Math.round(props.genderRate * 1250) / 100;
       const male = 100 - female;
       genderRate = `${female}%\u2640 ${male}%\u2642`;
+    }
   }
 
   return (
@@ -68,7 +67,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
         <header
           className="details-modal-header"
           style={{
-            backgroundColor: darkColor
+            backgroundColor: darkColor,
           }}
         >
           <h2>{props.name}</h2>
@@ -88,7 +87,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                       color:
                         PokemonTypeColors[
                           type.type.name as PokemonTypeColorAlias
-                        ]
+                        ],
                     }}
                     className="poke-type"
                   >
@@ -108,7 +107,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
             style={{
               fontFamily: "Montserrat",
               textAlign: "justify",
-              padding: "0 10px"
+              padding: "0 10px",
             }}
           >
             <p>{props.flavourText}</p>
@@ -168,6 +167,7 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                 <li key={index} className="poke-move-detail">
                   <div className="poke-move-name">{move.move.name}</div>
                   <PokeTypeCard
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     //@ts-ignore
                     type={
                       MovesList[move.move.name as keyof typeof MovesList].type

@@ -81,7 +81,7 @@ class App extends Component<RouteComponentProps, IAppState> {
   public closeModal(
     // TODO: This hack is dumb, need to refactor how modal work
     // BLAME: past self
-    ignoreCallback: boolean = false
+    ignoreCallback = false
   ) {
     document.body.classList.remove("freeze-page");
     document.documentElement!.classList.remove("freeze-page");

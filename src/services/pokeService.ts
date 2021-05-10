@@ -4,7 +4,7 @@ import pokemonsList from "../assets/pokemons.json";
 
 const baseUrl = "https://pokeapi.co/api/v2/";
 
-const imageUrlBase: string =
+const imageUrlBase =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
 export const getPokemonEvolutionChainBySpeciesNameOrId = async (

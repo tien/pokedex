@@ -41,7 +41,6 @@ const RecursivePokeEvolution = ({
     () => (
       <figure
         className="poke-evo-parent"
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
         role="button"
         tabIndex={0}
         onClick={onClick}
