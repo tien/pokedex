@@ -1,6 +1,6 @@
 import "../../styles/PokeEvolution.css";
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useEnterKeyCallback } from "../../utils/hooks";
 import { getPokemonDetailsRoute } from "../../routes";

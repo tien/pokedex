@@ -1,9 +1,9 @@
-import React from "react";
+import { createContext, ReactNode } from "react";
 
 export interface IGlobalContext {
   closeModal: (ignoreCallback: boolean) => void;
   openModalWithReactNode: (
-    ReactNode: React.ReactNode,
+    ReactNode: ReactNode,
     color?: string,
     callback?: () => void
   ) => void;
@@ -13,7 +13,7 @@ export interface IGlobalContext {
 const closeModal: () => void = () => {};
 const toggleLoading: () => void = () => {};
 const openModalWithReactNode: (
-  ReactNode: React.ReactNode,
+  ReactNode: ReactNode,
   color?: string,
   callback?: () => void
 ) => void = () => {};
@@ -21,12 +21,12 @@ const openModalWithReactNode: (
 const defaultValue = {
   closeModal,
   openModalWithReactNode,
-  toggleLoading
+  toggleLoading,
 };
 
-export const GlobalContext = React.createContext<IGlobalContext>(defaultValue);
+export const GlobalContext = createContext<IGlobalContext>(defaultValue);
 
 export const {
   Provider: GlobalContextProvider,
-  Consumer: GlobalContextConsumer
+  Consumer: GlobalContextConsumer,
 } = GlobalContext;

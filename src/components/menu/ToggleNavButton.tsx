@@ -1,4 +1,3 @@
-import React from "react";
 import { useEnterKeyCallback } from "../../utils/hooks";
 
 interface IToggleNavButtonProps {

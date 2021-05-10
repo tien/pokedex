@@ -1,18 +1,18 @@
 import "../styles/Modal.css";
 
-import React, { forwardRef, useCallback } from "react";
+import { forwardRef, ReactNode, SyntheticEvent, useCallback } from "react";
 
 import {
   useCombinedRefs,
   useEnterKeyCallback,
-  useFocusTrap
+  useFocusTrap,
 } from "../utils/hooks";
 
 interface IModalProps {
   active: boolean;
   closeModal: () => void;
   style: any;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const Modal = forwardRef<HTMLElement, IModalProps>(
@@ -20,7 +20,7 @@ const Modal = forwardRef<HTMLElement, IModalProps>(
     const modalRef = useFocusTrap(active);
 
     const onModalCloseButtonPress = useCallback(
-      (e: React.SyntheticEvent<HTMLButtonElement>) => {
+      (e: SyntheticEvent<HTMLButtonElement>) => {
         (e.target as HTMLButtonElement).blur();
         closeModal();
       },

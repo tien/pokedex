@@ -1,7 +1,6 @@
 import "../../styles/PokeDetails.css";
 
 import Color from "color";
-import React from "react";
 import { Helmet } from "react-helmet";
 
 import MovesList from "../../assets/moves.json";

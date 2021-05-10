@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import "../../styles/PokeStats.css";
 
 interface IPokeStatsProps extends HTMLAttributes<HTMLElement> {

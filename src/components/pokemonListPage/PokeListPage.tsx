@@ -1,12 +1,6 @@
 import "../../styles/PokeListPage.css";
 
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState
-} from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { useParams, useHistory } from "react-router-dom";
 

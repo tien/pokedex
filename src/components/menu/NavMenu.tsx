@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { getPokemonDetailsRoute } from "../../routes";

@@ -1,6 +1,6 @@
 import "../../styles/PokeBall.css";
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
 interface IPokeCardProps {

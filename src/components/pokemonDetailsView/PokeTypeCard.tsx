@@ -1,4 +1,3 @@
-import React from "react";
 import PokemonMoveCategoryColor, {
   PokemonMoveCategoryColorAlias
 } from "../../assets/PokemonMoveCategoryColor";

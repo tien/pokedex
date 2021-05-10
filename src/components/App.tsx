@@ -1,13 +1,13 @@
 import "../styles/App.css";
 
-import React from "react";
+import { Component, createRef, ReactNode, RefObject } from "react";
 import { Helmet } from "react-helmet";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import { GlobalContextProvider } from "../contexts/GlobalContext";
 import Router from "../router";
 import NavMenu from "./menu/NavMenu";
 import Modal from "./Modal";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 
 // TODO: This whole root component need to be nuked & purged
 interface IAppState {
@@ -15,15 +15,15 @@ interface IAppState {
   menuCategory: Array<string | { name: string; link: string }>;
   modalCloseCallback?: (() => void) | null;
   modalColor?: string;
-  modalContent: React.ReactNode | null;
+  modalContent: ReactNode | null;
   modalIsOpen: boolean;
   navMenuIsOpen: boolean;
   scrollPos: number;
 }
 
-class App extends React.Component<RouteComponentProps, IAppState> {
-  private menuRef: React.RefObject<HTMLDivElement>;
-  private modalRef: React.RefObject<HTMLDivElement>;
+class App extends Component<RouteComponentProps, IAppState> {
+  private menuRef: RefObject<HTMLDivElement>;
+  private modalRef: RefObject<HTMLDivElement>;
   private defaultPageDescription =
     "An online interactive Pokédex where you can explore, search and see your favourite Pokémon stats, moves and evolutions.";
 
@@ -36,7 +36,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
       modalContent: null,
       modalIsOpen: false,
       navMenuIsOpen: false,
-      scrollPos: 0
+      scrollPos: 0,
     };
     this.closeModal = this.closeModal.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
@@ -45,17 +45,17 @@ class App extends React.Component<RouteComponentProps, IAppState> {
     this.toggleNavMenuActiveState = this.toggleNavMenuActiveState.bind(this);
     this.closeMenuOnOutsideClick = this.closeMenuOnOutsideClick.bind(this);
     this.openModalWithReactNode = this.openModalWithReactNode.bind(this);
-    this.menuRef = React.createRef();
-    this.modalRef = React.createRef();
+    this.menuRef = createRef();
+    this.modalRef = createRef();
   }
 
   public openModalWithReactNode(
-    ReactNode: React.ReactNode,
+    ReactNode: ReactNode,
     color?: string,
     callBack?: () => void
   ) {
     this.setState(
-      prevState => ({
+      (prevState) => ({
         // TODO: This callback hack is dumb, need to refactor how modal work
         // BLAME: past self
         modalCloseCallback: callBack,
@@ -64,7 +64,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
         modalIsOpen: true,
         scrollPos: prevState.modalIsOpen
           ? prevState.scrollPos
-          : document.documentElement!.scrollTop + document.body.scrollTop
+          : document.documentElement!.scrollTop + document.body.scrollTop,
       }),
       () => {
         document.body.classList.add("freeze-page");
@@ -93,7 +93,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
     this.setState({
       modalCloseCallback: null,
       modalContent: null,
-      modalIsOpen: false
+      modalIsOpen: false,
     });
   }
 
@@ -107,7 +107,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
         value={{
           closeModal: this.closeModal,
           openModalWithReactNode: this.openModalWithReactNode,
-          toggleLoading: this.toggleLoading
+          toggleLoading: this.toggleLoading,
         }}
       >
         <Helmet titleTemplate="%s | Pokédex" defaultTitle="Pokédex">
@@ -138,7 +138,7 @@ class App extends React.Component<RouteComponentProps, IAppState> {
           style={{
             backgroundColor: this.state.modalColor
               ? this.state.modalColor
-              : "white"
+              : "white",
           }}
           active={this.state.modalIsOpen}
           closeModal={this.closeModal}
