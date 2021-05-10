@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "NODE_ENV=development && gulp build",
     "test": "react-scripts test --env=jsdom",
+    "format": "prettier --write .",
     "lint": "eslint --fix './src'",
     "eject": "react-scripts eject"
   },

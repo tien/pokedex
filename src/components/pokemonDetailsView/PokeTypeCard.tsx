@@ -1,8 +1,8 @@
 import PokemonMoveCategoryColor, {
-  PokemonMoveCategoryColorAlias
+  PokemonMoveCategoryColorAlias,
 } from "../../assets/PokemonMoveCategoryColor";
 import PokemonTypeColors, {
-  PokemonTypeColorAlias
+  PokemonTypeColorAlias,
 } from "../../assets/PokemonTypeColors";
 import "../../styles/PokeTypeCard.css";
 
@@ -36,7 +36,7 @@ const PokeTypeCard = (
       className="poke-type-card"
       style={{
         backgroundColor: color,
-        ...props.style
+        ...props.style,
       }}
     >
       {name}

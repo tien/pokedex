@@ -16,7 +16,7 @@ enum PokemonTypeColors {
   steel = "#B8B8D0",
   psychic = "#F85888",
   ice = "#98D8D8",
-  flying = "#A890F0"
+  flying = "#A890F0",
 }
 
 export type PokemonTypeColorAlias = keyof typeof PokemonTypeColors;

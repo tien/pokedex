@@ -100,14 +100,13 @@ export const usePressedKey = (): [string[], number[]] => {
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const createKeyboardEventHandler = <T1, T2 extends Function>(
-  key: string,
-  callback: T2
-) => (e: KeyboardEvent | React.KeyboardEvent<T1>) => {
-  if (e.key === key) {
-    callback(e);
-  }
-};
+export const createKeyboardEventHandler =
+  <T1, T2 extends Function>(key: string, callback: T2) =>
+  (e: KeyboardEvent | React.KeyboardEvent<T1>) => {
+    if (e.key === key) {
+      callback(e);
+    }
+  };
 
 export const useDocumentKeyBoardEffect = (
   type: "keyup" | "keydown" | "keypress",

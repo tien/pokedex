@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { useParams, useHistory } from "react-router-dom";
 
 import PokemonTypeColors, {
-  PokemonTypeColorAlias
+  PokemonTypeColorAlias,
 } from "../../assets/PokemonTypeColors";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import * as PokeService from "../../services/pokeService";
@@ -33,23 +33,22 @@ const PokeListPage = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const loadPokemons = useCallback(async () => {
-    const {
-      pokemons: pokemonsResult,
-      hasNext
-    } = await PokeService.getAllPokemonWithLimitAndOffset(40, offSet);
+    const { pokemons: pokemonsResult, hasNext } =
+      await PokeService.getAllPokemonWithLimitAndOffset(40, offSet);
 
     setHasNext(hasNext);
-    setOffset(offSet => offSet + 40);
-    setPokemons(pokemons => [...pokemons, ...pokemonsResult]);
+    setOffset((offSet) => offSet + 40);
+    setPokemons((pokemons) => [...pokemons, ...pokemonsResult]);
   }, [offSet]);
 
   const goToPokemonDetails = useCallback(
     async (pokemonId: string) => {
       globalContext.toggleLoading();
       try {
-        const pokemonDetails = await PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
-          pokemonId
-        );
+        const pokemonDetails =
+          await PokeService.getPokemonDetailsAndEvolutionChainByNameOrId(
+            pokemonId
+          );
 
         globalContext.toggleLoading();
         globalContext.openModalWithReactNode(
@@ -141,7 +140,7 @@ const PokeListPage = () => {
           id="pokemon-search-bar"
           value={searchQuery}
           placeholder="Search for Pokémon"
-          onChange={e => setSearchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
       {searchQuery === "" ? (

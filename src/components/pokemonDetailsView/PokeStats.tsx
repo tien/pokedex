@@ -23,7 +23,7 @@ const PokeStats = ({ stats, color, className, ...rest }: IPokeStatsProps) => (
             className="stat-bar"
             style={{
               backgroundColor: color,
-              transform: `scaleX(${stat.base_stat / 255})`
+              transform: `scaleX(${stat.base_stat / 255})`,
             }}
           />
           <div className="stat-number">{stat.base_stat}</div>

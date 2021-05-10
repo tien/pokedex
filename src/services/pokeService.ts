@@ -12,21 +12,21 @@ export const getPokemonEvolutionChainBySpeciesNameOrId = async (
 ) => {
   const pokemonSpecies = await regrest
     .get(`${baseUrl}pokemon-species/${id}/`)
-    .then(res => res.json);
+    .then((res) => res.json);
 
   const pokemonEvoChain = await regrest
     .get(pokemonSpecies.evolution_chain.url)
-    .then(res => res.json);
+    .then((res) => res.json);
 
   const flavourText = (pokemonSpecies.flavor_text_entries as any[]).find(
-    flavour => flavour.language.name === "en"
+    (flavour) => flavour.language.name === "en"
   )?.flavor_text;
 
   return {
     captureRate: pokemonSpecies.capture_rate,
     evolutionChain: buildChain(pokemonEvoChain.chain),
     genderRate: pokemonSpecies.gender_rate,
-    flavourText
+    flavourText,
   };
 };
 
@@ -37,7 +37,7 @@ export const getPokemonByNameOrId = async (id: number | string) => {
 
   return {
     ...pokemonDetails,
-    types: pokemonDetails.types.sort((x: any) => x.slot)
+    types: pokemonDetails.types.sort((x: any) => x.slot),
   };
 };
 
@@ -45,13 +45,14 @@ export const getPokemonDetailsAndEvolutionChainByNameOrId = async (
   id: number | string
 ) => {
   const pokemonDetails = await getPokemonByNameOrId(id);
-  const evolutionChainAndExtraDetails = await getPokemonEvolutionChainBySpeciesNameOrId(
-    pokemonDetails.species.name
-  );
+  const evolutionChainAndExtraDetails =
+    await getPokemonEvolutionChainBySpeciesNameOrId(
+      pokemonDetails.species.name
+    );
 
   return {
     ...pokemonDetails,
-    ...evolutionChainAndExtraDetails
+    ...evolutionChainAndExtraDetails,
   };
 };
 
@@ -70,7 +71,7 @@ export const getAllPokemonWithLimitAndOffset = (
 ): any =>
   Promise.resolve({
     hasNext: offset + limit < pokemonsList.count,
-    pokemons: pokemonsList.pokemons.slice(offset, offset + limit)
+    pokemons: pokemonsList.pokemons.slice(offset, offset + limit),
   });
 
 export const recursiveBuildChain = (currGen: any) => {
@@ -80,7 +81,7 @@ export const recursiveBuildChain = (currGen: any) => {
       children: [],
       id,
       imageUrl: `${imageUrlBase}${id}.png`,
-      name: currGen.species.name
+      name: currGen.species.name,
     };
   }
 
@@ -92,7 +93,7 @@ export const recursiveBuildChain = (currGen: any) => {
     children,
     id,
     imageUrl: `${imageUrlBase}${id}.png`,
-    name: currGen.species.name
+    name: currGen.species.name,
   };
 };
 
@@ -106,6 +107,6 @@ export const buildChain = (data: any) => {
         : data.evolves_to.map((e: any) => recursiveBuildChain(e)),
     id,
     imageUrl: `${imageUrlBase}${id}.png`,
-    name: data.species.name
+    name: data.species.name,
   };
 };

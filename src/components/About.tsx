@@ -28,7 +28,7 @@ const About = () => (
           fill: "var(--main-color)",
           position: "absolute",
           right: 0,
-          top: 0
+          top: 0,
         }}
         aria-hidden="true"
       >
