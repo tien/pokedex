@@ -1,7 +1,7 @@
 import { spawn } from "child_process";
 import { config } from "dotenv";
 import fs from "fs";
-import { series } from "gulp";
+import { parallel, series } from "gulp";
 import { json2xml } from "xml-js";
 
 import pokemonsAsset from "./src/assets/pokemons.json";
@@ -61,4 +61,7 @@ export const createRobotsDotTxt = async () => {
   return fs.promises.writeFile("build/robots.txt", content);
 };
 
-export const build = series(compile, buildSiteMap, createRobotsDotTxt);
+export const build = series(
+  compile,
+  parallel(buildSiteMap, createRobotsDotTxt)
+);
