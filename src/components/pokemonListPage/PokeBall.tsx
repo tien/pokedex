@@ -20,6 +20,7 @@ const PokeCard = (props: IPokeCardProps) => {
   return (
     <figure
       className="poke-ball"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
       role="button"
       tabIndex={0}
       onClick={goToPokemonRoute}
