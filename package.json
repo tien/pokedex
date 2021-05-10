@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=development && gulp build",
+    "build": "NODE_ENV=production && gulp build",
     "test": "react-scripts test --env=jsdom",
     "format": "prettier --write .",
     "lint": "eslint --fix './src'",
