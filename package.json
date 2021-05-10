@@ -29,7 +29,7 @@
     "@types/color": "^3.0.1",
     "@types/gulp": "^4.0.8",
     "@types/jest": "^23.3.14",
-    "@types/node": "^13.7.7",
+    "@types/node": "^15.0.2",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@types/react-helmet": "^5.0.15",
