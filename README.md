@@ -10,20 +10,20 @@ Live site: [https://pokedex.digital](https://pokedex.digital)
 
 First, be sure to install the dependencies
 
-```js
-npm install
+```sh
+yarn install
 ```
 
 Then start a dev server on localhost:3000
 
-```js
-npm start
+```sh
+yarn start
 ```
 
 ## 🏗 Building
 
-```js
-npm run build
+```sh
+yarn build
 ```
 
 This will write a production build to the `build` folder.<br>
