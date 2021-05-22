@@ -1,5 +1,0 @@
-# Redirect default Netlify subdomain to primary domain
-https://pokedex-digital.netlify.com/* https://pokedex.digital/:splat 301!
-
-# Redirect all remaining routes to index.html
-/* /index.html 200

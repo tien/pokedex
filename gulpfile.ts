@@ -20,7 +20,7 @@ export const compile = () =>
   });
 
 export const buildSiteMap = async () => {
-  const baseUrl = process.env.URL;
+  const baseUrl = process.env.PUBLIC_URL;
 
   const sitemap = {
     _declaration: {
@@ -52,7 +52,7 @@ export const buildSiteMap = async () => {
 };
 
 export const createRobotsDotTxt = async () => {
-  const baseUrl = process.env.URL;
+  const baseUrl = process.env.PUBLIC_URL;
 
   const content = ["User-agent: *", `Sitemap: ${baseUrl}/sitemap.xml`].join(
     "\n"
