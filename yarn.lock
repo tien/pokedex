@@ -7309,7 +7309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.7.0":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.1":
   version: 1.14.1
   resolution: "follow-redirects@npm:1.14.1"
   peerDependenciesMeta:
@@ -11970,7 +11970,7 @@ fsevents@^1.2.7:
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
     regenerator-runtime: ^0.13.7
-    regrest: ^3.6.11
+    regrest: ^3.7.0
     ts-node: ^10.0.0
     typescript: ^4.2.4
     xml-js: ^1.6.11
@@ -13650,12 +13650,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regrest@npm:^3.6.11":
-  version: 3.6.11
-  resolution: "regrest@npm:3.6.11"
+"regrest@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "regrest@npm:3.7.0"
   dependencies:
-    follow-redirects: ^1.7.0
-  checksum: c96e713a13c6892e99d2b7478203c83d0d00a83f1cba067a9f0e5cb3f7fe28a489abd955a2dc183305d8d0c17018cc9e6692f8c96adc83a96f1aa7b636e41b7d
+    follow-redirects: ^1.14.1
+  checksum: 1a2d912d59241795de09bf1f6ff7ca3957a36705b3f7bc9347d00b97a464c195d8807b2bbe805028f87b08eade2b057d2244514fa8f722e359c2542674026581
   languageName: node
   linkType: hard
 
