@@ -2491,10 +2491,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^15.9.0":
-  version: 15.9.0
-  resolution: "@types/node@npm:15.9.0"
-  checksum: 09399100eae55644ac56c554b456444ab157696aba9d73bab7ce52a16151260d70297beffd3bdfdca94e9ab840474da7d45a8d4d5acbea0c3bfd68868774c1e8
+"@types/node@npm:^15.12.0":
+  version: 15.12.0
+  resolution: "@types/node@npm:15.12.0"
+  checksum: d4d82cd60cd6f6030d3882e2cee9c7bdba7a3dd7349925a37320c557fedb730a72dd14ad703b38c45dd52c5e7bdcbdef740bce19c23133661c1dfa1290d763c0
   languageName: node
   linkType: hard
 
@@ -11973,7 +11973,7 @@ fsevents@^1.2.7:
     "@types/color": ^3.0.1
     "@types/gulp": ^4.0.8
     "@types/jest": ^26.0.23
-    "@types/node": ^15.9.0
+    "@types/node": ^15.12.0
     "@types/react": ^17.0.9
     "@types/react-dom": ^17.0.6
     "@types/react-helmet": ^6.1.1
@@ -11994,10 +11994,10 @@ fsevents@^1.2.7:
     react-infinite-scroller: ^1.2.4
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
-    regenerator-runtime: ^0.13.8
-    regrest: ^3.9.0
+    regenerator-runtime: ^0.13.7
+    regrest: ^4.0.0
     ts-node: ^10.0.0
-    typescript: ^4.2.4
+    typescript: ^4.3.2
     xml-js: ^1.6.11
   languageName: unknown
   linkType: soft
@@ -13600,13 +13600,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.8":
-  version: 0.13.8
-  resolution: "regenerator-runtime@npm:0.13.8"
-  checksum: 20178f5753f181d59691e5c3b4c59a2769987f75c7ccf325777673b5478acca61a553b10e895585086c222f72f5ee428090acf50320264de4b79f630f7388653
-  languageName: node
-  linkType: hard
-
 "regenerator-transform@npm:^0.14.2":
   version: 0.14.5
   resolution: "regenerator-transform@npm:0.14.5"
@@ -13682,13 +13675,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regrest@npm:^3.9.0":
-  version: 3.9.0
-  resolution: "regrest@npm:3.9.0"
+"regrest@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "regrest@npm:4.0.0"
   dependencies:
     "@babel/runtime": ^7.14.0
     follow-redirects: ^1.14.1
-  checksum: dac77360603509e24108024648139dcb394ef75a8b3451657c5e540b5354f8e15f50317b1bad4b61b510f91aeb58ab9439fbe202ddc7fb4f66d6376f5978c6e6
+  checksum: badb3b0b08009ac3b0e006625e1becb81b16fbc14eb3849010f17b1aeaa34e34b637b78e7b76f2decf79e33a615e886f34a3d1f170b91888375fa9588dfa91cf
   languageName: node
   linkType: hard
 
@@ -15855,23 +15848,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@^4.2.4:
-  version: 4.2.4
-  resolution: "typescript@npm:4.2.4"
+typescript@^4.3.2:
+  version: 4.3.2
+  resolution: "typescript@npm:4.3.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: edaede2fa77f56b7fba80ee624a2368ab1216e75b0434d968ccb47ab0a5e2f6d94f848b3b111c1237dd71e988cd376af26370dcdad3b94355c76e759f0dd0a1e
+  checksum: 21e1285402e32fd240f6ad3f97b6fea81b90d2591f412677d01b570a8bd93151d1e08460d58f43689fc758671a5baaebb16fa93d3c8260181612c8e619bd24f7
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.2.4#builtin<compat/typescript>":
-  version: 4.2.4
-  resolution: "typescript@patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"
+"typescript@patch:typescript@^4.3.2#builtin<compat/typescript>":
+  version: 4.3.2
+  resolution: "typescript@patch:typescript@npm%3A4.3.2#builtin<compat/typescript>::version=4.3.2&hash=ddfc1b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3be44317593182e8ce494c114e7ad9b0bb2553a22f3085cc6da4f0a36912c20850daa9be4c898af2ab6fc8b12f430c1c9e46ac715721867cd38643f2350d3ef9
+  checksum: 68d48dc86dacfeab59a22414ff061c976c46b679a9717a3a710051ea7bab779fd23f4edb856434da8155e8e8646c90b3912e342cc0010dfd15ed321a42cb0578
   languageName: node
   linkType: hard
 
