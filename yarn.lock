@@ -1600,7 +1600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.14.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.8.4":
   version: 7.14.0
   resolution: "@babel/runtime@npm:7.14.0"
   dependencies:
@@ -2484,10 +2484,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^15.6.1":
+"@types/node@npm:*":
   version: 15.6.1
   resolution: "@types/node@npm:15.6.1"
   checksum: 07b3855bc0a1ba2215455a3ef4ed5e88711321b3cdc0ba1ea0286f6facbdf61530970b9fa7eec79eb1d46231f986c21ef3b7c1f1e0c365cf1b887d76b0addb86
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^15.9.0":
+  version: 15.9.0
+  resolution: "@types/node@npm:15.9.0"
+  checksum: 09399100eae55644ac56c554b456444ab157696aba9d73bab7ce52a16151260d70297beffd3bdfdca94e9ab840474da7d45a8d4d5acbea0c3bfd68868774c1e8
   languageName: node
   linkType: hard
 
@@ -2526,12 +2533,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^17.0.5":
-  version: 17.0.5
-  resolution: "@types/react-dom@npm:17.0.5"
+"@types/react-dom@npm:^17.0.6":
+  version: 17.0.6
+  resolution: "@types/react-dom@npm:17.0.6"
   dependencies:
     "@types/react": "*"
-  checksum: b3e23acb7be9405050abb4bcd443d14b16b2f3ded2d1853528199e4307b17b25186f905ddd236c27b6ef0297e6779b7fedd11fd24ee9170771be45a7e8e70f4b
+  checksum: baf0e2ea405768ccfe30399c1d2d5bc35d48023c6d67394b0c9a8179e51ff3d5e0363e7166114195ea275f97611aae9d8d0163a2813c7a3f1e95ef99f8070390
   languageName: node
   linkType: hard
 
@@ -2574,7 +2581,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^17.0.8":
+"@types/react@npm:*":
   version: 17.0.8
   resolution: "@types/react@npm:17.0.8"
   dependencies:
@@ -2582,6 +2589,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: b59a3abafd240b2880f9e6a11b2b7f75165888260c56e95a77ed10a7dd55570b307fb2356eda7fde2a8e1255d2def11797e4ae9800ae114a1f578546acabda67
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^17.0.9":
+  version: 17.0.9
+  resolution: "@types/react@npm:17.0.9"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 12f1962a317cad805bd6fcd1da3ac1a58a782db28e522bdded163f1bdfc8388f8a110d200a6925cccbf3d442e1325199ce5da710f11ee73f0f140c6734fea127
   languageName: node
   linkType: hard
 
@@ -5163,7 +5181,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.13.0, core-js@npm:^3.6.5":
+"core-js@npm:^3.13.1":
+  version: 3.13.1
+  resolution: "core-js@npm:3.13.1"
+  checksum: 9138463ed7e6489a0b7f7e8a13cb345fde22866ab23d35f0e0e0ddc13e0374dfc7542d7316762a7dc2a5074efe22f8ff692e26ccc22860d8179de5eedf922e98
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.6.5":
   version: 3.13.0
   resolution: "core-js@npm:3.13.0"
   checksum: ec1fb8ee6692353c1c4eec0ac6cf58010e927458a373a33f1a4a9cc89391130dd378de4ad6e4e51b68ee6ea9bc622ae7ed82eeac6cea6076f2115e7ec632c6e5
@@ -7302,7 +7327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-visible@npm:^5.0.2":
+"focus-visible@npm:^5.2.0":
   version: 5.2.0
   resolution: "focus-visible@npm:5.2.0"
   checksum: 4e60302bd84accb92d11c22f8a5f6e38d2f5a0cc1bd45e708b9f00173cc700d1f0782c78f932023479074739fd588e0dd94c0e2575b2212843955e2d4398e752
@@ -11948,18 +11973,18 @@ fsevents@^1.2.7:
     "@types/color": ^3.0.1
     "@types/gulp": ^4.0.8
     "@types/jest": ^26.0.23
-    "@types/node": ^15.6.1
-    "@types/react": ^17.0.8
-    "@types/react-dom": ^17.0.5
+    "@types/node": ^15.9.0
+    "@types/react": ^17.0.9
+    "@types/react-dom": ^17.0.6
     "@types/react-helmet": ^6.1.1
     "@types/react-infinite-scroller": ^1.2.1
     "@types/react-router-dom": ^5.1.7
     color: ^3.1.3
-    core-js: ^3.13.0
+    core-js: ^3.13.1
     dotenv: ^10.0.0
     eslint: ^7.27.0
     eslint-config-prettier: ^8.3.0
-    focus-visible: ^5.0.2
+    focus-visible: ^5.2.0
     gulp: ^4.0.2
     path-to-regexp: ^6.2.0
     prettier: ^2.3.0
@@ -11969,8 +11994,8 @@ fsevents@^1.2.7:
     react-infinite-scroller: ^1.2.4
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
-    regenerator-runtime: ^0.13.7
-    regrest: ^3.7.0
+    regenerator-runtime: ^0.13.8
+    regrest: ^3.9.0
     ts-node: ^10.0.0
     typescript: ^4.2.4
     xml-js: ^1.6.11
@@ -13575,6 +13600,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"regenerator-runtime@npm:^0.13.8":
+  version: 0.13.8
+  resolution: "regenerator-runtime@npm:0.13.8"
+  checksum: 20178f5753f181d59691e5c3b4c59a2769987f75c7ccf325777673b5478acca61a553b10e895585086c222f72f5ee428090acf50320264de4b79f630f7388653
+  languageName: node
+  linkType: hard
+
 "regenerator-transform@npm:^0.14.2":
   version: 0.14.5
   resolution: "regenerator-transform@npm:0.14.5"
@@ -13650,12 +13682,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regrest@npm:^3.7.0":
-  version: 3.7.0
-  resolution: "regrest@npm:3.7.0"
+"regrest@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "regrest@npm:3.9.0"
   dependencies:
+    "@babel/runtime": ^7.14.0
     follow-redirects: ^1.14.1
-  checksum: 1a2d912d59241795de09bf1f6ff7ca3957a36705b3f7bc9347d00b97a464c195d8807b2bbe805028f87b08eade2b057d2244514fa8f722e359c2542674026581
+  checksum: dac77360603509e24108024648139dcb394ef75a8b3451657c5e540b5354f8e15f50317b1bad4b61b510f91aeb58ab9439fbe202ddc7fb4f66d6376f5978c6e6
   languageName: node
   linkType: hard
 
