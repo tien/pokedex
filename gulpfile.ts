@@ -9,6 +9,8 @@ import { getPokemonDetailsRoute, routes } from "./src/routes";
 
 config();
 
+const baseUrl = process.env.URL;
+
 export const compile = () =>
   new Promise((resolve, reject) => {
     const task = spawn("node_modules/.bin/react-scripts", ["build"], {
@@ -20,8 +22,6 @@ export const compile = () =>
   });
 
 export const buildSiteMap = async () => {
-  const baseUrl = process.env.PUBLIC_URL;
-
   const sitemap = {
     _declaration: {
       _attributes: {
@@ -52,8 +52,6 @@ export const buildSiteMap = async () => {
 };
 
 export const createRobotsDotTxt = async () => {
-  const baseUrl = process.env.PUBLIC_URL;
-
   const content = ["User-agent: *", `Sitemap: ${baseUrl}/sitemap.xml`].join(
     "\n"
   );
