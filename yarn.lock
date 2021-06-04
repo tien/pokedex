@@ -11995,7 +11995,7 @@ fsevents@^1.2.7:
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
     regenerator-runtime: ^0.13.7
-    regrest: ^4.0.0
+    regrest: ^4.0.1
     ts-node: ^10.0.0
     typescript: ^4.3.2
     xml-js: ^1.6.11
@@ -13675,13 +13675,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"regrest@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "regrest@npm:4.0.0"
+"regrest@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "regrest@npm:4.0.1"
   dependencies:
     "@babel/runtime": ^7.14.0
     follow-redirects: ^1.14.1
-  checksum: badb3b0b08009ac3b0e006625e1becb81b16fbc14eb3849010f17b1aeaa34e34b637b78e7b76f2decf79e33a615e886f34a3d1f170b91888375fa9588dfa91cf
+  checksum: 644e93ee6bd676086c0104492a6a0b923fb90815cabc8bd08723a9264cf7803cbad6187e2f28102cd431b1ab219475a1570379e3b3717fe3d2194b6975cb93f6
   languageName: node
   linkType: hard
 
