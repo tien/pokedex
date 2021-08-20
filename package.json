@@ -1,5 +1,6 @@
 {
   "name": "pokedex",
+  "packageManager": "yarn@3.0.1",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
