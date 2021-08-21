@@ -5262,13 +5262,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.16.2":
-  version: 3.16.2
-  resolution: "core-js@npm:3.16.2"
-  checksum: f48b988ab6d144aad1a7c09a73174946f797ec050b4566dee9bf0227560296cdd0f714b37f0ee065303eccf0e7fb8115ccca52ab3e80db12e0dcc20a88219483
-  languageName: node
-  linkType: hard
-
 "core-js@npm:^3.6.5":
   version: 3.13.0
   resolution: "core-js@npm:3.13.0"
@@ -12087,7 +12080,6 @@ fsevents@^1.2.7:
     "@types/react-infinite-scroller": ^1.2.2
     "@types/react-router-dom": ^5.1.8
     color: ^3.2.1
-    core-js: ^3.16.2
     dotenv: ^10.0.0
     eslint: ^7.27.0
     eslint-config-prettier: ^8.3.0
@@ -12101,7 +12093,6 @@ fsevents@^1.2.7:
     react-infinite-scroller: ^1.2.4
     react-router-dom: ^5.2.0
     react-scripts: ^4.0.3
-    regenerator-runtime: ^0.13.9
     regrest: ^4.0.1
     ts-node: ^10.2.1
     typescript: ^4.3.5
@@ -13716,13 +13707,6 @@ fsevents@^1.2.7:
   version: 0.13.7
   resolution: "regenerator-runtime@npm:0.13.7"
   checksum: 52b66e6669152c0b1bccd95c8e11aabbfe67bb97bdf00e223bdf723b0f0052d4da5c02001d4c4bef576bdc5bcdc38a20496d1b5363b65c950c8434ed5071d9e0
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.13.9":
-  version: 0.13.9
-  resolution: "regenerator-runtime@npm:0.13.9"
-  checksum: 65ed455fe5afd799e2897baf691ca21c2772e1a969d19bb0c4695757c2d96249eb74ee3553ea34a91062b2a676beedf630b4c1551cc6299afb937be1426ec55e
   languageName: node
   linkType: hard
 
