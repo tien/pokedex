@@ -176,8 +176,11 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                   />
                   <PokeTypeCard
                     category={
-                      MovesList[move.move.name as keyof typeof MovesList]
-                        ?.category as "physical" | "special" | "status"
+                      (
+                        MovesList[
+                          move.move.name as keyof typeof MovesList
+                        ] as any
+                      ).category as "physical" | "special" | "status"
                     }
                     style={{ flexBasis: "25%" }}
                   />
