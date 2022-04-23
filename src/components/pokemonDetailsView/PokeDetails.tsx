@@ -170,14 +170,14 @@ const PokeDetails = (props: IPokeDetailsProps) => {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     //@ts-ignore
                     type={
-                      MovesList[move.move.name as keyof typeof MovesList].type
+                      MovesList[move.move.name as keyof typeof MovesList]?.type
                     }
                     style={{ flexBasis: "25%", marginRight: "2px" }}
                   />
                   <PokeTypeCard
                     category={
                       MovesList[move.move.name as keyof typeof MovesList]
-                        .category as "physical" | "special" | "status"
+                        ?.category as "physical" | "special" | "status"
                     }
                     style={{ flexBasis: "25%" }}
                   />
