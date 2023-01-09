@@ -12244,7 +12244,7 @@ fsevents@^1.2.7:
     focus-visible: ^5.2.0
     gulp: ^4.0.2
     path-to-regexp: ^6.2.0
-    prettier: ^2.3.2
+    prettier: ^2.8.2
     react: ^18.0.0
     react-dom: ^18.0.0
     react-helmet: ^6.1.0
@@ -13121,12 +13121,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.3.2":
-  version: 2.3.2
-  resolution: "prettier@npm:2.3.2"
+"prettier@npm:^2.8.2":
+  version: 2.8.2
+  resolution: "prettier@npm:2.8.2"
   bin:
     prettier: bin-prettier.js
-  checksum: 17ce5784ac67621c292df58e2da60b2ee150c2d6aebea22a6ad9e52fcd6a5e66c349d0a8436ea3bd8ff9d778920a5f68000d7625b74f43558718a49755aa5259
+  checksum: 740c56c2128d587d656ea1dde9bc9c3503dfc94db4f3ac387259215eeb2e216680bdad9d18a0c9feecc6b42cfa188d6fa777df4c36c1d00cedd4199074fbfbd2
   languageName: node
   linkType: hard
 
